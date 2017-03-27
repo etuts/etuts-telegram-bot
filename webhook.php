@@ -41,10 +41,7 @@ switch ($state) {
 
 	case CONTACT:
 		// user has sent a message to admin! Wow!!
-		$telegram->sendMessage([
-		  'chat_id' => 92454,
-		  'text' => $text
-		]);
+		send_message_to_admin($text);
 		break;
 	
 	default:
