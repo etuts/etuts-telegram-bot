@@ -1,7 +1,7 @@
 <?php
 
 // connect to database
-// $db = mysqli_connect('localhost','ZMYbZ5jIaqW5SYi','bzJcaSbjlgtp9K9','etutsTeleRobot') or die('Error connecting to MySQL server.');
+$db = mysqli_connect('localhost','ZMYbZ5jIaqW5SYi','bzJcaSbjlgtp9K9','etutsTeleRobot') or die('Error connecting to MySQL server.');
 
 // requirements
 require 'vendor/autoload.php';
@@ -21,7 +21,7 @@ $telegram->sendMessage([
   'chat_id' => '92454',
   'text' => 'efw'
 ]);
-/*
+
 // Enum of STATEs
 define("CANCEL", 0);
 define("CONTACT", 1);
@@ -47,5 +47,5 @@ $telegram->sendMessage([
 
 // close database
 mysqli_close($db);
-*/
+
 ?>
