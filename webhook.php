@@ -5,7 +5,7 @@ $db = mysqli_connect('localhost','ZMYbZ5jIaqW5SYi','bzJcaSbjlgtp9K9','etutsTeleR
 
 // requirements
 require 'vendor/autoload.php';
-// require 'functions.php';
+require 'functions.php';
 use Telegram\Bot\Api;
 
 // connecting
