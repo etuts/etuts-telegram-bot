@@ -16,7 +16,7 @@ $telegram = new Api('291144367:AAF66QzZVlw8MH0c8RyCD9hmnYnzRRrqMWs');
 $updates = $telegram->getWebhookUpdates();
 $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
-// $telegram->addCommand(Commands\ContactCommand::class);
+$telegram->addCommand(ContactCommand::class);
 
 // Enum of STATEs
 define("CANCEL", 0);
