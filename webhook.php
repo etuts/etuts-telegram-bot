@@ -12,11 +12,11 @@ use Telegram\Bot\Api;
 $telegram = new Api('291144367:AAF66QzZVlw8MH0c8RyCD9hmnYnzRRrqMWs');
 
 // get user message
-/*$updates = $telegram->getWebhookUpdates();
+$updates = $telegram->getWebhookUpdates();
 $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
-$telegram->addCommand(Commands\ContactCommand::class);
-*/
+// $telegram->addCommand(Commands\ContactCommand::class);
+
 $telegram->sendMessage([
   'chat_id' => '92454',
   'text' => 'efw'
