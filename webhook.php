@@ -1,6 +1,11 @@
-<?php 
+<?php
+
+// connect to database
+$db = mysqli_connect('localhost','ZMYbZ5jIaqW5SYi','bzJcaSbjlgtp9K9','etutsTeleRobot') or die('Error connecting to MySQL server.');
+
 // requirements
 require 'vendor/autoload.php';
+require 'functions.php'
 use Telegram\Bot\Api;
 
 // connecting
@@ -11,22 +16,27 @@ $updates = $telegram->getWebhookUpdates();
 $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
 
-// connect to database
-$db = mysqli_connect('localhost','ZMYbZ5jIaqW5SYi','bzJcaSbjlgtp9K9','etutsTeleRobot') or die('Error connecting to MySQL server.');
+// Enum of STATEs
+class User_state extends SplEnum {
+    const __default = self::Cancel;
+    
+    const Cancel = 0;
+    const Contact = 1;
+}
 
 // get chat state from database
 $result = mysqli_query($db, "SELECT * FROM `chats` WHERE chat_id = '$chat_id' ");
-$state = "ef";
+$state = new User_state(User_state::Cancel); // no state
+
 if( mysqli_num_rows($result) == 0) {
-    mysqli_query($db, "INSERT INTO `chats` (chat_id, state, last_message) VALUES ('$chat_id', '0', '$text') ");
-	$state = "added";
+    db_insert($chat_id, 0, $text);
 }
 else {
-	$result = mysqli_query($db, "SELECT `state` FROM `chats` WHERE chat_id = '$chat_id' ");
-	$state = $result->fetch_assoc()['state'];
+	$state = db_get_state($chat_id);
+	db_update_last_message($chat_id, $text);
 }
 
-// 
+// switch case
 
 $telegram->sendMessage([
   'chat_id' => $chat_id,
