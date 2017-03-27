@@ -18,7 +18,7 @@ $db = mysqli_connect('localhost','ZMYbZ5jIaqW5SYi','bzJcaSbjlgtp9K9','etutsTeleR
 $result = mysql_query("SELECT * FROM chats WHERE chat_id ='$chat_id' ");
 $state = "nothing";
 if( mysql_num_rows($result) == 0) {
-    mysql_query("INSERT INTO chats (chat_id, state) VALUES ('$chat_id', '0') ");
+    mysql_query("INSERT INTO chats (chat_id, state, last_message) VALUES ('$chat_id', '0', '$text') ");
 	$state = "added";
 }
 /*else
