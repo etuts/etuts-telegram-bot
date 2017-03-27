@@ -16,14 +16,11 @@ $updates = $telegram->getWebhookUpdates();
 $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
 $telegram->addCommand(Commands\ContactCommand::class);
-<<<<<<< HEAD
 
 $telegram->sendMessage([
   'chat_id' => $chat_id,
   'text' => 'efw'
 ]);
-=======
->>>>>>> ef4782df1c45450544140ca10662c6b745c28060
 
 // Enum of STATEs
 define("CANCEL", 0);
