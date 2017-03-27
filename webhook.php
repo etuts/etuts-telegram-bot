@@ -29,7 +29,7 @@ if( mysqli_num_rows($result) == 0) {
     db_insert($chat_id, 0, $text);
 }
 else {
-	// $state = db_get_state($chat_id);
+	$state = db_get_state($chat_id);
 	// db_update_last_message($chat_id, $text);
 }
 $telegram->sendMessage([
