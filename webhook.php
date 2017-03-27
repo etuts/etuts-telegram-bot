@@ -10,10 +10,7 @@ $telegram = new Api('291144367:AAF66QzZVlw8MH0c8RyCD9hmnYnzRRrqMWs');
 $updates = $telegram->getWebhookUpdates();
 $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
-$telegram->sendMessage([
-	'chat_id' => $chat_id,
-	'text' => "Hello test";
-]);
+
 // connect to database
 $db = mysqli_connect('localhost','ZMYbZ5jIaqW5SYi','bzJcaSbjlgtp9K9','etutsTeleRobot') or die('Error connecting to MySQL server.');
 
