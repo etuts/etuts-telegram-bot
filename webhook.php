@@ -17,6 +17,11 @@ $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
 $telegram->addCommand(Commands\ContactCommand::class);
 
+$telegram->sendMessage([
+  'chat_id' => $chat_id,
+  'text' => 'efw'
+]);
+
 // Enum of STATEs
 define("CANCEL", 0);
 define("CONTACT", 1);
