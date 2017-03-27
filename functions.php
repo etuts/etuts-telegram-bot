@@ -25,6 +25,7 @@ function db_update_state($chat_id, $state) {
 
 // telegram bot api functions
 function send_message_to_admin($text) {
+	global $telegram;
 	$telegram->sendMessage([
 	  'chat_id' => 92454,
 	  'text' => $text
