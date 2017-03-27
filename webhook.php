@@ -25,17 +25,12 @@ define("CONTACT", 1);
 $result = mysqli_query($db, "SELECT * FROM `chats` WHERE chat_id = '$chat_id' ");
 $state = CANCEL; // no state
 
-$telegram->sendMessage([
-  'chat_id' => '92454',
-  'text' => 'efw'
-]);
-
 if( mysqli_num_rows($result) == 0) {
     db_insert($chat_id, 0, $text);
 }
 else {
-	$state = db_get_state($chat_id);
-	db_update_last_message($chat_id, $text);
+	// $state = db_get_state($chat_id);
+	// db_update_last_message($chat_id, $text);
 }
 $telegram->sendMessage([
   'chat_id' => '92454',
