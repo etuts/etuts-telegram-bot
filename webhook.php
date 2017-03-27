@@ -22,7 +22,7 @@ define("CANCEL", 0);
 define("CONTACT", 1);
 
 // get chat state from database
-$result = mysqli_query($db, "SELECT * FROM `chats` WHERE chat_id = '$chat_id' ");
+$result = db_get_user_row($chat_id);
 $state = CANCEL; // no state
 
 if( mysqli_num_rows($result) == 0) {
@@ -32,12 +32,22 @@ else {
 	$state = db_get_state($chat_id);
 	db_update_last_message($chat_id, $text);
 }
-$telegram->sendMessage([
-  'chat_id' => '92454',
-  'text' => 'efw'
-]);
 
 // switch case
+switch ($state) {
+	case CANCEL:
+		// user has sent chert o pert! execute help command
+		break;
+
+	case CONTACT:
+		// user has sent a message to admin! Wow!!
+		send_message_to_admin($text);
+		break;
+	
+	default:
+		# code...
+		break;
+}
 
 $telegram->sendMessage([
   'chat_id' => $chat_id,
