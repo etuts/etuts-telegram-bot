@@ -17,10 +17,11 @@ $db = mysqli_connect('localhost','ZMYbZ5jIaqW5SYi','bzJcaSbjlgtp9K9','etutsTeleR
 // check chat state
 $result = mysql_query("SELECT * FROM chats WHERE chat_id ='$chat_id' ");
 $state = "nothing";
-if( mysql_num_rows($result) == 0) {
+$state = mysql_num_rows($result);
+/*if( mysql_num_rows($result) == 0) {
     mysql_query("INSERT INTO chats (chat_id, state, last_message) VALUES ('$chat_id', '0', '$text') ");
 	$state = "added";
-}
+}*/
 /*else
 	$state = mysql_query("SELECT state from chats where chat_id = $chat_id");*/
 
