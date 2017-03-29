@@ -18,7 +18,7 @@ $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
 // $telegram->addCommand(ContactCommand::class);
 // $update = $telegram->commandsHandler(true);
-$command = new Telegram\Bot\Commands\ContactCommand();
+// $command = new Telegram\Bot\Commands\ContactCommand();
 $telegram->sendMessage([
   'chat_id' => $chat_id,
   'text' => 'debug'
