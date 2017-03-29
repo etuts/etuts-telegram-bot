@@ -18,6 +18,9 @@ $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
 // $telegram->addCommand(ContactCommand::class);
 // $update = $telegram->commandsHandler(true);
+$command = new Telegram\Bot\Commands\ContactCommand();
+
+$telegram->addCommand($command);
 
 // Enum of STATEs
 define("CANCEL", 0);
