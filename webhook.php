@@ -18,13 +18,15 @@ $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
 // $telegram->addCommand(ContactCommand::class);
 // $update = $telegram->commandsHandler(true);
-$command = new \Commands\ContactCommand();
-$telegram->sendMessage([
-  'chat_id' => $chat_id,
-  'text' => 'debug'
-]);
 
-$telegram->addCommand($command);
+
+//-----------
+// Alternative Way to Add Command
+// $command = new Commands\ContactCommand();			// This line doesnt work
+// $telegram->sendMessage(['chat_id' => $chat_id,'text' => 'debug']);
+// $telegram->addCommand($command);
+//---------------
+
 
 // Enum of STATEs
 define("CANCEL", 0);
