@@ -8,7 +8,7 @@ require 'vendor/autoload.php';
 require 'functions.php';
 require 'Commands/ContactCommand.php';
 use Telegram\Bot\Api;
-// use .\Commands\ContactCommand;
+use \Commands\ContactCommand;
 // connecting
 $telegram = new Api('291144367:AAF66QzZVlw8MH0c8RyCD9hmnYnzRRrqMWs');
 
