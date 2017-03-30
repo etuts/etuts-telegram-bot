@@ -24,7 +24,7 @@ $text = $updates->getMessage()->getText();
 // Alternative Way to Add Command
 // $command = new ContactCommand();			// This line doesnt work
 $telegram->sendMessage(['chat_id' => $chat_id,'text' => 'debug']);
-$telegram->addCommand($command);
+// $telegram->addCommand($command);
 //---------------
 
 
