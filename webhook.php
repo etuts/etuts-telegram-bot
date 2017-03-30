@@ -8,7 +8,7 @@ require 'vendor/autoload.php';
 require 'functions.php';
 require 'Commands/ContactCommand.php';
 use Telegram\Bot\Api;
-
+use .\Commands\ContactCommand;
 // connecting
 $telegram = new Api('291144367:AAF66QzZVlw8MH0c8RyCD9hmnYnzRRrqMWs');
 
@@ -22,9 +22,9 @@ $text = $updates->getMessage()->getText();
 
 //-----------
 // Alternative Way to Add Command
-// $command = new Commands\ContactCommand();			// This line doesnt work
-// $telegram->sendMessage(['chat_id' => $chat_id,'text' => 'debug']);
-// $telegram->addCommand($command);
+$command = new ContactCommand();			// This line doesnt work
+$telegram->sendMessage(['chat_id' => $chat_id,'text' => 'debug']);
+$telegram->addCommand($command);
 //---------------
 
 
