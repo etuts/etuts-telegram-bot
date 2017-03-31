@@ -19,7 +19,7 @@ $text = $updates->getMessage()->getText();
 // $telegram->addCommand(ContactCommand::class);
 // $update = $telegram->commandsHandler(true);
 
-//
+
 //-----------
 // Alternative Way to Add Command
 // $command = new ContactCommand();			// This line doesnt work
