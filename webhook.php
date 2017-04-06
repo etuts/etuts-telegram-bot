@@ -6,7 +6,7 @@ $db = mysqli_connect('localhost','ZMYbZ5jIaqW5SYi','bzJcaSbjlgtp9K9','etutsTeleR
 // requirements
 require 'vendor/autoload.php';
 require 'functions.php';
-require 'Commands/ContactCommand.php';
+// require 'Commands/ContactCommand.php';
 use Telegram\Bot\Api;
 use Commands\ContactCommand;
 // connecting
@@ -16,14 +16,14 @@ $telegram = new Api('291144367:AAF66QzZVlw8MH0c8RyCD9hmnYnzRRrqMWs');
 $updates = $telegram->getWebhookUpdates();
 $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
-// $telegram->addCommand(ContactCommand::class);
-// $update = $telegram->commandsHandler(true);
+$telegram->addCommand(Commands\ContactCommand::class);
+$update = $telegram->commandsHandler(true);
 
 
-//-----------
+//---------------
 // Alternative Way to Add Command
 // $command = new ContactCommand();			// This line doesnt work
-$telegram->sendMessage(['chat_id' => $chat_id,'text' => 'debug']);
+// $telegram->sendMessage(['chat_id' => $chat_id,'text' => 'debug']);
 // $telegram->addCommand($command);
 //---------------
 
