@@ -17,7 +17,7 @@ $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
 
 $telegram->addCommand(Telegram\Bot\Commands\HelpCommand::class);
-$telegram->addCommand(CustomCommands\ContactCommand::class);
+// $telegram->addCommand(CustomCommands\ContactCommand::class);
 $update = $telegram->commandsHandler(true);
 
 // Enum of STATEs
@@ -43,6 +43,7 @@ switch ($state) {
 	case CONTACT:
 		// user has sent a message to admin! Wow!!
 		send_message_to_admin($text);
+		db_reset_state($chat_id);
 		break;
 	
 	default:

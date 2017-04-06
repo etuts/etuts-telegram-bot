@@ -18,9 +18,12 @@ function db_update_last_message($chat_id, $text) {
 	global $db;
 	return mysqli_query($db, "UPDATE `chats` SET last_message = '$text' WHERE chat_id = '$chat_id' ");
 }
-function db_update_state($chat_id, $state) {
+function db_set_state($chat_id, $state) {
 	global $db;
 	return mysqli_query($db, "UPDATE `chats` SET state = '$state' WHERE chat_id = '$chat_id' ");
+}
+function db_reset_state($chat_id) {
+	return db_set_state($chat_id,0);
 }
 
 // telegram bot api functions

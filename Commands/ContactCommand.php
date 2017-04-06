@@ -1,34 +1,22 @@
 <?php
 
 namespace Telegram\Bot\Commands;
+require '../functions.php';
 
-/**
- * Class ContactCommand.
- */
 class ContactCommand extends Command
 {
-    /**
-     * @var string Command Name
-     */
-    protected $name = 'contact';
+	protected $name = 'contact';
+	protected $description = 'contact command';
 
-    /**
-     * @var string Command Description
-     */
-    protected $description = 'contact command';
+	public function handle($arguments)
+	{
+		$text = 'لطفا پیام تان را بفرستید.';
+		$this->replyWithMessage(compact('text'));
+		// test these ones
+		$this->getChat()->getId();
+		$this->getUpdate();
+		$this->getTelegram();
 
-    /**
-     * {@inheritdoc}
-     */
-    public function handle($arguments)
-    {
-        $commands = $this->telegram->getCommands();
-
-        $text = '';
-        foreach ($commands as $name => $handler) {
-            $text .= sprintf('/%s - %s'.PHP_EOL, $name, $handler->getDescription());
-        }
-
-        $this->replyWithMessage(compact('text'));
-    }
+		db_set_state()
+	}
 }
