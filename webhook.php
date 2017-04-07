@@ -12,7 +12,7 @@ $chat_id = (int) $updates->getMessage()->getChat()->getId();
 $text = $updates->getMessage()->getText();
 
 $telegram->addCommand(Telegram\Bot\Commands\HelpCommand::class);
-// $telegram->addCommand(CustomCommands\ContactCommand::class);
+$telegram->addCommand(CustomCommands\ContactCommand::class);
 $update = $telegram->commandsHandler(true);
 
 $telegram->sendMessage([
