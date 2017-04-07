@@ -1,8 +1,5 @@
 <?php
-
-namespace Telegram\Bot\Commands;
-require '../functions.php';
-
+namespace CustomCommands;
 class ContactCommand extends Command
 {
 	protected $name = 'contact';
@@ -10,13 +7,6 @@ class ContactCommand extends Command
 
 	public function handle($arguments)
 	{
-		$text = 'لطفا پیام تان را بفرستید.';
-		$this->replyWithMessage(compact('text'));
-		// test these ones
-		// $this->getChat()->getId();
-		// $this->getUpdate();
-		// $this->getTelegram();
-
-		// db_set_state($chat_id, CONTACT);
+		$this->replyWithMessage('text');
 	}
 }
