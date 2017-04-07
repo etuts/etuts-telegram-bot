@@ -1,6 +1,6 @@
 <?php
 
-namespace Telegram\Bot\Commands;
+namespace CustomCommands;
 require '../functions.php';
 
 class ContactCommand extends Command
@@ -17,6 +17,6 @@ class ContactCommand extends Command
 		$this->getUpdate();
 		$this->getTelegram();
 
-		db_set_state()
+		db_set_state($chat_id, CONTACT);
 	}
 }
