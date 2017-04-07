@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 use Telegram\Bot\Api;
 
 // connecting
-$telegram = new Api('TOKEN');
+$telegram = new Api('291144367:AAF66QzZVlw8MH0c8RyCD9hmnYnzRRrqMWs');
 
 // get user message
 $updates = $telegram->getWebhookUpdates();
