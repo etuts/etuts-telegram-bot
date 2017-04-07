@@ -1,7 +1,11 @@
 <?php
-
-namespace CustomCommands;
 require '../functions.php';
+
+// namespace CustomCommands;
+namespace Vendor\App\Commands;
+
+use Telegram\Bot\Actions;
+use Telegram\Bot\Commands\Command;
 
 class ContactCommand extends Command
 {
