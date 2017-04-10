@@ -88,7 +88,7 @@ function send_thank_message($chat_id, $message_id) {
 		'chat_id' => $chat_id,
 		'text' => 'خیلی ممنون! با موفقیت انجام شد.',
 		'reply_to_message_id' => $message_id
-	])
+	]);
 }
 
 //--------------------- helpers -------------------------------
