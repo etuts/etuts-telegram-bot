@@ -1,5 +1,5 @@
 <?php
-namespace CustomCommands;
+namespace Telegram\Bot\Commands;
 class ContactCommand extends Command
 {
 	protected $name = 'contact';
