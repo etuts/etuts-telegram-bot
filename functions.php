@@ -1,5 +1,7 @@
 <?php
 
+require_once 'config.php';
+
 //--------------------- Enum of STATEs ----------------------
 define("CANCEL", 0);
 define("CONTACT", 1);
@@ -71,8 +73,8 @@ function run_command($command, $chat_id, $text, $message_id) {
 				'chat_id' => $chat_id,
 				'text' => 'لطفا پیام بفرستید',
 				'reply_to_message_id' => $message_id
-			])
-			db_set_state($chat_id, CONTACT)
+			]);
+			db_set_state($chat_id, CONTACT);
 			break;
 	}
 }
