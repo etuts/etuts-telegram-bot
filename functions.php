@@ -51,11 +51,11 @@ function get_chat_state($chat_id) {
 //--------------------- telegram bot api functions ---------------
 $available_commands = ['/contact'];
 
-function send_message_to_admin($text) {
+function send_message_to_admin($message, $text) {
 	global $telegram;
 	$telegram->sendMessage([
 	  'chat_id' => 92454,
-	  'text' => $text
+	  'text' => $text . $message->getFrom()->getUsername();
 	]);
 }
 function get_command($text) {
