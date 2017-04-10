@@ -49,6 +49,8 @@ function get_chat_state($chat_id) {
 
 
 //--------------------- telegram bot api functions ---------------
+$available_commands = ['/contact'];
+
 function send_message_to_admin($text) {
 	global $telegram;
 	$telegram->sendMessage([
@@ -57,7 +59,7 @@ function send_message_to_admin($text) {
 	]);
 }
 function get_command($text) {
-	$available_commands = ['/contact'];
+	global $available_commands;
 	$contain_these_commands = array();
 	foreach ($available_commands as $command) {
 		if (contains_word($text, $command))
@@ -83,7 +85,7 @@ function run_command($command, $chat_id, $text, $message_id) {
 function contains_word($source, $find) {
 	if (strpos($text, '/contact') !== false)
 		return true;
-	return false;	
+	return true;
 }
 
 ?>
