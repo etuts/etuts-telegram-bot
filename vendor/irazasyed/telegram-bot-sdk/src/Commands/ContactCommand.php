@@ -9,10 +9,7 @@ class ContactCommand extends Command
 	{
 	    $commands = $this->telegram->getCommands();
 
-        $testit = '';
-        foreach ($commands as $name => $handler) {
-            $testit .= sprintf('/%s - %s'.PHP_EOL, $name, $handler->getDescription());
-        }
+        $testit = 'sklfje';
 
         $this->replyWithMessage(compact('testit'));
 	}
