@@ -87,7 +87,7 @@ function contains_word($source, $find) {
 		return true;
 	return false;
 }
-function log($text) {
+function log_debug($text) {
 	$debug_file = fopen("log.txt","a");
 	fwrite($debug_file, $text);
 	fclose($file);
