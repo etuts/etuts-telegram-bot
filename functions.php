@@ -49,17 +49,6 @@ function get_chat_state($chat_id) {
 //--------------------- telegram bot api functions ---------------
 $available_commands = ['/contact'];
 
-function send_message_to_admin($message, $text) {
-	global $telegram;
-	$username = $message->getFrom()->getUsername();
-	$firstname = $message->getFrom()->getFirstname();
-	$lastname = $message->getFrom()->getLastname();
-	$text = 'name: ' . $firstname . ' ' . $lastname . "\r\n" . 'from: @' . $username . "\r\n" . 'text: ' . $text;
-	$telegram->sendMessage([
-	  'chat_id' => 92454,
-	  'text' => $text
-	]);
-}
 function get_command($text) {
 	global $available_commands;
 	$contain_these_commands = array();
@@ -81,6 +70,25 @@ function run_command($command, $chat_id, $text, $message_id) {
 			db_set_state($chat_id, CONTACT);
 			break;
 	}
+}
+function send_message_to_admin($message, $text) {
+	global $telegram;
+	$username = $message->getFrom()->getUsername();
+	$firstname = $message->getFrom()->getFirstname();
+	$lastname = $message->getFrom()->getLastname();
+	$text = 'name: ' . $firstname . ' ' . $lastname . "\r\n" . 'from: @' . $username . "\r\n" . 'text: ' . $text;
+	$telegram->sendMessage([
+	  'chat_id' => 92454,
+	  'text' => $text
+	]);
+}
+function send_thank_message($chat_id, $message_id) {
+	global $telegram;
+	$telegram->sendMessage([
+		'chat_id' => $chat_id,
+		'text' => 'خیلی ممنون! با موفقیت انجام شد.'
+		'reply_to_message_id' => $message_id
+	])
 }
 
 //--------------------- helpers -------------------------------
