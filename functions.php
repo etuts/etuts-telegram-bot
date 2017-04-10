@@ -55,7 +55,7 @@ function send_message_to_admin($message, $text) {
 	global $telegram;
 	$telegram->sendMessage([
 	  'chat_id' => 92454,
-	  'text' => $text . $message->getFrom()->getUsername();
+	  'text' => $text . $message->getFrom()->getUsername()
 	]);
 }
 function get_command($text) {
