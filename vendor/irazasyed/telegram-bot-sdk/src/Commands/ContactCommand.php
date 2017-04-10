@@ -7,6 +7,13 @@ class ContactCommand extends Command
 
 	public function handle($arguments)
 	{
-		$this->replyWithMessage('text');
+	    $commands = $this->telegram->getCommands();
+
+        $text = '';
+        foreach ($commands as $name => $handler) {
+            $text .= sprintf('/%s - %s'.PHP_EOL, $name, $handler->getDescription());
+        }
+
+        $this->replyWithMessage(compact('text'));
 	}
 }
