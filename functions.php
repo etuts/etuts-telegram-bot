@@ -6,7 +6,6 @@ require_once 'config.php';
 define("CANCEL", 0);
 define("CONTACT", 1);
 
-
 //--------------------- database functions ------------------
 function db_get_user_row($chat_id) {
 	global $db;
@@ -47,15 +46,18 @@ function get_chat_state($chat_id) {
 	return $state;
 }
 
-
 //--------------------- telegram bot api functions ---------------
 $available_commands = ['/contact'];
 
 function send_message_to_admin($message, $text) {
 	global $telegram;
+	$username = $message->getFrom()->getUsername();
+	$firstname = $message->getFrom()->getFirstname();
+	$lastname = $message->getFrom()->getLastname();
+	$text = 'name: ' . $firstname . ' ' . $lastname . "\r\n" . 'from: @' . $username . "\r\n" . 'text: ' . $text;
 	$telegram->sendMessage([
 	  'chat_id' => 92454,
-	  'text' => $text . $message->getFrom()->getUsername()
+	  'text' => $text
 	]);
 }
 function get_command($text) {
