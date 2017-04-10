@@ -83,9 +83,9 @@ function run_command($command, $chat_id, $text, $message_id) {
 
 //--------------------- helpers -------------------------------
 function contains_word($source, $find) {
-	if (strpos($text, '/contact') !== false)
+	if (strpos($source, $find) !== false)
 		return true;
-	return true;
+	return false;
 }
 
 ?>
