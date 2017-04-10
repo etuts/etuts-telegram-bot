@@ -1,4 +1,6 @@
 <?php
+require '../../../../../functions.php';
+require '../../../../../config.php';
 namespace Telegram\Bot\Commands;
 class ContactCommand extends Command
 {
@@ -7,6 +9,7 @@ class ContactCommand extends Command
 
 	public function handle($arguments)
 	{
-	    $this->replyWithMessage(['text' => 'test']);
+	    $this->replyWithMessage(['text' => var_export($this->getChat())]);
+	    // db_set_state()
 	}
 }
