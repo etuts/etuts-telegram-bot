@@ -9,7 +9,7 @@ class ContactCommand extends Command
 
 	public function handle($arguments)
 	{
-	    $this->replyWithMessage(['text' => var_export($this->getChat())]);
+	    $this->replyWithMessage(['text' => 'var_export($this->getChat())']);
 	    // db_set_state()
 	}
 }
