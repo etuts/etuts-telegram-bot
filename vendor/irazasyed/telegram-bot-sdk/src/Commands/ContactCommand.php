@@ -7,10 +7,6 @@ class ContactCommand extends Command
 
 	public function handle($arguments)
 	{
-	    $commands = $this->telegram->getCommands();
-
-        $testit = 'sklfje';
-
-        $this->replyWithMessage(compact('testit'));
+	    $this->replyWithMessage(['text' => 'test']);
 	}
 }
