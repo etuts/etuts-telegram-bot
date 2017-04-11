@@ -102,13 +102,19 @@ function send_message_to_admin($message, $text) {
 	    ['1', '2', '3'],
 	         ['0']
 	];
-	$reply_markup = $telegram->replyKeyboardMarkup([
+/*	$reply_markup = $telegram->replyKeyboardMarkup([
+		'keyboard' => $keyboard, 
+		'resize_keyboard' => true, 
+		'one_time_keyboard' => true
+	]);*/
+
+	$keyboard = Telegram\Bot\Keyboard\Keyboard::make([
 		'keyboard' => $keyboard, 
 		'resize_keyboard' => true, 
 		'one_time_keyboard' => true
 	]);
-
-	$reply_markup->inline();
+	// $keyboard->inline();
+	// $reply_markup->inline();
 
 	$telegram->sendMessage([
 	  'chat_id' => 92454,
