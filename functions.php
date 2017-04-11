@@ -135,7 +135,7 @@ function log_debug($text) {
 	$telegram->sendMessage([
 		'chat_id' => 92454,
 		'text' => $text
-	])
+	]);
 	$debug_file = fopen("log.txt","a");
 	fwrite($debug_file, $text);
 	fclose($file);
