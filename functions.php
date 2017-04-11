@@ -49,37 +49,57 @@ function get_chat_state($chat_id) {
 //--------------------- telegram bot api functions ---------------
 $available_commands = ['/contact'];
 
+function run_commands($text) {
+	global $available_commands;
+	$commands_index = get_command($text);
+	foreach ($$commands_index as $command_index) {
+		$func = 'run_' . ltrim($available_commands[$commands_index], '/') . '_command';
+		$func($command, $chat_id, $text, $message_id);
+	}
+}
 function get_command($text) {
 	global $available_commands;
 	$contain_these_commands = array();
-	foreach ($available_commands as $command) {
+	foreach ($available_commands as $index=>$command) {
 		if (contains_word($text, $command))
-			$contain_these_commands[] = $command;
+			$contain_these_commands[] = $index;
 	}
 	return $contain_these_commands;
 }
-function run_command($command, $chat_id, $text, $message_id) {
+
+//--------------------- telegram bot command functions -------------
+function run_contact_command($command, $chat_id, $text, $message_id) {
 	global $telegram;
-	switch ($command) {
-		case '/contact':
-			$telegram->sendMessage([
-				'chat_id' => $chat_id,
-				'text' => 'لطفا پیام بفرستید',
-				'reply_to_message_id' => $message_id
-			]);
-			db_set_state($chat_id, CONTACT);
-			break;
-	}
+	$telegram->sendMessage([
+		'chat_id' => $chat_id,
+		'text' => 'لطفا پیام تان را بفرستید',
+		'reply_to_message_id' => $message_id
+	]);
+	db_set_state($chat_id, CONTACT);
 }
+
+//--------------------- telegram bot api helper functions ---------
 function send_message_to_admin($message, $text) {
 	global $telegram;
 	$username = $message->getFrom()->getUsername();
 	$firstname = $message->getFrom()->getFirstname();
 	$lastname = $message->getFrom()->getLastname();
 	$text = 'name: ' . $firstname . ' ' . $lastname . "\r\n" . 'from: @' . $username . "\r\n" . 'text: ' . $text;
+
+	$inline_keyboard_button = [
+		'text' = 'hi'
+	];
+	$inline_keyboard_buttons = array();
+	$inline_keyboard_buttons[] = $inline_keyboard_button;
+
+	$reply_markup = $telegram->inlineKeyboardMarkup([
+		'inline_keyboard' => $inline_keyboard_buttons
+	]);
+
 	$telegram->sendMessage([
 	  'chat_id' => 92454,
-	  'text' => $text
+	  'text' => $text,
+	  'reply_markup' => $reply_markup
 	]);
 }
 function send_thank_message($chat_id, $message_id) {
