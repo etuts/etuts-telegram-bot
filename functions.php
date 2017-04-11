@@ -52,9 +52,9 @@ $available_commands = ['/contact'];
 function run_commands($text, $chat_id, $message_id) {
 	global $available_commands;
 	$commands_index = get_command($text);
-	log_debug(var_export($commands_index, true));
-	foreach ($$commands_index as $command_index) {
+	foreach ($commands_index as $command_index) {
 		$func = 'run_' . ltrim($available_commands[$commands_index], '/') . '_command';
+		log_debug(var_export($func, true));
 		$func($chat_id, $text, $message_id);
 	}
 }
@@ -137,7 +137,7 @@ function log_debug($text) {
 		'text' => $text
 	]);
 	$debug_file = fopen("log.txt","a");
-	fwrite($debug_file, $text);
+	fwrite($debug_file, "-------------------------\r\n" . $text . "\r\n");
 	fclose($file);
 }
 
