@@ -54,8 +54,6 @@ function run_commands($text, $chat_id, $message_id) {
 	$commands_index = get_command($text);
 	foreach ($commands_index as $command_index) {
 		$func = 'run_' . ltrim($available_commands[$command_index], '/') . '_command';
-		log_debug(var_export($command_index, true));
-		log_debug(var_export($func, true));
 		$func($chat_id, $text, $message_id);
 	}
 }
@@ -98,7 +96,7 @@ function send_message_to_admin($message, $text) {
 		'inline_keyboard' => $inline_keyboard_buttons
 	]);*/
 
-	/*$keyboard = [
+	$keyboard = [
 	    ['7', '8', '9'],
 	    ['4', '5', '6'],
 	    ['1', '2', '3'],
@@ -108,7 +106,7 @@ function send_message_to_admin($message, $text) {
 		'keyboard' => $keyboard, 
 		'resize_keyboard' => true, 
 		'one_time_keyboard' => true
-	]);*/
+	]);
 
 	$telegram->sendMessage([
 	  'chat_id' => 92454,
