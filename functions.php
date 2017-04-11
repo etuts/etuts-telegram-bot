@@ -119,7 +119,7 @@ function send_message_to_admin($message, $text) {
 	$telegram->sendMessage([
 	  'chat_id' => 92454,
 	  'text' => $text,
-	  'reply_markup' => $reply_markup
+	  // 'reply_markup' => $reply_markup
 	]);
 }
 function send_thank_message($chat_id, $message_id) {
