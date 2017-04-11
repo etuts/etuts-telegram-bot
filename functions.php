@@ -86,7 +86,7 @@ function send_message_to_admin($message, $text) {
 	$lastname = $message->getFrom()->getLastname();
 	$text = 'name: ' . $firstname . ' ' . $lastname . "\r\n" . 'from: @' . $username . "\r\n" . 'text: ' . $text;
 
-	$inline_keyboard_button = [
+	/*$inline_keyboard_button = [
 		'text' => 'hi'
 	];
 	$inline_keyboard_buttons = array();
@@ -94,7 +94,20 @@ function send_message_to_admin($message, $text) {
 
 	$reply_markup = $telegram->inlineKeyboardMarkup([
 		'inline_keyboard' => $inline_keyboard_buttons
+	]);*/
+
+	$keyboard = [
+	    ['7', '8', '9'],
+	    ['4', '5', '6'],
+	    ['1', '2', '3'],
+	         ['0']
+	];
+	$reply_markup = $telegram->replyKeyboardMarkup([
+		'keyboard' => $keyboard,
+		'resize_keyboard' => true,
+		'one_time_keyboard' => true
 	]);
+	$reply_markup->inline();
 
 	$telegram->sendMessage([
 	  'chat_id' => 92454,
