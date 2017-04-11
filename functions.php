@@ -87,7 +87,7 @@ function send_message_to_admin($message, $text) {
 	$text = 'name: ' . $firstname . ' ' . $lastname . "\r\n" . 'from: @' . $username . "\r\n" . 'text: ' . $text;
 
 	$inline_keyboard_button = [
-		'text' = 'hi'
+		'text' => 'hi'
 	];
 	$inline_keyboard_buttons = array();
 	$inline_keyboard_buttons[] = $inline_keyboard_button;
