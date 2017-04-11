@@ -103,11 +103,10 @@ function send_message_to_admin($message, $text) {
 	         ['0']
 	];
 	$reply_markup = $telegram->replyKeyboardMarkup([
-		'keyboard' => $keyboard,
-		'resize_keyboard' => true,
+		'keyboard' => $keyboard, 
+		'resize_keyboard' => true, 
 		'one_time_keyboard' => true
 	]);
-	$reply_markup->inline();
 
 	$telegram->sendMessage([
 	  'chat_id' => 92454,
