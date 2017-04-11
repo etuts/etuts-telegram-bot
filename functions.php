@@ -108,6 +108,8 @@ function send_message_to_admin($message, $text) {
 		'one_time_keyboard' => true
 	]);
 
+	$reply_markup->inline();
+
 	$telegram->sendMessage([
 	  'chat_id' => 92454,
 	  'text' => $text,
