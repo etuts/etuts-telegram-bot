@@ -49,13 +49,13 @@ function get_chat_state($chat_id) {
 //--------------------- telegram bot api functions ---------------
 $available_commands = ['/contact'];
 
-function run_commands($text) {
+function run_commands($text, $chat_id, $message_id) {
 	global $available_commands;
 	$commands_index = get_command($text);
 	log_debug(var_export($commands_index, true));
 	foreach ($$commands_index as $command_index) {
 		$func = 'run_' . ltrim($available_commands[$commands_index], '/') . '_command';
-		$func($command, $chat_id, $text, $message_id);
+		$func($chat_id, $text, $message_id);
 	}
 }
 function get_command($text) {
@@ -69,7 +69,7 @@ function get_command($text) {
 }
 
 //--------------------- telegram bot command functions -------------
-function run_contact_command($command, $chat_id, $text, $message_id) {
+function run_contact_command($chat_id, $text, $message_id) {
 	global $telegram;
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
