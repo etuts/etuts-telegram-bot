@@ -53,7 +53,8 @@ function run_commands($text, $chat_id, $message_id) {
 	global $available_commands;
 	$commands_index = get_command($text);
 	foreach ($commands_index as $command_index) {
-		$func = 'run_' . ltrim($available_commands[$commands_index], '/') . '_command';
+		$func = 'run_' . ltrim($available_commands[$command_index], '/') . '_command';
+		log_debug(var_export($command_index, true));
 		log_debug(var_export($func, true));
 		$func($chat_id, $text, $message_id);
 	}
