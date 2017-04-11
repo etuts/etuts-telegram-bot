@@ -131,6 +131,11 @@ function contains_word($source, $find) {
 	return false;
 }
 function log_debug($text) {
+	global $telegram;
+	$telegram->sendMessage([
+		'chat_id' => 92454,
+		'text' => $text
+	])
 	$debug_file = fopen("log.txt","a");
 	fwrite($debug_file, $text);
 	fclose($file);
