@@ -68,13 +68,13 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 		case CONTACT:
 			// user has sent a message to admin! Wow!!
 			send_thank_message($chat_id, $message_id);
-			send_message_to_admin($message, $text);
+			send_message_to_admin($message, $text, 'یک تماس جدید');
 			db_reset_state($chat_id);
 			break;
 		case POST_VALIDATION_SEND_POST_TITLE:
 			// user has sent title and link of a post to validate
 			send_thank_message($chat_id, $message_id);
-			send_message_to_admin($message, $text);
+			send_message_to_admin($message, $text, 'مطلب جدید در انتظار بررسی');
 			db_reset_state($chat_id);
 			break;
 	}
@@ -155,6 +155,7 @@ function run_scheduale_post_command($chat_id, $text, $message_id, $message) {
 			'resize_keyboard' => true, 
 			'one_time_keyboard' => true
 		]);
+		$reply_markup = $telegram->forceReply();
 	} else {
 		$answer = 'برای استفاده از این دستور باید ادمین کانال باشید';
 	}
@@ -166,12 +167,15 @@ function run_scheduale_post_command($chat_id, $text, $message_id, $message) {
 }
 
 //--------------------- telegram bot api helper functions ---------
-function send_message_to_admin($message, $text) {
+function send_message_to_admin($message, $text, $description) {
 	global $telegram;
 	$username = $message->getFrom()->getUsername();
 	$firstname = $message->getFrom()->getFirstName();
 	$lastname = $message->getFrom()->getLastName();
-	$text = 'name: ' . $firstname . ' ' . $lastname . "\r\n" . 'from: @' . $username . "\r\n" . 'text: ' . $text;
+	$text = $description . "\r\n" .
+			'نام: ' . $firstname . ' ' . $lastname . "\r\n" .
+			'از: @' . $username . "\r\n" .
+			'متن: ' . $text;
 
 	/*$inline_keyboard_button = [
 		'text' => 'hi'
