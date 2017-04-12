@@ -84,6 +84,41 @@ function add_admin($chat_id) {
 }
 
 //--------------------- telegram bot api functions ---------------
+$keyboard_buttons = ['معرفی ربات'];
+function run_keyboard_buttons($text, $chat_id, $message_id, $message) {
+	global $keyboard_buttons;
+	$is_keyboard_button = false;
+	$btn = get_keyboard_button($text);
+	if ($btn !== false) {
+		$is_keyboard_button = true;
+		run_keyboard_button_func($btn,$text, $chat_id, $message_id, $message);
+	}
+	return $is_keyboard_button;
+}
+function get_keyboard_button($text) {
+	global $keyboard_buttons;
+	$keyboard_button = false;
+	foreach ($keyboard_buttons as $btn) {
+		if ($text == $btn)
+			$keyboard_button = $btn;
+	}
+	return $keyboard_button;
+}
+function run_keyboard_button_func($btn,$text,$chat_id, $message_id, $message) {
+	log_debug(iconv('UTF-8', 'ASCII//TRANSLIT', $text));
+	// global $keyboard_buttons;
+	// switch ($btn) {
+	// 	case $:
+	// 		# code...
+	// 		break;
+		
+	// 	default:
+	// 		# code...
+	// 		break;
+	// }
+}
+// keyboard buttons seperated functions
+//--------------------- telegram bot command functions -----------
 $available_commands = ['/contact','/post_validation','/cancel','/scheduale_post'];
 
 function run_commands($text, $chat_id, $message_id, $message) {
@@ -103,8 +138,7 @@ function get_command($text) {
 	}
 	return $contain_these_commands;
 }
-
-//--------------------- telegram bot command functions -------------
+// command seperated functions
 function run_cancel_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
 	db_reset_state($chat_id);
