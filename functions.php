@@ -1,6 +1,12 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 require_once 'config.php';
+
+//--------------------- Enum of permissions ----------------------
+define("ADMIN", 1);
+define("AUTHOR", 2);
 
 //--------------------- Enum of STATEs ----------------------
 define("CANCEL", 0);
@@ -32,9 +38,9 @@ function db_set_state($chat_id, $state) {
 function db_reset_state($chat_id) {
 	return db_set_state($chat_id,0);
 }
-function db_is_user_author($chat_id) {
+function db_check_user_permission($chat_id, $permission) {
 	global $db;
-	$result = mysqli_query($db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$chat_id', 2) ");
+	$result = mysqli_query($db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$chat_id', '$permission') ");
 	return mysqli_num_rows($result) == 1;
 }
 
@@ -61,11 +67,17 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 			send_message_to_admin($message, $text);
 			db_reset_state($chat_id);
 			break;
+		case POST_VALIDATION_SEND_POST_TITLE:
+			// user has sent title and link of a post to validate
+			send_thank_message($chat_id, $message_id);
+			send_message_to_admin($message, $text);
+			db_reset_state($chat_id);
+			break;
 	}
 }
 
 //--------------------- telegram bot api functions ---------------
-$available_commands = ['/contact','/post_validation'];
+$available_commands = ['/contact','/post_validation','/cancel','/scheduale_post'];
 
 function run_commands($text, $chat_id, $message_id, $message) {
 	global $available_commands;
@@ -86,33 +98,72 @@ function get_command($text) {
 }
 
 //--------------------- telegram bot command functions -------------
+function run_cancel_command($chat_id, $text, $message_id, $message) {
+	global $telegram;
+	db_reset_state($chat_id);
+	$reply_markup = $telegram->replyKeyboardHide();
+	$telegram->sendMessage([
+		'chat_id' => $chat_id,
+		'tetx' => 'عملیات با موفقیت کنسل شد',
+		'reply_to_message_id' => $message_id,
+		'reply_markup' => $reply_markup
+	]);
+}
 function run_contact_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
+	db_set_state($chat_id, CONTACT);
+	$reply_markup = $telegram->forceReply();
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => 'لطفا پیام تان را بفرستید',
-		'reply_to_message_id' => $message_id
+		'reply_to_message_id' => $message_id,
+		'reply_markup' => $reply_markup
 	]);
-	db_set_state($chat_id, CONTACT);
 }
 function run_post_validation_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
-	if (db_is_user_author($chat_id)) {
-		$telegram->sendMessage([
-			'chat_id' => $chat_id,
-			'text' => 'عنوان مطلب و لینک مطلبی که می خواهید بنویسید را وارد کنید',
-			'reply_to_message_id' => $message_id
-		]);
+	if (db_check_user_permission($chat_id, AUTHOR) || db_check_user_permission($chat_id, ADMIN)) {
+		db_set_state($chat_id, POST_VALIDATION_SEND_POST_TITLE);
+		$answer = 'عنوان مطلب و لینک مطلبی که می خواهید بنویسید را وارد کنید';
+	} else {
+		$answer = 'ببخشید اما شما نویسنده ی سایت نیستید!';
 	}
-	db_set_state($chat_id, POST_VALIDATION_SEND_POST_TITLE);
+	$reply_markup = $telegram->forceReply();
+	$telegram->sendMessage([
+		'chat_id' => $chat_id,
+		'text' => $answer,
+		'reply_to_message_id' => $message_id,
+		'reply_markup' => $reply_markup
+	]);
+}
+function run_scheduale_post_command($chat_id, $text, $message_id, $message) {
+	global $telegram;
+	if (db_check_user_permission($chat_id, ADMIN)) {
+		$answer = 'نوع مطلبی که میخوای بفرستی رو مشخص کن' . "\r\n";
+		$keyboard = [
+		    ['معرفی ربات', 'معرفی ابزار']
+		];
+		$reply_markup = $telegram->replyKeyboardMarkup([
+			'keyboard' => $keyboard, 
+			'resize_keyboard' => true, 
+			'one_time_keyboard' => true
+		]);
+	} else {
+		$answer = 'برای استفاده از این دستور باید ادمین کانال باشید';
+	}
+	$telegram->sendMessage([
+		$chat_id => $chat_id,
+		$text => $answer,
+		'reply_markup' => $reply_markup
+	]);
 }
 
 //--------------------- telegram bot api helper functions ---------
 function send_message_to_admin($message, $text) {
 	global $telegram;
 	$username = $message->getFrom()->getUsername();
-	$firstname = $message->getFrom()->getFirstname();
-	$lastname = $message->getFrom()->getLastname();
+	$firstname = $message->getFrom()->getFirstName();
+	$lastname = $message->getFrom()->getLastName();
 	$text = 'name: ' . $firstname . ' ' . $lastname . "\r\n" . 'from: @' . $username . "\r\n" . 'text: ' . $text;
 
 	/*$inline_keyboard_button = [
