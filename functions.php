@@ -235,7 +235,7 @@ function log_debug($text) {
 		'text' => $text
 	]);
 	$debug_file = fopen("log.txt","a");
-	fwrite($debug_file, "-------------------------\r\n" . $text . "\r\n");
+	fwrite($debug_file, $text . "\r\n" . "-------------------------\r\n");
 	fclose($file);
 }
 
