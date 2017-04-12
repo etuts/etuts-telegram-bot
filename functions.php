@@ -125,10 +125,10 @@ function run_post_validation_command($chat_id, $text, $message_id, $message) {
 	if (db_check_user_permission($chat_id, AUTHOR) || db_check_user_permission($chat_id, ADMIN)) {
 		db_set_state($chat_id, POST_VALIDATION_SEND_POST_TITLE);
 		$answer = 'عنوان مطلب و لینک مطلبی که می خواهید بنویسید را وارد کنید';
+		$reply_markup = $telegram->forceReply();
 	} else {
 		$answer = 'ببخشید اما شما نویسنده ی سایت نیستید!';
 	}
-	$reply_markup = $telegram->forceReply();
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => $answer,
