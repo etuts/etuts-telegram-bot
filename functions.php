@@ -43,6 +43,10 @@ function db_check_user_permission($chat_id, $permission) {
 	$result = mysqli_query($db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$chat_id', '$permission') ");
 	return mysqli_num_rows($result) == 1;
 }
+function db_set_permission($chat_id, $permission) {
+	global $db;
+	return mysqli_query($db, "UPDATE `chats` SET permission = '$permission' WHERE chat_id = '$chat_id' ");
+}
 
 // get chat state from database
 function get_chat_state($chat_id, $text) {
@@ -74,6 +78,9 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 			db_reset_state($chat_id);
 			break;
 	}
+}
+function add_admin($chat_id) {
+	db_set_permission($chat_id, ADMIN);
 }
 
 //--------------------- telegram bot api functions ---------------
