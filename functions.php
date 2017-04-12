@@ -105,8 +105,8 @@ function get_keyboard_button($text) {
 	return $keyboard_button;
 }
 function run_keyboard_button_func($btn,$text,$chat_id, $message_id, $message) {
-	setlocale(LC_CTYPE, 'nl_BE.utf8');
-	log_debug(iconv('UTF-8', 'ASCII//TRANSLIT', $text));
+	// setlocale(LC_CTYPE, 'nl_BE.utf8');
+	log_debug(iconv("UTF-8", "ISO-8859-1//TRANSLIT", $text));
 	// global $keyboard_buttons;
 	// switch ($btn) {
 	// 	case $:
@@ -181,10 +181,8 @@ function run_post_validation_command($chat_id, $text, $message_id, $message) {
 function run_scheduale_post_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
 	if (db_check_user_permission($chat_id, ADMIN)) {
-		$answer = 'نوع مطلبی که میخوای بفرستی رو مشخص کن' . "\r\n";
-		$keyboard = [
-		    ['معرفی ربات', 'معرفی ابزار']
-		];
+		$answer = 'نوع مطلبی که میخوای بفرستی رو مشخص کن' . PHP_EOL;
+		$keyboard = [['معرفی ربات', 'معرفی ابزار']];
 		$reply_markup = $telegram->replyKeyboardMarkup([
 			'keyboard' => $keyboard, 
 			'resize_keyboard' => true, 
@@ -207,9 +205,9 @@ function send_message_to_admin($message, $text, $description) {
 	$username = $message->getFrom()->getUsername();
 	$firstname = $message->getFrom()->getFirstName();
 	$lastname = $message->getFrom()->getLastName();
-	$text = $description . "\r\n" .
-			'نام: ' . $firstname . ' ' . $lastname . "\r\n" .
-			'از: @' . $username . "\r\n" .
+	$text = $description . PHP_EOL .
+			'نام: ' . $firstname . ' ' . $lastname . PHP_EOL .
+			'از: @' . $username . PHP_EOL .
 			'متن: ' . $text;
 
 	/*$inline_keyboard_button = [
@@ -270,7 +268,7 @@ function log_debug($text) {
 		'text' => $text
 	]);
 	$debug_file = fopen("log.txt","a");
-	fwrite($debug_file, $text . "\r\n" . "-------------------------\r\n");
+	fwrite($debug_file, $text . PHP_EOL . "-------------------------\r\n");
 	fclose($file);
 }
 
