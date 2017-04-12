@@ -5,6 +5,7 @@ require_once 'config.php';
 //--------------------- Enum of STATEs ----------------------
 define("CANCEL", 0);
 define("CONTACT", 1);
+define("POST_VALIDATION_SEND_POST_TITLE", 2);
 
 //--------------------- database functions ------------------
 function db_get_user_row($chat_id) {
@@ -16,9 +17,9 @@ function db_get_state($chat_id) {
 	$result = mysqli_query($db, "SELECT `state` FROM `chats` WHERE chat_id = '$chat_id' ");
 	return (int)$result->fetch_assoc()['state'];
 }
-function db_insert($chat_id, $state, $text) {
+function db_insert($chat_id, $state, $text, $permission = 0) {
 	global $db;
-	return mysqli_query($db, "INSERT INTO `chats` (chat_id, state, last_message) VALUES ('$chat_id', '$state', '$text') ");
+	return mysqli_query($db, "INSERT INTO `chats` (chat_id, state, last_message, permission) VALUES ('$chat_id', '$state', '$text', '$permission') ");
 }
 function db_update_last_message($chat_id, $text) {
 	global $db;
@@ -30,6 +31,11 @@ function db_set_state($chat_id, $state) {
 }
 function db_reset_state($chat_id) {
 	return db_set_state($chat_id,0);
+}
+function db_is_user_author($chat_id) {
+	global $db;
+	$result = mysqli_query($db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$chat_id', 2) ");
+	return mysqli_num_rows($result) == 1;
 }
 
 // get chat state from database
@@ -45,16 +51,29 @@ function get_chat_state($chat_id) {
 	}
 	return $state;
 }
+function handle_state($state) {
+	switch ($state) {
+		case CANCEL:
+			// user has sent chert o pert! execute help command
+			break;
+		case CONTACT:
+			// user has sent a message to admin! Wow!!
+			send_thank_message($chat_id, $message_id);
+			send_message_to_admin($message, $text);
+			db_reset_state($chat_id);
+			break;
+	}
+}
 
 //--------------------- telegram bot api functions ---------------
-$available_commands = ['/contact'];
+$available_commands = ['/contact','/post_validation'];
 
-function run_commands($text, $chat_id, $message_id) {
+function run_commands($text, $chat_id, $message_id, $message) {
 	global $available_commands;
 	$commands_index = get_command($text);
 	foreach ($commands_index as $command_index) {
 		$func = 'run_' . ltrim($available_commands[$command_index], '/') . '_command';
-		$func($chat_id, $text, $message_id);
+		$func($chat_id, $text, $message_id, $message);
 	}
 }
 function get_command($text) {
@@ -68,7 +87,7 @@ function get_command($text) {
 }
 
 //--------------------- telegram bot command functions -------------
-function run_contact_command($chat_id, $text, $message_id) {
+function run_contact_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
@@ -76,6 +95,18 @@ function run_contact_command($chat_id, $text, $message_id) {
 		'reply_to_message_id' => $message_id
 	]);
 	db_set_state($chat_id, CONTACT);
+}
+function run_post_validation_command($chat_id, $text, $message_id, $message) {
+	global $telegram;
+
+	if (db_is_user_author($chat_id)) {
+		$telegram->sendMessage([
+			'chat_id' => $chat_id,
+			'text' => 'عنوان مطلب و لینک مطلبی که می خواهید بنویسید را وارد کنید',
+			'reply_to_message_id' => $message_id
+		]);
+	}
+	db_set_state($chat_id, POST_VALIDATION_SEND_POST_TITLE);
 }
 
 //--------------------- telegram bot api helper functions ---------
@@ -96,23 +127,23 @@ function send_message_to_admin($message, $text) {
 		'inline_keyboard' => $inline_keyboard_buttons
 	]);*/
 
-	$keyboard = [
+/*	$keyboard = [
 	    ['7', '8', '9'],
 	    ['4', '5', '6'],
 	    ['1', '2', '3'],
 	         ['0']
-	];
+	];*/
 /*	$reply_markup = $telegram->replyKeyboardMarkup([
 		'keyboard' => $keyboard, 
 		'resize_keyboard' => true, 
 		'one_time_keyboard' => true
 	]);*/
 
-	$keyboard = Telegram\Bot\Keyboard\Keyboard::make([
+/*	$keyboard = Telegram\Bot\Keyboard\Keyboard::make([
 		'keyboard' => $keyboard, 
 		'resize_keyboard' => true, 
 		'one_time_keyboard' => true
-	]);
+	]);*/
 	// $keyboard->inline();
 	// $reply_markup->inline();
 
