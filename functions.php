@@ -105,6 +105,7 @@ function get_keyboard_button($text) {
 	return $keyboard_button;
 }
 function run_keyboard_button_func($btn,$text,$chat_id, $message_id, $message) {
+	setlocale(LC_CTYPE, 'nl_BE.utf8');
 	log_debug(iconv('UTF-8', 'ASCII//TRANSLIT', $text));
 	// global $keyboard_buttons;
 	// switch ($btn) {
