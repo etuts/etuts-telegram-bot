@@ -160,8 +160,8 @@ function run_scheduale_post_command($chat_id, $text, $message_id, $message) {
 		$answer = 'برای استفاده از این دستور باید ادمین کانال باشید';
 	}
 	$telegram->sendMessage([
-		$chat_id => $chat_id,
-		$text => $answer,
+		'chat_id' => $chat_id,
+		'text' => $answer,
 		'reply_markup' => $reply_markup
 	]);
 }
