@@ -138,7 +138,12 @@ function get_command($text) {
 // command seperated functions
 function run_start_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
+	$telegram->sendMessage([
+		'chat_id' => $chat_id,
+		'text' => 'خوش آمدید'
+	]);
 
+	//run_help_command($chat_id, $text, $message_id, $message);
 }
 function run_cancel_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
