@@ -9,7 +9,7 @@ define("ADMIN", 1);
 define("AUTHOR", 2);
 
 //--------------------- Enum of STATEs ----------------------
-define("CANCEL", 0);
+define("IDLE", 0);
 define("CONTACT", 1);
 define("POST_VALIDATION_SEND_POST_TITLE", 2);
 
@@ -18,14 +18,18 @@ function db_get_user_row($chat_id) {
 	global $db;
 	return mysqli_query($db, "SELECT * FROM `chats` WHERE chat_id = '$chat_id' ");
 }
+function db_insert($chat_id, $state, $text, $permission = 0) {
+	global $db;
+	return mysqli_query($db, "INSERT INTO `chats` (chat_id, state, last_message, permission) VALUES ('$chat_id', '$state', '$text', '$permission') ");
+}
+function db_set_permission($chat_id, $permission) {
+	global $db;
+	return mysqli_query($db, "UPDATE `chats` SET permission = '$permission' WHERE chat_id = '$chat_id' ");
+}
 function db_get_state($chat_id) {
 	global $db;
 	$result = mysqli_query($db, "SELECT `state` FROM `chats` WHERE chat_id = '$chat_id' ");
 	return (int)$result->fetch_assoc()['state'];
-}
-function db_insert($chat_id, $state, $text, $permission = 0) {
-	global $db;
-	return mysqli_query($db, "INSERT INTO `chats` (chat_id, state, last_message, permission) VALUES ('$chat_id', '$state', '$text', '$permission') ");
 }
 function db_update_last_message($chat_id, $text) {
 	global $db;
@@ -43,15 +47,12 @@ function db_check_user_permission($chat_id, $permission) {
 	$result = mysqli_query($db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$chat_id', '$permission') ");
 	return mysqli_num_rows($result) == 1;
 }
-function db_set_permission($chat_id, $permission) {
-	global $db;
-	return mysqli_query($db, "UPDATE `chats` SET permission = '$permission' WHERE chat_id = '$chat_id' ");
-}
+
 
 // get chat state from database
 function get_chat_state($chat_id, $text) {
 	$result = db_get_user_row($chat_id);
-	$state = CANCEL; // no state
+	$state = IDLE; // no state
 	if (mysqli_num_rows($result) == 0) {
 	    db_insert($chat_id, 0, $text);
 	} else {
@@ -62,7 +63,7 @@ function get_chat_state($chat_id, $text) {
 }
 function handle_state($state, $chat_id, $text, $message_id, $message) {
 	switch ($state) {
-		case CANCEL:
+		case IDLE:
 			// user has sent chert o pert! execute help command
 			break;
 		case CONTACT:
@@ -85,13 +86,16 @@ function add_admin($chat_id) {
 
 //--------------------- telegram bot api functions ---------------
 $keyboard_buttons = ['معرفی ربات'];
+
 function run_keyboard_buttons($text, $chat_id, $message_id, $message) {
 	global $keyboard_buttons;
 	$is_keyboard_button = false;
 	$btn = get_keyboard_button($text);
 	if ($btn !== false) {
 		$is_keyboard_button = true;
-		run_keyboard_button_func($btn,$text, $chat_id, $message_id, $message);
+		$func = 'keyboard_button_' . convert_to_english($text);
+		log_debug($func);
+		$func($btn, $text, $chat_id, $message_id, $message);
 	}
 	return $is_keyboard_button;
 }
@@ -104,22 +108,15 @@ function get_keyboard_button($text) {
 	}
 	return $keyboard_button;
 }
-function run_keyboard_button_func($btn,$text,$chat_id, $message_id, $message) {
-	log_debug(convert_to_english($text));
-	// global $keyboard_buttons;
-	// switch ($btn) {
-	// 	case $:
-	// 		# code...
-	// 		break;
-		
-	// 	default:
-	// 		# code...
-	// 		break;
-	// }
+// معرفی ربات
+function keyboard_button_lubtdbfhj($btn, $text, $chat_id, $message_id, $message) {
 }
 // keyboard buttons seperated functions
+
+
+
 //--------------------- telegram bot command functions -----------
-$available_commands = ['/contact','/post_validation','/cancel','/scheduale_post'];
+$available_commands = ['/contact','/post_validation','/cancel','/schedule_post','/start'];
 
 function run_commands($text, $chat_id, $message_id, $message) {
 	global $available_commands;
@@ -139,13 +136,17 @@ function get_command($text) {
 	return $contain_these_commands;
 }
 // command seperated functions
+function run_start_command($chat_id, $text, $message_id, $message) {
+	global $telegram;
+
+}
 function run_cancel_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
 	db_reset_state($chat_id);
 	$reply_markup = $telegram->replyKeyboardHide();
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
-		'tetx' => 'عملیات با موفقیت کنسل شد',
+		'text' => 'عملیات با موفقیت کنسل شد',
 		'reply_to_message_id' => $message_id,
 		'reply_markup' => $reply_markup
 	]);
@@ -177,7 +178,7 @@ function run_post_validation_command($chat_id, $text, $message_id, $message) {
 		'reply_markup' => $reply_markup
 	]);
 }
-function run_scheduale_post_command($chat_id, $text, $message_id, $message) {
+function run_schedule_post_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
 	if (db_check_user_permission($chat_id, ADMIN)) {
 		$answer = 'نوع مطلبی که میخوای بفرستی رو مشخص کن' . PHP_EOL;
