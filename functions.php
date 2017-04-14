@@ -14,9 +14,6 @@ define("CONTACT", 1);
 define("POST_VALIDATION_SEND_POST_TITLE", 2);
 
 //--------------------- database functions ------------------
-/**
-* database
-*/
 class Database {
 	var $db_name;
 	var $db_user;
@@ -30,7 +27,7 @@ class Database {
 		$this->db_pass = $db_pass;
 		$this->$db = mysqli_connect('localhost',$this->db_user,$this->db_pass,$this->$db_name) or die('Error connecting to MySQL server.');
 		$this->chat_id = $chat_id;
-		return $db;
+		return $this->db;
 	}
 	function get_user_row() {
 		return mysqli_query($this->db, "SELECT * FROM `chats` WHERE chat_id = '$this->chat_id' ");
