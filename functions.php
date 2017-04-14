@@ -116,7 +116,7 @@ function keyboard_button_lubtdbfhj($btn, $text, $chat_id, $message_id, $message)
 
 
 //--------------------- telegram bot command functions -----------
-$available_commands = ['/contact','/post_validation','/cancel','/schedule_post','/start'];
+$available_commands = ['/contact','/post_validation','/cancel','/schedule_post','/start','/help'];
 
 function run_commands($text, $chat_id, $message_id, $message) {
 	global $available_commands;
@@ -138,7 +138,6 @@ function get_command($text) {
 // command seperated functions
 function run_start_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
-
 }
 function run_cancel_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
