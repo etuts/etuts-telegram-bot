@@ -54,7 +54,7 @@ function get_chat_state($chat_id, $text) {
 	$result = db_get_user_row($chat_id);
 	$state = IDLE; // no state
 	if (mysqli_num_rows($result) == 0) {
-	    db_insert($chat_id, 0, $text);
+		db_insert($chat_id, 0, $text);
 	} else {
 		$state = db_get_state($chat_id);
 		db_update_last_message($chat_id, $text);
@@ -143,7 +143,18 @@ function run_start_command($chat_id, $text, $message_id, $message) {
 		'text' => 'خوش آمدید'
 	]);
 
-	//run_help_command($chat_id, $text, $message_id, $message);
+	run_help_command($chat_id, $text, $message_id, $message);
+}
+function run_help_command($chat_id, $text, $message_id, $message) {
+	global $telegram, $available_commands;
+	$answer = '';
+	foreach ($available_commands as $index => $command) {
+		$answer .= sprintf('%s - %s'.PHP_EOL, $index, $command);
+	}
+	$telegram->sendMessage([
+		'chat_id' => $chat_id,
+		'text' => $answer,
+	]);
 }
 function run_cancel_command($chat_id, $text, $message_id, $message) {
 	global $telegram;
@@ -226,10 +237,10 @@ function send_message_to_admin($message, $text, $description) {
 	]);*/
 
 /*	$keyboard = [
-	    ['7', '8', '9'],
-	    ['4', '5', '6'],
-	    ['1', '2', '3'],
-	         ['0']
+		['7', '8', '9'],
+		['4', '5', '6'],
+		['1', '2', '3'],
+			 ['0']
 	];*/
 /*	$reply_markup = $telegram->replyKeyboardMarkup([
 		'keyboard' => $keyboard, 
