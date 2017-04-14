@@ -14,7 +14,7 @@ define("CONTACT", 1);
 define("POST_VALIDATION_SEND_POST_TITLE", 2);
 
 //--------------------- database functions ------------------
-class Database {
+/*class Database {
 	protected $db_name;
 	protected $db_user;
 	protected $db_pass;
@@ -57,19 +57,53 @@ class Database {
 		$result = mysqli_query($this->db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$this->chat_id', '$permission') ");
 		return mysqli_num_rows($result) == 1;
 	}
+}*/
+function get_user_row() {
+	global $db, $chat_id;
+	return mysqli_query($db, "SELECT * FROM `chats` WHERE chat_id = '$chat_id' ");
+}
+function insert($state, $text, $permission = 0) {
+	global $db, $chat_id;
+	return mysqli_query($db, "INSERT INTO `chats` (chat_id, state, last_message, permission) VALUES ('$chat_id', '$state', '$text', '$permission') ");
+}
+function set_permission($permission) {
+	global $db, $chat_id;
+	return mysqli_query($db, "UPDATE `chats` SET permission = '$permission' WHERE chat_id = '$chat_id' ");
+}
+function get_state() {
+	global $db, $chat_id;
+	$result = mysqli_query($db, "SELECT `state` FROM `chats` WHERE chat_id = '$chat_id' ");
+	return (int)$result->fetch_assoc()['state'];
+}
+function update_last_message($text) {
+	global $db, $chat_id;
+	return mysqli_query($db, "UPDATE `chats` SET last_message = '$text' WHERE chat_id = '$chat_id' ");
+}
+function set_state($state) {
+	global $db, $chat_id;
+	return mysqli_query($db, "UPDATE `chats` SET state = '$state' WHERE chat_id = '$chat_id' ");
+}
+function reset_state() {
+	global $db, $chat_id;
+	return db_set_state($chat_id,0);
+}
+function check_user_permission($permission) {
+	global $db, $chat_id;
+	$result = mysqli_query($db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$chat_id', '$permission') ");
+	return mysqli_num_rows($result) == 1;
 }
 
 
 // get chat state from database
 function get_chat_state($chat_id, $text) {
 	global $db;
-	$result = $db->get_user_row();
+	$result = /*$db->*/get_user_row();
 	$state = IDLE; // no state
 	if (mysqli_num_rows($result) == 0) {
-		$db->insert(0, $text);
+		/*$db->*/insert(0, $text);
 	} else {
-		$state = $db->get_state();
-		$db->update_last_message($text);
+		$state = /*$db->*/get_state();
+		/*$db->*/update_last_message($text);
 	}
 	return $state;
 }
@@ -83,19 +117,19 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 			// user has sent a message to admin! Wow!!
 			send_thank_message($chat_id, $message_id);
 			send_message_to_admin($message, $text, 'یک تماس جدید');
-			$db->reset_state();
+			/*$db->*/reset_state();
 			break;
 		case POST_VALIDATION_SEND_POST_TITLE:
 			// user has sent title and link of a post to validate
 			send_thank_message($chat_id, $message_id);
 			send_message_to_admin($message, $text, 'مطلب جدید در انتظار بررسی');
-			$db->reset_state();
+			/*$db->*/reset_state();
 			break;
 	}
 }
 function add_admin($chat_id) {
 	global $db;
-	$db->set_permission(ADMIN);
+	/*$db->*/set_permission(ADMIN);
 }
 
 //--------------------- telegram bot api functions ---------------
@@ -172,7 +206,7 @@ function run_help_command($chat_id, $text, $message_id, $message) {
 }
 function run_cancel_command($chat_id, $text, $message_id, $message) {
 	global $telegram, $db;
-	$db->reset_state();
+	/*$db->*/reset_state();
 	$reply_markup = $telegram->replyKeyboardHide();
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
@@ -183,7 +217,7 @@ function run_cancel_command($chat_id, $text, $message_id, $message) {
 }
 function run_contact_command($chat_id, $text, $message_id, $message) {
 	global $telegram, $db;
-	$db->set_state(CONTACT);
+	/*$db->*/set_state(CONTACT);
 	$reply_markup = $telegram->forceReply();
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
@@ -194,8 +228,8 @@ function run_contact_command($chat_id, $text, $message_id, $message) {
 }
 function run_post_validation_command($chat_id, $text, $message_id, $message) {
 	global $telegram, $db;
-	if ($db->check_user_permission(AUTHOR) || $db->check_user_permission(ADMIN)) {
-		$db->set_state(POST_VALIDATION_SEND_POST_TITLE);
+	if (/*$db->*/check_user_permission(AUTHOR) || /*$db->*/check_user_permission(ADMIN)) {
+		/*$db->*/set_state(POST_VALIDATION_SEND_POST_TITLE);
 		$answer = 'عنوان مطلب و لینک مطلبی که می خواهید بنویسید را وارد کنید';
 		$reply_markup = $telegram->forceReply();
 	} else {
@@ -210,7 +244,7 @@ function run_post_validation_command($chat_id, $text, $message_id, $message) {
 }
 function run_schedule_post_command($chat_id, $text, $message_id, $message) {
 	global $telegram, $db;
-	if ($db->check_user_permission(ADMIN)) {
+	if (/*$db->*/check_user_permission(ADMIN)) {
 		$answer = 'نوع مطلبی که میخوای بفرستی رو مشخص کن' . PHP_EOL;
 		$keyboard = [['معرفی ربات', 'معرفی ابزار']];
 		$reply_markup = $telegram->replyKeyboardMarkup([
