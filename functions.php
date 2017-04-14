@@ -8,12 +8,12 @@ ini_set('display_errors', 1);
 define("ADMIN", 1);
 define("AUTHOR", 2);
 
-//--------------------- Enum of STATEs ----------------------
+//--------------------- Enum of STATEs --------------------------
 define("IDLE", 0);
 define("CONTACT", 1);
 define("POST_VALIDATION_SEND_POST_TITLE", 2);
 
-//--------------------- database functions ------------------
+//--------------------- database class --------------------------
 class Database {
 	protected $db_name;
 	protected $db_user;
@@ -57,50 +57,20 @@ class Database {
 		$result = mysqli_query($this->db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$this->chat_id', '$permission') ");
 		return mysqli_num_rows($result) == 1;
 	}
+	function user_already_exists() {
+		$result = $this->get_user_row();
+		return mysqli_num_rows($result) == 0;
+	}
 }
-/*
-function get_user_row() {
-	global $db, $chat_id;
-	return mysqli_query($db, "SELECT * FROM `chats` WHERE chat_id = '$chat_id' ");
-}
-function insert($state, $text, $permission = 0) {
-	global $db, $chat_id;
-	return mysqli_query($db, "INSERT INTO `chats` (chat_id, state, last_message, permission) VALUES ('$chat_id', '$state', '$text', '$permission') ");
-}
-function set_permission($permission) {
-	global $db, $chat_id;
-	return mysqli_query($db, "UPDATE `chats` SET permission = '$permission' WHERE chat_id = '$chat_id' ");
-}
-function get_state() {
-	global $db, $chat_id;
-	$result = mysqli_query($db, "SELECT `state` FROM `chats` WHERE chat_id = '$chat_id' ");
-	return (int)$result->fetch_assoc()['state'];
-}
-function update_last_message($text) {
-	global $db, $chat_id;
-	return mysqli_query($db, "UPDATE `chats` SET last_message = '$text' WHERE chat_id = '$chat_id' ");
-}
-function set_state($state) {
-	global $db, $chat_id;
-	return mysqli_query($db, "UPDATE `chats` SET state = '$state' WHERE chat_id = '$chat_id' ");
-}
-function reset_state() {
-	global $db, $chat_id;
-	return db_set_state($chat_id,0);
-}
-function check_user_permission($permission) {
-	global $db, $chat_id;
-	$result = mysqli_query($db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$chat_id', '$permission') ");
-	return mysqli_num_rows($result) == 1;
-}
-*/
+//--------------------- end of database class -------------------
 
+
+//--------------------- database functions ------------------
 // get chat state from database
 function get_chat_state($chat_id, $text) {
 	global $db;
-	$result = $db->get_user_row();
 	$state = IDLE; // no state
-	if (mysqli_num_rows($result) == 0) {
+	if ($db->user_already_exists()) {
 		$db->insert(0, $text);
 	} else {
 		$state = $db->get_state();
