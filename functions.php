@@ -15,11 +15,11 @@ define("POST_VALIDATION_SEND_POST_TITLE", 2);
 
 //--------------------- database functions ------------------
 class Database {
-	var $db_name;
-	var $db_user;
-	var $db_pass;
-	var $db;
-	var $chat_id;
+	protected $db_name;
+	protected $db_user;
+	protected $db_pass;
+	protected static $db;
+	protected $chat_id;
 
 	function __construct($db_name, $db_user, $db_pass, $chat_id) {
 		$this->db_name = $db_name;
