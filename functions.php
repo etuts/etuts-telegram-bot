@@ -22,10 +22,12 @@ class Database {
 	protected $chat_id;
 
 	function __construct($db_name, $db_user, $db_pass, $chat_id) {
+		// if(!isset(self::$db)) {
+
 		$this->db_name = $db_name;
 		$this->db_user = $db_user;
 		$this->db_pass = $db_pass;
-		$this->$db = mysqli_connect('localhost',$this->db_user,$this->db_pass,$this->$db_name) or die('Error connecting to MySQL server.');
+		$this->db = mysqli_connect('localhost',$this->db_user,$this->db_pass,$this->db_name) or die('Error connecting to MySQL server.');
 		$this->chat_id = $chat_id;
 		return $this->db;
 	}
