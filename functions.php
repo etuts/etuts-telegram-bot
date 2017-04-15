@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 
 // require_once 'config.php';
 
-//--------------------- Enum of permissions ----------------------
+//--------------------- Enum of permissions ---------------------
 define("ADMIN", 1);
 define("AUTHOR", 2);
 
@@ -22,14 +22,15 @@ class Database {
 	protected $chat_id;
 
 	function __construct($db_name, $db_user, $db_pass, $chat_id) {
-		// if(!isset(self::$db)) {
-
 		$this->db_name = $db_name;
 		$this->db_user = $db_user;
 		$this->db_pass = $db_pass;
 		$this->db = mysqli_connect('localhost',$this->db_user,$this->db_pass,$this->db_name) or die('Error connecting to MySQL server.');
 		$this->chat_id = $chat_id;
 		return $this->db;
+	}
+	function __destruct() {
+		mysqli_close($this->db);
 	}
 	function get_user_row() {
 		return mysqli_query($this->db, "SELECT * FROM `chats` WHERE chat_id = '$this->chat_id' ");
@@ -62,10 +63,40 @@ class Database {
 		return mysqli_num_rows($result) == 0;
 	}
 }
-//--------------------- end of database class -------------------
+//--------------------- end of database class ----------------------
+class Posts_file {
+	protected $pfile_name;
+	protected $has_read_file;
+	protected $has_write_file;
+	protected $read_file;
+	protected $write_file;
+	function __construct($pfile_name) {
+		$this->pfile_name = $pfile_name;
+	}
+	function open_read_file() {
+		$this->read_file = fopen($this->pfile_name, "r");
+		$this->has_read_file = true;
+		return $this->read_file;
+	}
+	function open_write_file() {
+		$this->write_file = fopen($this->pfile_name, "a");
+		$this->has_write_file = true;
+		return $this->write_file;
+	}
+	function close_files() {
+		if ($this->has_read_file)
+			fclose($this->read_file);
+
+		if ($this->has_write_file)
+			fclose($this->write_file);
+	}
+	function add_post($post_line) {
+		$this->open_write_file();
+	}
+}
 
 
-//--------------------- database functions ------------------
+//--------------------- database functions -------------------------
 // get chat state from database
 function get_chat_state($chat_id, $text) {
 	global $db;
@@ -134,7 +165,7 @@ function keyboard_button_lubtdbfhj($btn, $text, $chat_id, $message_id, $message)
 
 
 
-//--------------------- telegram bot command functions -----------
+//--------------------- telegram bot command functions -----------------
 $available_commands = ['/contact','/post_validation','/cancel','/schedule_post','/start','/help'];
 
 function run_commands($text, $chat_id, $message_id, $message) {
