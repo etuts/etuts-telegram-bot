@@ -11,9 +11,9 @@ function run_help_command($chat_id, $text, $message_id, $message) {
 		$answer .= ("/".$command["name"]."\n");
 	}
 	if ($is_admin)
-			$answer.("You are Admin\n");
+			$answer .= ("You are Admin\n");
 	else
-		$answer.("You are note Admin\n");
+		$answer .= ("You are note Admin\n");
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => $answer,
