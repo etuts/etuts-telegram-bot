@@ -30,10 +30,14 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 			send_message_to_admin($message, $text, 'مطلب جدید در انتظار بررسی');
 			$db->reset_state();
 			break;
+		case MOAREFI_ROBOT:
+			$file = new Posts_file();
+			$post_line = $text;
+			$file->add_post($post_line);
+			break;
 	}
 }
 function add_admin($chat_id) {
 	global $db;
 	$db->set_permission(ADMIN);
 }
-?>

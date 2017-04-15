@@ -22,8 +22,7 @@ function get_keyboard_button($text) {
 	}
 	return $keyboard_button;
 }
-// keyboard buttons seperated functions
-function keyboard_button_lubtdbfhj($btn, $text, $chat_id, $message_id, $message) { // معرفی ربات
-	// should read a file where we store all the posts in there (there should be some functions to work with this file)
+
+foreach (glob("./keyboard_btns/*.php") as $filename) {
+    require ($filename);
 }
-?>

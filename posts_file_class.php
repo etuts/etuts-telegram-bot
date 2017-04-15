@@ -1,11 +1,10 @@
 <?php 
-define("LAST", -1);
 class Posts_file {
 	protected $pfile_name;
 
 	protected $the_file; // FILE type
 
-	function __construct($pfile_name, $for_write = true) {
+	function __construct($for_write = true, $pfile_name = "channel-posts.txt") {
 		$this->pfile_name = $pfile_name;
 		if ($for_write)
 			$this->open_write_file();
@@ -23,9 +22,11 @@ class Posts_file {
 		$this->the_file = fopen($this->pfile_name, "a");
 		return $this->the_file;
 	}
-	function add_post($post_line, $priority = LAST) {
+	function add_post($post_line, $priority = false) {
 		if (is_writable($this->the_file)) {
-			fwrite($this->the_file, $post_line);
+			if ($priority)
+				rewind($this->the_file);
+			fwrite($this->the_file, $post_line . PHP_EOL);
 		}
 	}
 	function read_post() {
@@ -41,4 +42,3 @@ class Posts_file {
 		return $post_line;
 	}
 }
-?>

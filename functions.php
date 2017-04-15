@@ -10,12 +10,13 @@ define("AUTHOR", 2);
 define("IDLE", 0);
 define("CONTACT", 1);
 define("POST_VALIDATION_SEND_POST_TITLE", 2);
+define("MOAREFI_ROBOT", 3);
 
 //--------------------- database class ---------------------------
 require('database_class.php');
 
 //--------------------- posts_file class -------------------------
-// require('posts_file_class.php');
+require('posts_file_class.php');
 
 //--------------------- database functions -----------------------
 require('database_functions.php');

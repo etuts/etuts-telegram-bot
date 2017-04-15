@@ -1,4 +1,19 @@
 <?php 
+function reply($chat_id, $text, $message_id, $force_reply = false, $reply = true) {
+	global $telegram;
+	$data = [
+		'chat_id' => $chat_id,
+		'text' => $text
+	];
+	if ($force_reply) {
+		$reply_markup = $telegram->forceReply();
+		$data['reply_to_message_id'] = $message_id;
+	}
+	if ($reply) {
+		$data['reply_markup'] = $reply_markup;
+	}
+	$telegram->sendMessage($data);
+}
 function send_message_to_admin($message, $text, $description) {
 	global $telegram;
 	$username = $message->getFrom()->getUsername();
@@ -39,18 +54,17 @@ function send_message_to_admin($message, $text, $description) {
 	// $keyboard->inline();
 	// $reply_markup->inline();
 
-	$telegram->sendMessage([
-	  'chat_id' => 92454,
-	  'text' => $text,
-	  // 'reply_markup' => $reply_markup
-	]);
+	reply(92454, $text);
 }
 function send_thank_message($chat_id, $message_id) {
 	global $telegram;
-	$telegram->sendMessage([
-		'chat_id' => $chat_id,
-		'text' => 'خیلی ممنون! با موفقیت انجام شد.',
-		'reply_to_message_id' => $message_id
-	]);
+	reply($chat_id, 'خیلی ممنون! با موفقیت انجام شد.', $message_id);
+}
+function log_debug($text, $chat_id = 92454) {
+	global $telegram;
+	reply($chat_id, $text, false, false);
+	$debug_file = fopen("log.txt","a");
+	fwrite($debug_file, $text . PHP_EOL . "-------------------------\r\n");
+	fclose($file);
 }
 ?>
