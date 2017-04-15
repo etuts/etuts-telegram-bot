@@ -39,5 +39,5 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 }
 function add_admin($chat_id) {
 	global $db;
-	$db->set_permission(ADMIN);
+	$db->set_permission(ADMIN, $chat_id);
 }
