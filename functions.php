@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 //--------------------- Enum of permissions ----------------------
+define("USER", 0);
 define("ADMIN", 1);
 define("AUTHOR", 2);
 
