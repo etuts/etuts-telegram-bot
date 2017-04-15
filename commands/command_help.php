@@ -2,7 +2,7 @@
 
 function run_help_command($chat_id, $text, $message_id, $message) {
 	global $telegram, $available_commands,$db;
-	// $is_admin = check_user_permission(ADMIN);
+	$is_admin =  $db->check_user_permission(ADMIN);
 	// $is_admin = true;
 	// $permission = get_user_permission();
 	$answer = '';
