@@ -17,7 +17,7 @@ define("POST_VALIDATION_SEND_POST_TITLE", 2);
 require('database_class.php');
 
 //--------------------- posts_file class -------------------------
-require('posts_file_class.php');
+// require('posts_file_class.php');
 
 //--------------------- database functions -----------------------
 require('database_functions.php');
