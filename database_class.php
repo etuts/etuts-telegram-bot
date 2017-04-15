@@ -37,7 +37,7 @@ class Database {
 		return mysqli_query($this->db, "UPDATE `chats` SET state = '$state' WHERE chat_id = '$this->chat_id' ");
 	}
 	function reset_state() {
-		return db_set_state($this->chat_id,0);
+		return db_set_state(0);
 	}
 	function check_user_permission($permission) {
 		$result = mysqli_query($this->db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$this->chat_id', '$permission') ");
