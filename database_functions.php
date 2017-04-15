@@ -1,9 +1,10 @@
 <?php 
 // get chat state from database
-function get_chat_state($chat_id, $text) {
+function get_chat_state($text) {
 	global $db;
 	$state = IDLE; // no state
-	if ($db->user_already_exists()) {
+
+	if ($db->user_is_new()) {
 		$db->insert(0, $text);
 	} else {
 		$state = $db->get_state();
