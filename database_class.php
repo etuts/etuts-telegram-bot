@@ -26,6 +26,9 @@ class Database {
 	function set_permission($permission, $chat_id) {
 		return mysqli_query($this->db, "UPDATE `chats` SET permission = '$permission' WHERE chat_id = '$chat_id' ");
 	}
+	function get_admins(){
+		return mysqli_qurey($this->db,"SELECT `chat_id` FROM `chats` WHERE permission = ADMIN");
+	}
 	function get_state() {
 		$result = mysqli_query($this->db, "SELECT `state` FROM `chats` WHERE chat_id = '$this->chat_id' ");
 		return (int)$result->fetch_assoc()['state'];
