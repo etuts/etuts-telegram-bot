@@ -48,7 +48,7 @@ class Database {
 	}
 	function get_user_permission() {
 		mysqli_query($this->db, "SELECT `permission` FROM `chats` WHERE chat_id = '$this->chat_id' ");
-		return (int)$result->fetch_assoc()['state'];
+		return (int)$result->fetch_assoc()['permission'];
 	}
 	function user_is_new() {
 		$result = $this->get_user_row();
