@@ -7,7 +7,7 @@ $available_commands = [
 	"/cancel" => array("name"=>"cancel", "description"=>"description of cancel"),
 	"/schedule_post" => array("name"=>"schedule_post", "description"=>"description of schedule_post"),
 	"/start" => array("name"=>"start", "description"=>"description of start"),
-	"/help" => array("name"=>"help", "description"=>"description of help")
+	"/help" => array("name"=>"help", "description"=>"description of help"),
 
 ];
 
