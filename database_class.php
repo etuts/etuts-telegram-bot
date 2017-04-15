@@ -43,6 +43,10 @@ class Database {
 		$result = mysqli_query($this->db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$this->chat_id', '$permission') ");
 		return mysqli_num_rows($result) == 1;
 	}
+	function get_user_permission() {
+		mysqli_query($this->db, "SELECT `permission` FROM `chats` WHERE chat_id = '$this->chat_id' ");
+		return (int)$result->fetch_assoc()['state'];
+	}
 	function user_is_new() {
 		$result = $this->get_user_row();
 		return mysqli_num_rows($result) == 0;
