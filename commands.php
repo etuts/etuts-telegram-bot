@@ -13,7 +13,6 @@ $available_commands = [
 	"/start" => array("name"=>"start", "description"=>"description of start"),
 
 	"/help" => array("name"=>"help", "description"=>"description of help"),
-	"/shahryar" => array("name"=>"shahryar", "description"=>"description of shahryar"),
 	
 
 ];
