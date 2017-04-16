@@ -18,7 +18,7 @@ function run_help_command($chat_id, $text, $message_id, $message) {
 	$chat_id2 = "@mytest2testchannel";
 	$text2 = "Testing the text";
 	$telegram->sendMessage([
-		'chat_id' => $chat_id2,
+		'chat_id' => $chat_id,
 		'text' => $$text2,
 	]);
 }
