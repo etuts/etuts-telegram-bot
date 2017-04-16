@@ -11,16 +11,16 @@ function run_help_command($chat_id, $text, $message_id, $message) {
 		if ($command["permission"] <= $permission)
 			$answer .= ("/".$command["name"]." - ".$command["description"]."\n");
 	}
-	// $telegram->sendMessage([
-	// 	'chat_id' => $chat_id,
-	// 	'text' => $answer,
-	// ]);
-	$chat_id2 = "@mytest2testchannel";
-	$text2 = "Testing the text";
 	$telegram->sendMessage([
-		'chat_id' => $chat_id2,
-		'text' => $text2,
+		'chat_id' => $chat_id,
+		'text' => $answer,
 	]);
+	// $chat_id2 = "@mytest2testchannel";
+	// $text2 = "Testing the text";
+	// $telegram->sendMessage([
+	// 	'chat_id' => $chat_id2,
+	// 	'text' => $text2,
+	// ]);
 }
 
 ?>
