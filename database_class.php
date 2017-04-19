@@ -51,5 +51,8 @@ class Database {
 		$result = $this->get_user_row();
 		return mysqli_num_rows($result) == 0;
 	}
+	function get_chat_id() {
+		return $this->chat_id;
+	}
 }
 ?>
