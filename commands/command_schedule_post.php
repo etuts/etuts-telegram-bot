@@ -5,16 +5,10 @@ function run_schedule_post_command($chat_id, $text, $message_id, $message) {
 	if ($db->check_user_permission(ADMIN)) {
 		$answer = 'نوع مطلبی که میخوای بفرستی رو مشخص کن' . PHP_EOL;
 		$keyboard = [['معرفی ربات', 'معرفی ابزار']];
-		/*$reply_markup = $telegram->replyKeyboardMarkup([
+		$reply_markup = $telegram->replyKeyboardMarkup([
 			'keyboard' => $keyboard, 
 			'resize_keyboard' => true, 
 			'one_time_keyboard' => true
-		]);*/
-		$reply_markup = Telegram\Bot\Keyboard\Keyboard::make([
-			'keyboard' => $keyboard, 
-			'resize_keyboard' => true, 
-			'one_time_keyboard' => true,
-			'inline_keyboard' => '',
 		]);
 	} else {
 		$answer = 'برای استفاده از این دستور باید ادمین کانال باشید';

@@ -8,7 +8,7 @@ function run_keyboard_buttons($text, $chat_id, $message_id, $message) {
 	if ($btn !== false) {
 		$is_keyboard_button = true;
 		$func = 'keyboard_button_' . convert_to_english($text);
-		log_debug($func);
+		// log_debug($func);
 		$func($btn, $text, $chat_id, $message_id, $message);
 	}
 	return $is_keyboard_button;
