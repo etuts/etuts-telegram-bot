@@ -1,3 +1,4 @@
 {
-    "require": { "irazasyed/telegram-bot-sdk" : "master" }
+    "require": { "irazasyed/telegram-bot-sdk" : "master" },
+	"minimum-stability": "dev"
 }
