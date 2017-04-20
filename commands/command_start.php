@@ -1,6 +1,6 @@
 <?php
 
-function run_start_command($chat_id, $text, $message_id, $message) {
+function run_start_command($chat_id, $text, $message_id, $message, $state) {
 	global $telegram;
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
@@ -25,5 +25,3 @@ function run_start_command($chat_id, $text, $message_id, $message) {
 
 	run_help_command($chat_id, $text, $message_id, $message);
 }
-
-?>

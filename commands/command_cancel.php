@@ -1,6 +1,6 @@
 <?php
 
-function run_cancel_command($chat_id, $text, $message_id, $message) {
+function run_cancel_command($chat_id, $text, $message_id, $message, $state) {
 	global $telegram, $db;
 	$db->reset_state();
 	$reply_markup = $telegram->replyKeyboardHide();
@@ -11,5 +11,3 @@ function run_cancel_command($chat_id, $text, $message_id, $message) {
 		'reply_markup' => $reply_markup
 	]);
 }
-
-?>

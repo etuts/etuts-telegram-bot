@@ -1,4 +1,8 @@
 <?php 
+function get_chat_id() {
+	global $db;
+	return $db->get_chat_id();
+}
 function reply($text, $message_id, $force_reply = false, $reply = true) {
 	global $telegram, $db;
 	$chat_id = $db->get_chat_id();
@@ -29,7 +33,7 @@ function send_message_to_admin($message, $text, $description) {
 		'text' => $text
 	]);
 }
-function send_thank_message($chat_id, $message_id) {
+function send_thank_message($message_id) {
 	reply('خیلی ممنون! با موفقیت انجام شد.', $message_id);
 }
 function log_debug($text, $chat_id = 92454) {
@@ -42,4 +46,3 @@ function log_debug($text, $chat_id = 92454) {
 	fwrite($debug_file, $text . PHP_EOL . "-------------------------\r\n");
 	fclose($file);
 }
-?>

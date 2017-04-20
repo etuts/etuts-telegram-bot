@@ -33,5 +33,3 @@ require('telegram_helpers.php');
 
 //--------------------- php helpers ------------------------------
 require('php_helpers.php');
-
-?>

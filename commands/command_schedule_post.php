@@ -1,6 +1,6 @@
 <?php
 
-function run_schedule_post_command($chat_id, $text, $message_id, $message) {
+function run_schedule_post_command($chat_id, $text, $message_id, $message, $state) {
 	global $telegram, $db;
 	if ($db->check_user_permission(ADMIN)) {
 		$answer = 'نوع مطلبی که میخوای بفرستی رو مشخص کن' . PHP_EOL;
@@ -19,5 +19,3 @@ function run_schedule_post_command($chat_id, $text, $message_id, $message) {
 		'reply_markup' => $reply_markup
 	]);
 }
-
-?>

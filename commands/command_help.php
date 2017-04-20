@@ -1,6 +1,6 @@
 <?php
 
-function run_help_command($chat_id, $text, $message_id, $message) {
+function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	global $telegram, $available_commands,$db;
 	$is_admin =  $db->check_user_permission(ADMIN);
 	$is_author = $db->check_user_permission(AUTHOR);
@@ -15,5 +15,3 @@ function run_help_command($chat_id, $text, $message_id, $message) {
 		'text' => $answer,
 	]);
 }
-
-?>

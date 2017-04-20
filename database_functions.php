@@ -19,25 +19,17 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 			// user has sent chert o pert! execute help command
 			break;
 		case CONTACT:
-			// user has sent a message to admin! Wow!!
-			send_thank_message($chat_id, $message_id);
-			send_message_to_admin($message, $text, 'یک تماس جدید');
-			$db->reset_state();
+			run_contact_command($chat_id, $text, $message_id, $message, CONTACT);
 			break;
 		case POST_VALIDATION_SEND_POST_TITLE:
-			// user has sent title and link of a post to validate
-			send_thank_message($chat_id, $message_id);
-			send_message_to_admin($message, $text, 'مطلب جدید در انتظار بررسی');
-			$db->reset_state();
+			run_post_validation_command($chat_id, $text, $message_id, $message, POST_VALIDATION_SEND_POST_TITLE);
 			break;
 		case MOAREFI_ROBOT:
-			$file = new Posts_file();
-			$post_line = $text;
-			$file->add_post($post_line);
+			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT);
 			break;
 	}
 }
-function add_admin($chat_id) {
+function add_admin($admin_chat_id) {
 	global $db;
-	$db->set_permission(ADMIN, $chat_id);
+	$db->set_permission(ADMIN, $admin_chat_id);
 }
