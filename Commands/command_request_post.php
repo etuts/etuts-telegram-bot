@@ -1,5 +1,5 @@
 <?php
-
+//
 function run_request_post_command($chat_id, $text, $message_id, $message, $state) {
 	global $telegram, $db;
 	$telegram->sendMessage([
