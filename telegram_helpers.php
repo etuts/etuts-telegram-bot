@@ -20,6 +20,7 @@ function reply($text, $message_id, $force_reply = false, $reply = true) {
 	$telegram->sendMessage($data);
 }
 function send_message_to_admin($message, $text, $description) {
+	global $telegram;
 	$username = $message->getFrom()->getUsername();
 	$firstname = $message->getFrom()->getFirstName();
 	$lastname = $message->getFrom()->getLastName();
@@ -37,6 +38,7 @@ function send_thank_message($message_id) {
 	reply('خیلی ممنون! با موفقیت انجام شد.', $message_id);
 }
 function log_debug($text, $chat_id = 92454) {
+	global $telegram;
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => $text
