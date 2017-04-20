@@ -55,3 +55,27 @@ function log_debug($text, $chat_id = 92454) {
 	fwrite($debug_file, $text . PHP_EOL . "-------------------------\r\n");
 	fclose($file);
 }
+
+//chat_id is the only problem, remember to change the id when debugged =))
+function show_keyboard($keyboard_name, $text) {
+	global $keyboard_buttons, $telegram;
+	//$chat_id = get_chat_id();
+
+	$keyboard = $keyboard_buttons[$keyboard_name];
+	//log_debug(var_export($keyboard, true), 117990761);
+	$keys = array();
+	foreach($keyboard as $key){
+		$keys[] = $key["name"];
+	}
+	log_debug(var_export($keys, true), 117990761);
+	$reply_markup = Telegram\Bot\Keyboard\Keyboard::make([
+		'keyboard' => [$keys], 
+		'resize_keyboard' => true, 
+		'one_time_keyboard' => true
+	]);
+	$telegram->sendMessage([
+		'chat_id' =>  117990761,// $chat_id, 
+		'text' => $text, 
+		'reply_markup' => $reply_markup,
+	]);
+}

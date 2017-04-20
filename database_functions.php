@@ -26,6 +26,9 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 		case MOAREFI_ROBOT:
 			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT);
 			break;
+		case REQUEST_POST:
+			run_request_post_command($chat_id, $text, $message_id, $message,REQUEST_POST);
+			break;
 	}
 }
 function add_admin($admin_chat_id) {

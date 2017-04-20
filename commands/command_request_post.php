@@ -2,10 +2,6 @@
 
 function run_request_post_command($chat_id, $text, $message_id, $message, $state) {
 	global $telegram, $db;
-	$telegram->sendMessage([
-				'chat_id' => $chat_id,
-				'text' => 'لطفا عنوان مطلب را وارد کنید.',
-			]);
 	switch ($state) {
 		case REQUEST_POST:
 			// user has sent a message to admin! Wow!!
