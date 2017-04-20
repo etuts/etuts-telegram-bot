@@ -19,7 +19,7 @@ function reply($text, $message_id, $force_reply = false, $reply = true) {
 	}
 	$telegram->sendMessage($data);
 }
-function send_message_to_admin($message, $text, $description) {
+function send_message_to_admin($message, $text, $description, $reply_markup = false) {
 	global $telegram;
 	$username = $message->getFrom()->getUsername();
 	$firstname = $message->getFrom()->getFirstName();
@@ -29,10 +29,17 @@ function send_message_to_admin($message, $text, $description) {
 			'از: @' . $username . PHP_EOL .
 			'متن: ' . $text;
 
-	$telegram->sendMessage([
-		'chat_id' => 92454,
-		'text' => $text
-	]);
+	if ($reply_markup !== false) {
+		$telegram->sendMessage([
+			'chat_id' => 92454,
+			'text' => $text
+		]);
+	} else {
+		$telegram->sendMessage([
+			'chat_id' => 92454,
+			'text' => $text
+		]);
+	}
 }
 function send_thank_message($message_id) {
 	reply('خیلی ممنون! با موفقیت انجام شد.', $message_id);

@@ -6,6 +6,17 @@ function run_post_validation_command($chat_id, $text, $message_id, $message, $st
 		case POST_VALIDATION_SEND_POST_TITLE:
 			// user has sent title and link of a post to validate
 			send_thank_message($message_id);
+			$keyboard = [
+				['text' => 'تایید', 'url' => 'http://etuts.ir'],
+				['text' => '7', 'url' => 'http://etuts.ir'],
+			];
+			$reply_markup = Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
+
+			$telegram->sendMessage([
+				'chat_id' => 92454, 
+				'text' => 'Hello World', 
+				'reply_markup' => $reply_markup,
+			]);
 			send_message_to_admin($message, $text, 'مطلب جدید در انتظار بررسی');
 			$db->reset_state();
 			break;
