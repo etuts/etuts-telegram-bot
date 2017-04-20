@@ -57,7 +57,7 @@ function show_keyboard($keyboard_name, $text) {
 	foreach($keyboard as $key){
 		$keys[] = $key["name"];
 	}
-	log_debug(var_export($keys, true));
+	log_debug(var_export($keys, true), 117990761);
 	$reply_markup = Telegram\Bot\Keyboard\Keyboard::make([
 		'keyboard' => $keys, 
 		'resize_keyboard' => true, 
