@@ -48,3 +48,25 @@ function log_debug($text, $chat_id = 92454) {
 	fwrite($debug_file, $text . PHP_EOL . "-------------------------\r\n");
 	fclose($file);
 }
+function show_keyboard($keyboard_name, $text) {
+	global $keyboard_buttons, $db;
+	$chat_id = $db->get_chat_id();
+
+	$keyboard = $keyboard_buttons[$keyboard_name];
+	$keys = array();
+	foreach($keyboard as $key){
+		$keys[] = $key["name"];
+	}
+	log_debug(var_export($keys, true));
+	$reply_markup = Telegram\Bot\Keyboard\Keyboard::make([
+		'keyboard' => $keys, 
+		'resize_keyboard' => true, 
+		'one_time_keyboard' => true
+	]);
+
+	$telegram->sendMessage([
+		'chat_id' => $chat_id, 
+		'text' => $text, 
+		'reply_markup' => $reply_markup,
+	]);
+}

@@ -1,18 +1,30 @@
 <?php 
 $keyboard_buttons = [
 
-	"moarefi_robot" => array("name"=>'معرفی ربات', "permission"=>ADMIN),
+	"schedule_post"=>[
+		"moarefi_robot" => array("name"=>'معرفی ربات', "permission"=>ADMIN)
+
+	],
+	"start"=>[
+		"contact"=>array("name"=>"contact", "permission"=>USER),
+		"help"=>array("name"=>"help", "permission"=>USER),
+		"post_valiation"=>array("name"=>"post_validation", "permission"=>AUTHOR),
+		"schedule_post"=>array("name"=>"schedule_post", "permission"=>ADMIN),
+
+	],
 
 ];
 
 function run_keyboard_buttons($text, $chat_id, $message_id, $message) {
 	global $keyboard_buttons;
 	
-	foreach ($keyboard_buttons as $func_name => $btn) {
-		if ($text == $btn['name']) {
-			$func = 'btn_' . $func_name;
-			$func($btn, $text, $chat_id, $message_id, $message);
-			return true;
+	foreach ($keyboard_buttons as $keyboard_name => $btns) {
+		foreach ($btns as $btn_name=>$btn ){
+			if ($text == $btn['name']) {
+				$func = 'btn_' . $btn_name;
+				$func($text, $chat_id, $message_id, $message, IDLE);
+				return true;
+			}
 		}
 	}
 	
