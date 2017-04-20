@@ -8,7 +8,7 @@ $available_commands = [
 	"/schedule_post" => array("name"=>"schedule_post", "description"=>"description of schedule_post", "permission"=>ADMIN),
 	"/start" => array("name"=>"start", "description"=>"description of start", "permission"=>USER),
 	"/help" => array("name"=>"help", "description"=>"description of help", "permission"=>USER),
-
+	"/request_post" => array("name"=>"request_post", "description"=>"description of request_post", "permission"=>AUTHOR),
 ];
 
 function run_commands($text, $chat_id, $message_id, $message) {

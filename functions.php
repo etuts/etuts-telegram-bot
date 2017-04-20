@@ -12,6 +12,7 @@ define("IDLE", 0);
 define("CONTACT", 1);
 define("POST_VALIDATION_SEND_POST_TITLE", 2);
 define("MOAREFI_ROBOT", 3);
+define("REQUEST_POST",4);
 
 //--------------------- database class ---------------------------
 require('database_class.php');
