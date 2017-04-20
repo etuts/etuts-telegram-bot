@@ -13,7 +13,6 @@ function get_chat_state($text) {
 	return $state;
 }
 function handle_state($state, $chat_id, $text, $message_id, $message) {
-	global $db;
 	switch ($state) {
 		case IDLE:
 			// user has sent chert o pert! execute help command
