@@ -1,13 +1,13 @@
 <?php 
 
 function btn_moarefi_robot($btn, $text, $chat_id, $message_id, $message, $state) {
-	// should read a file where we store all the posts in there
 	global $db;
 	switch ($state) {
 		case MOAREFI_ROBOT:
 			$file = new Posts_file();
 			$post_line = $text;
 			$file->add_post($post_line);
+			$db->reset_state();
 			break;
 		
 		default:
