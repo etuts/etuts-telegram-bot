@@ -2,12 +2,13 @@
 
 $callback_query_functions = [
 
-	"admin_answer_to_contact" => array("name"=>"contact", "permission"=>USER),
+	"admn_answr_cntct",
+
 ];
 
 function run_callback_queries($id, $from, $message, $data) {
 	global $callback_query_functions;
-	$data = json_decode($data);
+	$data = json_decode($data, true);
 	$callback_func = $data['f'];
 
 	if (in_array($callback_func, $callback_query_functions)) {
