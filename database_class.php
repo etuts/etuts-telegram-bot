@@ -38,7 +38,7 @@ class Database {
 	}
 	function get_data() {
 		$result = mysqli_query($this->db, "SELECT `data` FROM `chats` WHERE chat_id = '$this->chat_id' ");
-		return (int)$result->fetch_assoc()['data'];
+		return (string)$result->fetch_assoc()['data'];
 	}
 	function get_user_permission() {
 		mysqli_query($this->db, "SELECT `permission` FROM `chats` WHERE chat_id = '$this->chat_id' ");
