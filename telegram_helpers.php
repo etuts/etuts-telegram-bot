@@ -6,6 +6,11 @@ function get_chat_id() {
 function sendMessage($text, $force_reply = false) {
 	reply($text, null, $force_reply, false);
 }
+function get_fullname($message, $seperator = ' ') {
+	$firstname = $message->getFrom()->getFirstName();
+	$lastname = $message->getFrom()->getLastName();
+	return $firstname . $seperator . $lastname;
+}
 function reply($text, $message_id, $force_reply = false, $reply = true) {
 	global $telegram;
 	$chat_id = get_chat_id();
@@ -25,10 +30,8 @@ function reply($text, $message_id, $force_reply = false, $reply = true) {
 function send_message_to_admin($message, $text, $description, $reply_markup = false) {
 	global $telegram;
 	$username = $message->getFrom()->getUsername();
-	$firstname = $message->getFrom()->getFirstName();
-	$lastname = $message->getFrom()->getLastName();
 	$text = $description . PHP_EOL .
-			'نام: ' . $firstname . ' ' . $lastname . PHP_EOL .
+			'نام: ' . get_fullname($message) . PHP_EOL .
 			'از: @' . $username . PHP_EOL .
 			'متن: ' . $text;
 
