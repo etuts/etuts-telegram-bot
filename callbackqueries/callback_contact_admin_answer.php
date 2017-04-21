@@ -1,6 +1,6 @@
 <?php 
 
-function callback_admin_answer_to_contact($id, $from, $message, $data) {
+function callback_admn_answr_cntct($id, $from, $message, $data) {
 	global $db;
 	$chat_id = $data['chat_id'];
 	$message_id = $data['message_id'];
@@ -9,5 +9,8 @@ function callback_admin_answer_to_contact($id, $from, $message, $data) {
 	$db->set_state(CONTACT_ADMIN_ANSWER);
 	$db->set_data('{"chat_id":' . $chat_id . ',"message_id":' . $message_id . '}');
 
-	sendMessage('در حال پاسخ به ' . $username, true);
+	$answer_data = ['text' => 'در حال پاسخ به ' . $username];
+	sendMessage($answer_data['text'], true);
+
+	return $answer_data;
 }
