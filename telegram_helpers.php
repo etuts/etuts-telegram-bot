@@ -35,12 +35,13 @@ function send_message_to_admin($message, $text, $description, $reply_markup = fa
 	if ($reply_markup !== false) {
 		$telegram->sendMessage([
 			'chat_id' => 92454,
-			'text' => $text
+			'text' => $text,
+			'reply_markup' => $reply_markup,
 		]);
 	} else {
 		$telegram->sendMessage([
 			'chat_id' => 92454,
-			'text' => $text
+			'text' => $text,
 		]);
 	}
 }
