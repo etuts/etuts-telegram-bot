@@ -26,7 +26,7 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 
 			$telegram->sendMessage([
 				'chat_id' => $dest_chat_id,
-				'text' => '*پاسخ مدیر به پیام شما از طرف:* ' . $fullname . PHP_EOL . PHP_EOL . $text,
+				'text' => '*پاسخ به پیام شما از طرف:* ' . $fullname . PHP_EOL . PHP_EOL . $text,
 				'parse_mode' => 'Markdown',
 				'reply_to_message_id' => $dest_message_id,
 				'reply_markup' => $reply_markup,
