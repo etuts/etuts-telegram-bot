@@ -9,6 +9,8 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 			$keyboard = [ [['text' => 'پاسخ', 'callback_data' => '{"func":admin_answer_to_contact,"chat_id":'.$chat_id.',"message_id":'.$message_id.'}']] ];
 			$reply_markup = Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
 
+			log_debug("ok");
+
 			send_message_to_admin($message, $text, 'یک تماس جدید', $reply_markup);
 			$db->reset_state();
 			break;
