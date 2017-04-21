@@ -2,8 +2,8 @@
 
 function callback_admn_answr_cntct($id, $from, $message, $data) {
 	global $db;
-	$chat_id = $data['chat_id'];
-	$message_id = $data['message_id'];
+	$chat_id = $data['c'];
+	$message_id = $data['m'];
 	$username = $from->getUsername();
 
 	$db->set_state(CONTACT_ADMIN_ANSWER);
