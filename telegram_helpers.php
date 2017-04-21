@@ -3,9 +3,12 @@ function get_chat_id() {
 	global $db;
 	return $db->get_chat_id();
 }
+function sendMessage($text, $force_reply = false) {
+	reply($text, null, $force_reply, false);
+}
 function reply($text, $message_id, $force_reply = false, $reply = true) {
-	global $telegram, $db;
-	$chat_id = $db->get_chat_id();
+	global $telegram;
+	$chat_id = get_chat_id();
 	$data = [
 		'chat_id' => $chat_id,
 		'text' => $text

@@ -31,6 +31,6 @@ function run_keyboard_buttons($text, $chat_id, $message_id, $message) {
 	return false;
 }
 
-foreach (glob("./keyboard_btns/*.php") as $filename) {
+foreach (glob("./keyboard_btns/btn_*.php") as $filename) {
     require ($filename);
 }

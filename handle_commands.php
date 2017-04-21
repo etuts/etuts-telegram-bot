@@ -22,6 +22,6 @@ function run_commands($text, $chat_id, $message_id, $message) {
 	}
 }
 
-foreach (glob("./commands/*.php") as $filename) {
+foreach (glob("./commands/command_*.php") as $filename) {
     require ($filename);
 }

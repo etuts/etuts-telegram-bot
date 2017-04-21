@@ -9,9 +9,14 @@ define("AUTHOR", 2);
 
 //--------------------- Enum of STATEs ---------------------------
 define("IDLE", 0);
+
 define("CONTACT", 1);
+define("CONTACT_ADMIN_ANSWER", 1);
+
 define("POST_VALIDATION_SEND_POST_TITLE", 2);
+
 define("MOAREFI_ROBOT", 3);
+
 define("REQUEST_POST",4);
 
 //--------------------- database class ---------------------------
@@ -21,13 +26,16 @@ require('database_class.php');
 require('posts_file_class.php');
 
 //--------------------- database functions -----------------------
-require('database_functions.php');
+require('handle_state.php');
 
 //--------------------- telegram keyboard buttons functions ------
-require('keyboard_buttons.php');
+require('handle_keboards.php');
 
 //--------------------- telegram command functions ---------------
-require('commands.php');
+require('handle_commands.php');
+
+//--------------------- telegram callback queries functions ---------------
+require('handle_callbacks.php');
 
 //--------------------- telegram bot api helper functions --------
 require('telegram_helpers.php');

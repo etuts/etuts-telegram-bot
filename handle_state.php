@@ -20,6 +20,9 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 		case CONTACT:
 			run_contact_command($chat_id, $text, $message_id, $message, CONTACT);
 			break;
+		case CONTACT_ADMIN_ANSWER:
+			run_contact_command($chat_id, $text, $message_id, $message, CONTACT_ADMIN_ANSWER);
+			break;
 		case POST_VALIDATION_SEND_POST_TITLE:
 			run_post_validation_command($chat_id, $text, $message_id, $message, POST_VALIDATION_SEND_POST_TITLE);
 			break;
