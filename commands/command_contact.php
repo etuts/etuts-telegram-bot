@@ -22,9 +22,9 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 			$fullname = get_fullname($message);
 			$telegram->sendMessage([
 				'chat_id' => $dest_chat_id,
-				'text' => $text,
-				'reply_to_message_id' => '*پاسخ مدیر به پیام شما*' . PHP_EOL . '*پاسخ از طرف:* ' . $fullname . PHP_EOL . $dest_message_id,
+				'text' => '*پاسخ مدیر به پیام شما از طرف:* ' . $fullname . PHP_EOL . PHP_EOL . $text,
 				'parse_mode' => 'Markdown',
+				'reply_to_message_id' => $dest_message_id,
 			]);
 			$db->reset_state();
 			break;
