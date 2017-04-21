@@ -32,7 +32,6 @@ function send_message_to_admin($message, $text, $description, $reply_markup = fa
 			'از: @' . $username . PHP_EOL .
 			'متن: ' . $text;
 
-	log_debug(var_export($reply_markup, true));
 	if ($reply_markup !== false) {
 		$telegram->sendMessage([
 			'chat_id' => 92454,
