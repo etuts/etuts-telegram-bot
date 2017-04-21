@@ -7,9 +7,7 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 			// user has sent a message to admin! Wow!!
 			send_thank_message($message_id);
 			
-			$callback_data = '"func":admin_answer_to_contact,"chat_id":'.(string)$chat_id.',"message_id":'.(string)$message_id.'ewkjfl';
-		    $btn1 = ['text' => '7', 'url' => 'http://etuts.ir'];
-			$btn1 = ['text' => '7', 'callback_data' => $callback_data];
+			$btn1 = ['text' => '7', 'callback_data' => '{"f":admn_answr_cntct,"c":'.(string)$chat_id.',"m":'.(string)$message_id.'}'];
 		    $keyboard = [ [$btn1] ];
 		    $reply_markup = Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
 
