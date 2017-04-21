@@ -29,7 +29,7 @@ require('posts_file_class.php');
 require('handle_state.php');
 
 //--------------------- telegram keyboard buttons functions ------
-require('handle_keboards.php');
+require('handle_keyboards.php');
 
 //--------------------- telegram command functions ---------------
 require('handle_commands.php');
