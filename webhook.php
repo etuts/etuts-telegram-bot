@@ -20,7 +20,9 @@ if ($message != null) {
 	$text = $message->getText();
 	$message_id = $message->getMessageId();
 	$username = $message->getFrom()->getUsername();
-	$fullname = $message->getFrom()->getFirstName() . ' ' . $message->getFrom()->getLastName();
+	$user = $message->getFrom();
+	$username = $user->getUsername();
+	$fullname = $user->getFirstName() . ' ' . $user->getLastName();
 	try {
 		$db = new Database($db_name, $db_user, $db_pass, $chat_id);
 		// vahid tests
