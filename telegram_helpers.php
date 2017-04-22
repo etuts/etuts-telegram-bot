@@ -97,6 +97,6 @@ $emoji = [
 	'thinking' => '🤔',
 	'like' => '👍',
 	'exact' => '👌',
-	'hand' => '✋️',
+	'hand' => '✋',
 	'facepalm' => '😑',
 ];
