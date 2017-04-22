@@ -1,7 +1,7 @@
 <?php
 
 function run_start_command($chat_id, $text, $message_id, $message, $state) {
-	global $telegram;
+	global $telegram, $available_commands, $db;
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => 'خوش آمدید'
@@ -11,6 +11,7 @@ function run_start_command($chat_id, $text, $message_id, $message, $state) {
 	$permission = $is_admin ? ADMIN : $is_author ? AUTHOR : USER;
 	$commands = array();
 	foreach ($available_commands as $command) {
+		// log_debug(var_export($command, true), 117990761);
 		// $answer .= sprintf('%s'.PHP_EOL, $command["name"]);
 		if ($command["permission"] <= $permission)
 			// $answer .= ("/".$command["name"]." - ".$command["description"]."\n");
@@ -22,6 +23,6 @@ function run_start_command($chat_id, $text, $message_id, $message, $state) {
 			'resize_keyboard' => true, 
 			'one_time_keyboard' => true
 		]);
-	log_debug(var_export($state), 117990761);
-	run_help_command($chat_id, $text, $message_id, $message, $state);
+	// log_debug(var_export($state), 117990761);
+	//run_help_command($chat_id, $text, $message_id, $message, $state);
 }
