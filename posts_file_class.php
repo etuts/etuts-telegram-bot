@@ -26,6 +26,7 @@ class Posts_file {
 		if (is_writable($this->the_file)) {
 			if ($priority)
 				rewind($this->the_file);
+			log_debug($post_line);
 			fwrite($this->the_file, $post_line . PHP_EOL);
 		}
 	}
