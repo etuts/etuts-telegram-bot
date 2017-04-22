@@ -11,9 +11,13 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 			$answer .= ("/".$command["name"]." - ".$command["description"]."\n");
 	}
 	// $data['text'] =  "your text ".json_decode('"'.$emoticons.'"').' bla bla';
+	$post = get_last_post();
+	$answer = $post->title;
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => $answer,
 	]);
+	
+
 	
 }
