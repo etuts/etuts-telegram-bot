@@ -22,6 +22,6 @@ function run_start_command($chat_id, $text, $message_id, $message, $state) {
 			'resize_keyboard' => true, 
 			'one_time_keyboard' => true
 		]);
-
+	log_debug(var_export($state), 117990761);
 	run_help_command($chat_id, $text, $message_id, $message, $state);
 }
