@@ -33,25 +33,3 @@ function run_start_command($chat_id, $text, $message_id, $message, $state) {
 	// log_debug(var_export($state), 117990761);
 	//run_help_command($chat_id, $text, $message_id, $message, $state);
 }
-
-function oojoor($arr){
-    $ans = array();
-    $cnt = 0;
-    $i = -1;
-    
-    // log_debug(sizeof($arr), 117990761);
-    foreach($arr as $ind){
-        if($cnt%2 == 0){
-            $i++;
-            array_push($ans, array());
-        }
-
-        array_push($ans[$i], $ind);
-        $cnt++; 
-    }
-    //log_debug(var_export($ans, true), 117990761);
-    return $ans;
-}
-
-
-?>
