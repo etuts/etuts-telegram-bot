@@ -90,6 +90,12 @@ function get_answer_key($f, $c, $m) {
 	$keyboard = [ [['text' => 'پاسخ', 'callback_data' => '{"f":"'.$f.'","c":'.$c.',"m":'.$m.'}']] ];
 	return Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
 }
+function get_last_post(){
+	file_put_contents("feed", fopen("http://etuts.ir/feed", 'r'));
+	$rss = simplexml_load_file('feed');
+	$last_item = $rss->channel->item;
+	return $last_item;
+}
 function emoji($text){
 	global $emojis;
 	return $emojis[$text];
