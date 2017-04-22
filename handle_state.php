@@ -1,14 +1,16 @@
 <?php 
 // get chat state from database
-function get_chat_state($text) {
+function get_chat_state($text, $username, $fullname) {
 	global $db;
 	$state = IDLE; // no state
 
 	if ($db->user_is_new()) {
-		$db->insert(0, $text);
+		$db->insert(0, $text, $username, $fullname);
 	} else {
 		$state = $db->get_state();
-		$db->update_last_message($text);
+		$db->set_last_message($text);
+		$db->set_username($username);
+		$db->set_fullname($fullname);
 	}
 	return $state;
 }
