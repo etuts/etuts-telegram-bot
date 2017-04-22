@@ -18,7 +18,7 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 			$data = json_decode($db->get_data(), true);
 			$dest_chat_id = $data['chat_id'];
 			$dest_message_id = $data['message_id'];
-			$fullname = get_fullname($message);
+			$fullname = get_fullname();
 
 			$reply_markup = get_answer_key('admn_answr_cntct', (string)$chat_id, (string)$message_id);
 
