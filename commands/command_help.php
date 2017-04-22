@@ -14,7 +14,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	// $data['text'] =  "your text ".json_decode('"'.$emoticons.'"').' bla bla';
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
-		'text' => $answer.json_decode('"'.$emoticons.'"').' bla bla',
+		'text' => $answer.json_decode('"'.$emoticons.'"').' bla bla🤣',
 	]);
 	
 }
