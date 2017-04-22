@@ -23,8 +23,8 @@ function run_start_command($chat_id, $text, $message_id, $message, $state) {
 
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
-		'text' => 'خوش آمدید'
-		'reply_markup' => $reply_markup,
+		'text' => 'خوش آمدید',
+		'reply_markup' => $reply_markup
 	]);
 	// log_debug(var_export($state), 117990761);
 	//run_help_command($chat_id, $text, $message_id, $message, $state);
