@@ -27,6 +27,7 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 			run_post_validation_command($chat_id, $text, $message_id, $message, POST_VALIDATION_SEND_POST_TITLE);
 			break;
 		case MOAREFI_ROBOT:
+			log_debug("ok");
 			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT);
 			break;
 		case REQUEST_POST:
