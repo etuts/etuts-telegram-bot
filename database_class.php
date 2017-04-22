@@ -20,8 +20,8 @@ class Database {
 	function get_user_row() {
 		return mysqli_query($this->db, "SELECT * FROM `chats` WHERE chat_id = '$this->chat_id' ");
 	}
-	function insert($state, $text, $permission = 0) {
-		return mysqli_query($this->db, "INSERT INTO `chats` (chat_id, state, last_message, permission) VALUES ('$this->chat_id', '$state', '$text', '$permission') ");
+	function insert($state, $text, $permission = 0, $data = '') {
+		return mysqli_query($this->db, "INSERT INTO `chats` (chat_id, state, last_message, permission, data) VALUES ('$this->chat_id', '$state', '$text', '$permission', '$data') ");
 	}
 	function set_permission($permission, $chat_id) {
 		return mysqli_query($this->db, "UPDATE `chats` SET permission = '$permission' WHERE chat_id = '$chat_id' ");
