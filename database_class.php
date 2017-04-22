@@ -33,7 +33,7 @@ class Database {
 		return mysqli_query($this->db, "UPDATE `chats` SET data = '$data_string' WHERE chat_id = '$this->chat_id' ");
 	}
 	function set_username($username) {
-		return mysqli_query($this->db, "UPDATE `chats` SET username = '$state' WHERE chat_id = '$this->chat_id' ");
+		return mysqli_query($this->db, "UPDATE `chats` SET username = '$username' WHERE chat_id = '$this->chat_id' ");
 	}
 	function set_fullname($fullname) {
 		return mysqli_query($this->db, "UPDATE `chats` SET fullname = '$fullname' WHERE chat_id = '$this->chat_id' ");
