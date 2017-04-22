@@ -22,7 +22,7 @@ function run_keyboard_buttons($text, $chat_id, $message_id, $message) {
 		foreach ($btns as $btn_name=>$btn ){
 			if ($text == $btn['name']) {
 				$func = 'btn_' . $btn_name;
-				$func($text, $chat_id, $message_id, $message, IDLE);
+				$func($chat_id, $text, $message_id, $message, IDLE);
 				return true;
 			}
 		}
