@@ -6,10 +6,17 @@ function get_chat_id() {
 function sendMessage($text, $force_reply = false) {
 	reply($text, null, $force_reply, false);
 }
-function get_fullname($message, $seperator = ' ') {
-	$firstname = $message->getFrom()->getFirstName();
-	$lastname = $message->getFrom()->getLastName();
-	return $firstname . $seperator . $lastname;
+function get_fullname($chat_id = false) {
+	global $db;
+	if ($chat_id === false)
+		return $db->get_fullname();
+	return $db->get_fullname($chat_id);
+}
+function get_username($chat_id = false) {
+	global $db;
+	if ($chat_id === false)
+		return $db->get_username();
+	return $db->get_username($chat_id);
 }
 function reply($text, $message_id, $force_reply = false, $reply = true) {
 	global $telegram;
@@ -29,10 +36,9 @@ function reply($text, $message_id, $force_reply = false, $reply = true) {
 }
 function send_message_to_admin($message, $text, $description, $reply_markup = false) {
 	global $telegram;
-	$username = $message->getFrom()->getUsername();
 	$text = $description . PHP_EOL .
 			'نام: ' . get_fullname($message) . PHP_EOL .
-			'از: @' . $username . PHP_EOL .
+			'از: @' . get_username($message) . PHP_EOL .
 			'متن: ' . $text;
 
 	if ($reply_markup !== false) {
@@ -83,4 +89,8 @@ function show_keyboard($keyboard_name, $text) {
 		'text' => $text, 
 		'reply_markup' => $reply_markup,
 	]);
+}
+function get_answer_key($f, $c, $m) {
+	$keyboard = [ [['text' => 'پاسخ', 'callback_data' => '{"f":"'.$f.'","c":'.$c.',"m":'.$m.'}']] ];
+	return Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
 }
