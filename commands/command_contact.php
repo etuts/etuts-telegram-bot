@@ -7,8 +7,7 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 			// user has sent a message to admin! Wow!!
 			send_thank_message($message_id);
 			
-			$keyboard = [ [['text' => 'پاسخ', 'callback_data' => '{"f":"admn_answr_cntct","c":'.(string)$chat_id.',"m":'.(string)$message_id.'}']] ];
-		    $reply_markup = Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
+			$reply_markup = get_answer_key('admn_answr_cntct', (string)$chat_id, (string)$message_id);
 
 			send_message_to_admin($message, $text, 'یک تماس جدید', $reply_markup);
 			$db->reset_state();
@@ -21,8 +20,7 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 			$dest_message_id = $data['message_id'];
 			$fullname = get_fullname($message);
 
-			$keyboard = [ [['text' => 'پاسخ', 'callback_data' => '{"f":"admn_answr_cntct","c":'.(string)$chat_id.',"m":'.(string)$message_id.'}']] ];
-		    $reply_markup = Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
+			$reply_markup = get_answer_key('admn_answr_cntct', (string)$chat_id, (string)$message_id);
 
 			$telegram->sendMessage([
 				'chat_id' => $dest_chat_id,
