@@ -7,9 +7,9 @@ class Posts_file {
 	function __construct($for_write = true, $pfile_name = "channel-posts.txt") {
 		$this->pfile_name = $pfile_name;
 		if ($for_write)
-			$this->open_write_file();
+			return $this->open_write_file();
 		else
-			$this->open_read_file();
+			return $this->open_read_file();
 	}
 	function __destruct() {
 		fclose($this->the_file);
