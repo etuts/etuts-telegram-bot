@@ -17,3 +17,5 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			break;
 	}
 }
+
+?>

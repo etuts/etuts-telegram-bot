@@ -11,6 +11,7 @@ function run_start_command($chat_id, $text, $message_id, $message, $state) {
 		// log_debug(var_export($command, true), 117990761);
 		// $answer .= sprintf('%s'.PHP_EOL, $command["name"]);
 		if ($command["permission"] <= $permission)
+			if($command["name"] != "help")
 			// $answer .= ("/".$command["name"]." - ".$command["description"]."\n");
 			array_push($commands, $command["name"]);
 	}
@@ -26,6 +27,8 @@ function run_start_command($chat_id, $text, $message_id, $message, $state) {
 		'text' => 'خوش آمدید',
 		'reply_markup' => $reply_markup
 	]);
+
+	run_keyboard_button();
 	// log_debug(var_export($state), 117990761);
 	//run_help_command($chat_id, $text, $message_id, $message, $state);
 }
