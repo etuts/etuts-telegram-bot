@@ -38,6 +38,9 @@ class Database {
 	function set_fullname($fullname) {
 		return mysqli_query($this->db, "UPDATE `chats` SET fullname = '$fullname' WHERE chat_id = '$this->chat_id' ");
 	}
+	function set_last_message($text) {
+		return mysqli_query($this->db, "UPDATE `chats` SET last_message = '$text' WHERE chat_id = '$this->chat_id' ");
+	}
 	function get_state($chat_id = false) {
 		if ($chat_id === false)
 			$chat_id = $this->chat_id;
@@ -67,9 +70,6 @@ class Database {
 			$chat_id = $this->chat_id;
 		mysqli_query($this->db, "SELECT `permission` FROM `chats` WHERE chat_id = '$chat_id' ");
 		return (int)$result->fetch_assoc()['permission'];
-	}
-	function update_last_message($text) {
-		return mysqli_query($this->db, "UPDATE `chats` SET last_message = '$text' WHERE chat_id = '$this->chat_id' ");
 	}
 	function reset_state() {
 		return $this->set_state(0);
