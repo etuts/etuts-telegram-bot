@@ -33,8 +33,8 @@ function reply($text, $message_id, $force_reply = false, $reply = true) {
 function send_message_to_admin($message, $text, $description, $reply_markup = false) {
 	global $telegram;
 	$text = $description . PHP_EOL .
-			'نام: ' . get_fullname($message) . PHP_EOL .
-			'از: @' . get_username($message) . PHP_EOL .
+			'نام: ' . get_fullname() . PHP_EOL .
+			'از: @' . get_username() . PHP_EOL .
 			'متن: ' . $text;
 
 	if ($reply_markup !== false) {
