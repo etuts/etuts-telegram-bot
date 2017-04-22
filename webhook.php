@@ -19,6 +19,8 @@ if ($message != null) {
 	$chat_id = (int) $message->getChat()->getId();
 	$text = $message->getText();
 	$message_id = $message->getMessageId();
+	$username = $message->getFrom()->getUsername();
+	$fullname = $message->getFrom()->getFirstName() . ' ' . $message->getFrom()->getLastName();
 	try {
 		$db = new Database($db_name, $db_user, $db_pass, $chat_id);
 		// vahid tests
@@ -28,7 +30,7 @@ if ($message != null) {
 		/*if ($chat_id == 117990761) {
 		}*/
 
-		$state = get_chat_state($text);
+		$state = get_chat_state($text, $username, $fullname);
 		handle_state($state, $chat_id, $text, $message_id, $message);
 		
 		if (!run_keyboard_buttons($text, $chat_id, $message_id, $message))
