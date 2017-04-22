@@ -11,8 +11,10 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			$file->add_post($post_line);*/
 			/*$file = fopen("channel-posts.txt", "w");
 			fwrite($file, $post_line . PHP_EOL);*/
+			$myfile = fopen("logs.txt", "a") or die("Unable to open file!");
 			$txt = "user id date";
- $myfile = file_put_contents('logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+			fwrite($myfile, "\n". $txt);
+			fclose($myfile);
 			$db->reset_state();
 			break;
 		
