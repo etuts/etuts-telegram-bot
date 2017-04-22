@@ -19,13 +19,17 @@ class Posts_file {
 		return $this->the_file;
 	}
 	function open_write_file() {
-		$this->the_file = fopen($this->pfile_name, "a");
+		$this->the_file = fopen($this->pfile_name, "w");
 		return $this->the_file;
 	}
 	function add_post($post_line, $priority = false) {
-		if ($priority)
-			rewind($this->the_file);
+		log_debug($post_line);
 		fwrite($this->the_file, $post_line . PHP_EOL);
+		/*if (is_writable($this->the_file)) {
+			if ($priority)
+				rewind($this->the_file);
+			log_debug($post_line);
+		}*/
 	}
 	function read_post() {
 		$post_line = '';

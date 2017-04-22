@@ -6,8 +6,9 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 		case MOAREFI_ROBOT:
 			$file = new Posts_file();
 			$post_line = $text;
+			log_debug("vahid");
 			$file->add_post($post_line);
-			$db->reset_state();
+			// $db->reset_state();
 			break;
 		
 		default:
