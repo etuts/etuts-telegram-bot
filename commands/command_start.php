@@ -50,6 +50,7 @@ function oojoor($arr){
         $cnt++; 
     }
     //log_debug(var_export($ans, true), 117990761);
+    return $ans;
 }
 
 
