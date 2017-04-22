@@ -8,14 +8,10 @@ function sendMessage($text, $force_reply = false) {
 }
 function get_fullname($chat_id = false) {
 	global $db;
-	if ($chat_id === false)
-		return $db->get_fullname();
 	return $db->get_fullname($chat_id);
 }
 function get_username($chat_id = false) {
 	global $db;
-	if ($chat_id === false)
-		return $db->get_username();
 	return $db->get_username($chat_id);
 }
 function reply($text, $message_id, $force_reply = false, $reply = true) {
