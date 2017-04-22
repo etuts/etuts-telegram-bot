@@ -4,10 +4,17 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 	global $db;
 	switch ($state) {
 		case MOAREFI_ROBOT:
-			$file = new Posts_file();
 			$post_line = $text;
 			log_debug("vahid");
-			$file->add_post($post_line);
+
+			/*$file = new Posts_file();
+			$file->add_post($post_line);*/
+			/*$file = fopen("channel-posts.txt", "w");
+			fwrite($file, $post_line . PHP_EOL);*/
+			$myfile = fopen("channelposts.txt", "a") or die("Unable to open file!");
+			$txt = "user id date";
+			fwrite($myfile, "\n". $txt);
+			fclose($myfile);
 			$db->reset_state();
 			break;
 		
