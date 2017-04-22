@@ -7,9 +7,9 @@ class Posts_file {
 	function __construct($for_write = true, $pfile_name = "channel-posts.txt") {
 		$this->pfile_name = $pfile_name;
 		if ($for_write)
-			$this->open_write_file();
+			return $this->open_write_file();
 		else
-			$this->open_read_file();
+			return $this->open_read_file();
 	}
 	function __destruct() {
 		fclose($this->the_file);
@@ -23,11 +23,9 @@ class Posts_file {
 		return $this->the_file;
 	}
 	function add_post($post_line, $priority = false) {
-		if (is_writable($this->the_file)) {
-			if ($priority)
-				rewind($this->the_file);
-			fwrite($this->the_file, $post_line . PHP_EOL);
-		}
+		if ($priority)
+			rewind($this->the_file);
+		fwrite($this->the_file, $post_line . PHP_EOL);
 	}
 	function read_post() {
 		$post_line = '';

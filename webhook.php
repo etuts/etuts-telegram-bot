@@ -30,12 +30,10 @@ if ($message != null) {
 
 		$state = get_chat_state($text);
 		handle_state($state, $chat_id, $text, $message_id, $message);
-		// manual command system
+		
 		if (!run_keyboard_buttons($text, $chat_id, $message_id, $message))
 			run_commands($text, $chat_id, $message_id, $message);
 		
-		
-		// add_admin(92454);
 	} catch (Exception $e) {
 		log_debug($e->getPrevious());
 	}
@@ -48,7 +46,7 @@ elseif ($callback_query != null) {
 	$data = $callback_query->getData();
 
 	try {
-	$db = new Database($db_name, $db_user, $db_pass, $chat_id);
+		$db = new Database($db_name, $db_user, $db_pass, $chat_id);
 		run_callback_queries($id, $from, $message, $data);
 	} catch (Exception $e) {
 		log_debug($e->getPrevious());

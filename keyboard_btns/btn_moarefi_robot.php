@@ -1,6 +1,6 @@
 <?php 
 
-function btn_moarefi_robot($text, $chat_id, $message_id, $message, $state) {
+function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 	global $db;
 	switch ($state) {
 		case MOAREFI_ROBOT:
