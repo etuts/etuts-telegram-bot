@@ -24,12 +24,12 @@ class Posts_file {
 	}
 	function add_post($post_line, $priority = false) {
 		log_debug($post_line);
-		if (is_writable($this->the_file)) {
+			fwrite($this->the_file, $post_line . PHP_EOL);
+		/*if (is_writable($this->the_file)) {
 			if ($priority)
 				rewind($this->the_file);
 			log_debug($post_line);
-			fwrite($this->the_file, $post_line . PHP_EOL);
-		}
+		}*/
 	}
 	function read_post() {
 		$post_line = '';
