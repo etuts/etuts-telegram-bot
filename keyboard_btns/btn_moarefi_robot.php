@@ -7,6 +7,7 @@ function btn_moarefi_robot($text, $chat_id, $message_id, $message, $state) {
 			$file = new Posts_file();
 			$post_line = $text;
 			$file->add_post($post_line);
+			log_debug("ok");
 			$db->reset_state();
 			break;
 		
