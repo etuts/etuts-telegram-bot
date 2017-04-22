@@ -10,7 +10,7 @@ $keyboard_buttons = [
 		// "help"=>array("name"=>"help", "permission"=>USER),
 		"post_valiation"=>array("name"=>"post_validation", "permission"=>AUTHOR),
 		"schedule_post"=>array("name"=>"schedule_post", "permission"=>ADMIN),
-
+		"request_post"=>array("name"=>"request_post", "permission"=>USER),
 	],
 
 ];
