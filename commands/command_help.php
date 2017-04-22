@@ -10,8 +10,10 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 		if ($command["permission"] <= $permission)
 			$answer .= ("/".$command["name"]." - ".$command["description"]."\n");
 	}
+	// $data['text'] =  "your text ".json_decode('"'.$emoticons.'"').' bla bla';
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => $answer,
 	]);
+	
 }

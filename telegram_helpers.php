@@ -90,3 +90,17 @@ function get_answer_key($f, $c, $m) {
 	$keyboard = [ [['text' => 'پاسخ', 'callback_data' => '{"f":"'.$f.'","c":'.$c.',"m":'.$m.'}']] ];
 	return Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
 }
+function emoji($text){
+	global $emojis;
+	return $emojis[$text];
+}
+$emojis = [
+	'laugh' => '😂',
+	'poker' => '😐',
+	':D' => '😁',
+	'thinking' => '🤔',
+	'like' => '👍',
+	'exact' => '👌',
+	'hand' => '✋',
+	'facepalm' => '😑',
+];
