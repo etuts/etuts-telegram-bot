@@ -7,7 +7,7 @@ $callback_query_functions = [
 ];
 
 function run_callback_queries($id, $from, $message, $data) {
-	global $callback_query_functions;
+	global $callback_query_functions, $telegram;
 	$data = json_decode($data, true);
 	$callback_func = $data['f'];
 
