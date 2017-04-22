@@ -19,7 +19,7 @@ class Posts_file {
 		return $this->the_file;
 	}
 	function open_write_file() {
-		$this->the_file = fopen($this->pfile_name, "a");
+		$this->the_file = fopen($this->pfile_name, "w");
 		return $this->the_file;
 	}
 	function add_post($post_line, $priority = false) {
