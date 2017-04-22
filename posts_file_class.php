@@ -23,6 +23,7 @@ class Posts_file {
 		return $this->the_file;
 	}
 	function add_post($post_line, $priority = false) {
+		log_debug($post_line);
 		if (is_writable($this->the_file)) {
 			if ($priority)
 				rewind($this->the_file);
