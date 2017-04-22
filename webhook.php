@@ -26,7 +26,6 @@ if ($message != null) {
 		}*/
 		// mamad tests
 		/*if ($chat_id == 117990761) {
-			// show_keyboard("start", "Hellow");
 		}*/
 
 		$state = get_chat_state($text);
@@ -49,8 +48,7 @@ elseif ($callback_query != null) {
 	$data = $callback_query->getData();
 
 	try {
-		$db = new Database($db_name, $db_user, $db_pass, $chat_id);
-		log_debug("ok3");
+	$db = new Database($db_name, $db_user, $db_pass, $chat_id);
 		run_callback_queries($id, $from, $message, $data);
 	} catch (Exception $e) {
 		log_debug($e->getPrevious());
