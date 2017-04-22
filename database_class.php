@@ -62,4 +62,3 @@ class Database {
 		return $this->chat_id;
 	}
 }
-?>
