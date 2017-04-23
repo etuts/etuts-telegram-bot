@@ -86,8 +86,10 @@ function show_keyboard($keyboard_name, $text) {
 		'reply_markup' => $reply_markup,
 	]);
 }
-function get_answer_key($f, $c, $m) {
-	$keyboard = [ [['text' => 'پاسخ', 'callback_data' => '{"f":"'.$f.'","c":'.$c.',"m":'.$m.'}']] ];
+function get_key_btn($f, $c, $m, $more_data = '') {
+	return ['text' => 'پاسخ', 'callback_data' => '{"f":"'.$f.'","c":'.$c.',"m":'.$m. (($more_data == '') ? $more_data : ',' . $more_data) .'}'];
+}
+function make_keyboard($keyboard) {
 	return Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
 }
 function get_last_post(){
