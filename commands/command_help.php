@@ -17,10 +17,10 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	$text = "";
 	$post = get_last_post();
 	$text .= $post->description;
-	$pos = strpos($text, "src=\"");
+	$pos = strpos($text, "src=\"") + 5;
 	$text = substr($text,$pos);
-	$pos2 = strpos($text, "\"");
-	$text = substr($text,$pos,$pos2 - $pos);
+	// $pos2 = strpos($text, "\"");
+	// $text = substr($text,$pos,$pos2 - $pos);
 
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
