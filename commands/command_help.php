@@ -14,20 +14,18 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 		'chat_id' => $chat_id,
 		'text' => $answer,
 	]);
-	$text = "";
-	$post = get_last_post();
-	$text .= $post->description;
+	// $text = "";
+	// $post = get_last_post();
+	// $text .= $post->description;
+	// $pos = strpos($text, "src=\"");
+	// $text = substr($text,$pos);
+	// $pos2 = strpos($text, "\"");
+	// $text = substr($text,$pos,$pos2 - $pos);
 
-	$pos = strpos($text, "src=\"");
-	$text = substr($text,$pos);
-	$pos2 = strpos($text, "\"");
-	$text = substr($text,$pos,$pos2 - $pos);
-
-	$telegram->sendMessage([
-		'chat_id' => $chat_id,
-		'text' => $text,
-
-	]);
+	// $telegram->sendMessage([
+	// 	'chat_id' => $chat_id,
+	// 	'text' => $text,
+	// ]);
 	
 
 	
