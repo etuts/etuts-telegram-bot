@@ -17,13 +17,11 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	$text = " saaaasda";
 	$post = get_last_post();
 	$text .= $post->description;
-	$html = file_get_html('etuts.ir/feed');
+	$id = $text->find('src');
 
-	foreach($html->find('img') as $element) 
-     	$text .= $element->src . '<br>';
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
-		'text' => $text,
+		'text' => $id,
 
 	]);
 	
