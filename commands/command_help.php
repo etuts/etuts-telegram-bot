@@ -14,7 +14,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 		'chat_id' => $chat_id,
 		'text' => $answer,
 	]);
-	$text = "<a href=\"http://mobile.etuts.ir/?p=168\">inline URL</a>";
+	$text =get_last_post()->description;
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => $text,
