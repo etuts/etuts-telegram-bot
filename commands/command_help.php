@@ -17,22 +17,22 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	$text = "";
 	$post = get_last_post();
 	$text .= $post->description;
-	$pos = strpos($text, "src=\"") + 5;
-	$text = substr($text,$pos);
-	$pos2 = strpos($text, "\"");
-	$link = substr($text,0,$pos2);
-	$text = strip_tags($post->description);
-	$text = substr($text, 0,strlen($text)-7);
-	$testing = "[🖼](".$link.")";
-	// $link_to_site = " ";
-	// $link_to_site .= $post->link;
-	$final_text = $post->title.$testing."\n".$text."\n";//.$link_to_site;
+	// $pos = strpos($text, "src=\"") + 5;
+	// $text = substr($text,$pos);
+	// $pos2 = strpos($text, "\"");
+	// $link = substr($text,0,$pos2);
+	// $text = strip_tags($post->description);
+	// $text = substr($text, 0,strlen($text)-7);
+	// $testing = "[🖼](".$link.")";
+	// // $link_to_site = " ";
+	// // $link_to_site .= $post->link;
+	// $final_text = $post->title.$testing."\n".$text."\n";//.$link_to_site;
 
 
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
-		'text' => $final_text,
-		'parse_mode' => "Markdown",
+		'text' => $text,
+		// 'parse_mode' => "Markdown",
 	]);
 	
 
