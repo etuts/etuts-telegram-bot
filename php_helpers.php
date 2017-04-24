@@ -27,17 +27,23 @@ function array_duplex($arr){
     return $ans;
 }
 function emoji($text){
-    global $emojis;
+    $emojis = [
+        'laugh' => '😂',
+        'poker' => '😐',
+        ':D' => '😁',
+        'thinking' => '🤔',
+        'like' => '👍',
+        'exact' => '👌',
+        'hand' => '✋',
+        'facepalm' => '😑',
+        'dislike' => '👎',
+    ];
     return $emojis[$text];
 }
-$emojis = [
-    'laugh' => '😂',
-    'poker' => '😐',
-    ':D' => '😁',
-    'thinking' => '🤔',
-    'like' => '👍',
-    'exact' => '👌',
-    'hand' => '✋',
-    'facepalm' => '😑',
-];
+function get_last_post(){
+    file_put_contents("feed", fopen("http://etuts.ir/feed", 'r'));
+    $rss = simplexml_load_file('feed');
+    $last_item = $rss->channel->item;
+    return $last_item;
+}
 
