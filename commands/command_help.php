@@ -17,7 +17,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	$text = " saaaasda";
 	$post = get_last_post();
 	$text .= $post->description;
-	$html = file_get_html('feed');
+	$html = file_get_html('etuts.ir/feed');
 
 	foreach($html->find('img') as $element) 
      	$text .= $element->src . '<br>';
