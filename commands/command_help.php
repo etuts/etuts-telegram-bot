@@ -19,8 +19,8 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	$text .= $post->description;
 	$pos = strpos($text, "src=\"") + 5;
 	$text = substr($text,$pos);
-	// $pos2 = strpos($text, "\"");
-	// $text = substr($text,$pos,$pos2 - $pos);
+	$pos2 = strpos($text, "\"");
+	$text = substr($text,0,$pos2);
 
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
