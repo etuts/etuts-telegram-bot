@@ -9,7 +9,7 @@ function callback_rqst_acc_dny($id, $from, $message, $data) {
 	$user_answer;
 	$admin_answer;
 
-	if ($accepted) {
+	if ($accepted == 1) {
 		$user_answer = 'مطلب درخواستی شما تایید شده و به زودی در سایت قرار می گیرد';
 		$admin_answer = 'تایید شد';
 	} else {
@@ -23,9 +23,8 @@ function callback_rqst_acc_dny($id, $from, $message, $data) {
 	]);
 	
 	$answer_data = ['text' => $admin_answer];
-	sendMessage($answer_data['text'], true);
-
-	$db->reset_state();
 	
+	$db->reset_state();
+
 	return $answer_data;
 }
