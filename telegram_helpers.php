@@ -1,10 +1,22 @@
 <?php 
+
+// debug functions - use'em just for debug
+function log_debug($text, $chat_id = 92454) {
+	global $telegram;
+	$telegram->sendMessage([
+		'chat_id' => $chat_id,
+		'text' => $text
+	]);
+
+	$debug_file = fopen("log.txt","a");
+	fwrite($debug_file, $text . PHP_EOL . "-------------------------\r\n");
+	fclose($file);
+}
+
+// getters
 function get_chat_id() {
 	global $db;
 	return $db->get_chat_id();
-}
-function sendMessage($text, $force_reply = false) {
-	reply($text, null, $force_reply, false);
 }
 function get_fullname($chat_id = false) {
 	global $db;
@@ -14,7 +26,12 @@ function get_username($chat_id = false) {
 	global $db;
 	return $db->get_username($chat_id);
 }
-function reply($text, $message_id, $force_reply = false, $reply = true) {
+
+// senders - they send something to user with $telegram
+function sendMessage($text, $force_reply = false) { // send message to current user
+	reply($text, null, $force_reply, false);
+}
+function reply($text, $message_id, $force_reply = false, $reply = true) { // reply to current user
 	global $telegram;
 	$chat_id = get_chat_id();
 	$data = [
@@ -30,7 +47,7 @@ function reply($text, $message_id, $force_reply = false, $reply = true) {
 	}
 	$telegram->sendMessage($data);
 }
-function send_message_to_admin($message, $text, $description, $reply_markup = false) {
+function send_message_to_admin($message, $text, $description, $reply_markup = false) { // send message to admin
 	global $telegram;
 	$text = $description . PHP_EOL .
 			'نام: ' . get_fullname() . PHP_EOL .
@@ -50,22 +67,12 @@ function send_message_to_admin($message, $text, $description, $reply_markup = fa
 		]);
 	}
 }
-function send_thank_message($message_id) {
+function send_thank_message($message_id) { // send "thank you" to current user
 	reply('خیلی ممنون! با موفقیت انجام شد.', $message_id);
 }
-function log_debug($text, $chat_id = 92454) {
-	global $telegram;
-	$telegram->sendMessage([
-		'chat_id' => $chat_id,
-		'text' => $text
-	]);
 
-	$debug_file = fopen("log.txt","a");
-	fwrite($debug_file, $text . PHP_EOL . "-------------------------\r\n");
-	fclose($file);
-}
-
-function show_keyboard($keyboard_name, $text) {
+// keyboard functions
+function show_keyboard($keyboard_name, $text) { // gets the name of a keyboard from handle_keyboards file and shows all of its buttons to user
 	global $keyboard_buttons, $telegram;
 	$chat_id = get_chat_id();
 
@@ -86,15 +93,9 @@ function show_keyboard($keyboard_name, $text) {
 		'reply_markup' => $reply_markup,
 	]);
 }
-function get_key_btn($f, $c, $m, $more_data = '') {
-	return ['text' => 'پاسخ', 'callback_data' => '{"f":"'.$f.'","c":'.$c.',"m":'.$m. (($more_data == '') ? $more_data : ',' . $more_data) .'}'];
+function create_glassy_btn($text, $callback_function, $chat_id, $message_id, $more_data = '') { // create and get a glassy btn
+	return ['text' => $text, 'callback_data' => '{"f":"'.$callback_function.'","c":'.$chat_id.',"m":'.$message_id. (($more_data == '') ? $more_data : ',' . $more_data) .'}'];
 }
-function make_keyboard($keyboard) {
+function create_glassy_keyboard($keyboard) { // just makes a given glassy keyboard
 	return Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
-}
-function get_last_post(){
-	file_put_contents("feed", fopen("http://etuts.ir/feed", 'r'));
-	$rss = simplexml_load_file('feed');
-	$last_item = $rss->channel->item;
-	return $last_item;
 }
