@@ -98,17 +98,3 @@ function get_last_post(){
 	$last_item = $rss->channel->item;
 	return $last_item;
 }
-function emoji($text){
-	global $emojis;
-	return $emojis[$text];
-}
-$emojis = [
-	'laugh' => '😂',
-	'poker' => '😐',
-	':D' => '😁',
-	'thinking' => '🤔',
-	'like' => '👍',
-	'exact' => '👌',
-	'hand' => '✋',
-	'facepalm' => '😑',
-];
