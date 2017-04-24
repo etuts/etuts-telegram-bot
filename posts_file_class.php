@@ -37,7 +37,7 @@ class Posts_file {
 			$post_line = fgets($this->the_file);
 			// remove the line from file
 			$contents = file_get_contents($this->pfile_name);
-			$contents = str_replace($post_line, '', $contents);
+			$contents = implode('', explode($post_line, $contents, 2)); // replace first occurrence
 			file_put_contents($this->pfile_name, $contents);
 		}
 		return $post_line;
