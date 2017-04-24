@@ -5,7 +5,7 @@ send the post to channel (you may be able to require the codes of iraqsaqi (baya
 delete that line
 */
 require('posts_file_class.php');
-$file = Posts_file();
+$file = new Posts_file();
 $file->open_read_file();
 $post = $file->read_post();
 
