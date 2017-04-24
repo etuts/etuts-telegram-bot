@@ -26,3 +26,18 @@ function array_duplex($arr){
     
     return $ans;
 }
+function emoji($text){
+    global $emojis;
+    return $emojis[$text];
+}
+$emojis = [
+    'laugh' => '😂',
+    'poker' => '😐',
+    ':D' => '😁',
+    'thinking' => '🤔',
+    'like' => '👍',
+    'exact' => '👌',
+    'hand' => '✋',
+    'facepalm' => '😑',
+];
+
