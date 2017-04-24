@@ -26,7 +26,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	$testing = "[🖼](".$link.")";
 	$link_to_site = " ";
 	$link_to_site .= $post->link;
-	$final_text = $post->title.$testing."\n".$text."\n";//.$link_to_site;
+	$final_text = $post->title.$testing."\n".$text."\n".$link_to_site;
 
 
 	$telegram->sendMessage([
