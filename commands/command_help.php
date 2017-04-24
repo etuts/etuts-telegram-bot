@@ -22,10 +22,11 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	$pos2 = strpos($text, "\"");
 	$link = substr($text,0,$pos2);
 	$text = strip_tags($post->description);
+	$testing = "[🖼](".$link.")";
 
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
-		'text' => $text.$link,
+		'text' => $testing,
 	]);
 	
 
