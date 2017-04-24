@@ -15,7 +15,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 		'text' => $answer,
 	]);
 	$text = " ";
-	$text .= get_last_post()->description.'hi';
+	// $text .= get_last_post()->description.'hi';
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => $text,
