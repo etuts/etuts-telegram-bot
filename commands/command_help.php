@@ -24,7 +24,8 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	$text = strip_tags($post->description);
 	$text = substr($text, 0,strlen($text)-7);
 	$testing = "[🖼](".$link.")";
-	$link_to_site = $post->link;
+	$link_to_site = " ".
+	$link_to_site .= $post->link;
 	$final_text = $post->title.$testing."\n".$text."\n".$link_to_site;
 
 
