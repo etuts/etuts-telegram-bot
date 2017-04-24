@@ -22,6 +22,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	$pos2 = strpos($text, "\"");
 	$link = substr($text,0,$pos2);
 	$text = strip_tags($post->description);
+	$text = substr($text, 0,strlen($text)-7);
 	$testing = "[🖼](".$link.")";
 	$final_text = $post->title.$testing."\n".$text;
 
