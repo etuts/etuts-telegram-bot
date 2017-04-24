@@ -41,4 +41,4 @@ require('handle_callbacks.php');
 require('telegram_helpers.php');
 
 //--------------------- php helpers ------------------------------
-require('php_helpers.php');
+require('utilities.php');

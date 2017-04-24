@@ -4,7 +4,7 @@
 require 'vendor/autoload.php';
 require_once 'config.php';
 // file_get_contents('https://api.telegram.org/bot'.$token.'/sendMessage?chat_id=92454&text=debug');
-require 'functions.php';
+require 'main-controller.php';
 use Telegram\Bot\Api;
 
 // connecting
