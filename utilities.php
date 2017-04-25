@@ -27,7 +27,7 @@ function array_duplex($arr){
     return $ans;
 }
 function emoji($text){
-    $emojis = [
+    $emoji = [
         'laugh' => '😂',
         'poker' => '😐',
         ':D' => '😁',
