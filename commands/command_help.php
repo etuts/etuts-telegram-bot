@@ -27,7 +27,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	$photos = $telegram->getUserProfilePhotos($params)->photos;
 	$photo = $photos[0][0];
 	if ($photo != null){
-		$params2 = ['file_id' => $photo->file_id]
+		$params2 = ['file_id' => $photo->file_id];
 		$file = $telegram->getFile($params2);
 		$telegram->sendMessage([
 		'chat_id' => $chat_id,
