@@ -37,6 +37,7 @@ function emoji($text){
         'hand' => '✋',
         'facepalm' => '😑',
         'dislike' => '👎',
+        'image-icon' => '🖼',
     ];
     return $emojis[$text];
 }
