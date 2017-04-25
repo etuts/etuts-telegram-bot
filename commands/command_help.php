@@ -31,7 +31,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 		$file = $telegram->getFile($params2);
 		$telegram->sendMessage([
 		'chat_id' => $chat_id,
-		'text' => $file->file_path,
+		'text' => 'fillle'.$file->file_path,
 		]);
 	}
 	else{
