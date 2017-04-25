@@ -4,7 +4,7 @@ class Posts_file {
 
 	protected $the_file; // FILE type
 
-	function __construct($for_write = true, $pfile_name = "channelposts.txt") {
+	function __construct($for_write = true, $pfile_name = __DIR__."channelposts.txt") {
 		$this->pfile_name = $pfile_name;
 		if ($for_write)
 			return $this->open_write_file();
