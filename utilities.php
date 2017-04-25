@@ -41,29 +41,41 @@ function emoji($text){
     ];
     return $emojis[$text];
 }
+
+// post display functions
 function get_last_post(){
     file_put_contents("feed", fopen("http://etuts.ir/feed", 'r'));
     $rss = simplexml_load_file('feed');
     $last_item = $rss->channel->item;
     return $last_item;
 }
+function make_post_for_channel($title, $description, $image_link = false, $link_to_site = false) {
+    
+    $image_link = ($image_link === false) ? '' : "[".emoji('image-icon')."](".$image_link.")";
+
+    $link_to_site = ($link_to_site === false) ? '' : "[برای مشاهده ی مطلب کلیک کنید](".$link_to_site.")";
+
+    $final_text = $title.$image_link."\n".$description."\n".$link_to_site;
+}
 function display_latest_post_in_channel() {
     global $telegram;
-    $text = "";
     $post = get_last_post();
-    $text .= $post->description;
+    $description = $post->description;
+    $title = $post->title;
+
+    $text = "";
+    $text .= $description;
     $pos = strpos($text, "src=\"") + 5;
     $text = substr($text,$pos);
     $pos2 = strpos($text, "\"");
-    $link = substr($text,0,$pos2);
-    $text = strip_tags($post->description);
-    $text = substr($text, 0,strlen($text)-9);
-    $image_link = "[".emoji('image-icon')."](".$link.")";
-    // $link_to_site = " ";
-    $link_to_site = $post->link;
-    $link_to_site = "[برای مشاهده ی مطلب کلیک کنید](".$link_to_site.")";
-    $final_text = $post->title.$image_link."\n".$text."\n".$link_to_site;
+    $image_link = substr($text,0,$pos2);
 
+    $description = strip_tags($description);
+    $description = substr($description, 0,strlen($description)-9);
+    
+    $link_to_site = $post->link;
+
+    $final_text = make_post_for_channel($title, $description, $image_link, $link_to_site);
 
     $telegram->sendMessage([
         'chat_id' => $chat_id,
