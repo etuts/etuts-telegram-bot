@@ -24,11 +24,11 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 		'text' => $answer,
 	]);
 	$params =['user_id' => $chat_id];
+	$photos = getUserProfilePhotos($params);
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => "test",
 		]);
-	$photos = getUserProfilePhotos($params);
 	$photo = $photos[0][0];
 	if ($photo != null){
 		$file = $telegram->getFile($photo->file_id);
