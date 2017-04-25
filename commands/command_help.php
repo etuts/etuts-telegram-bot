@@ -16,6 +16,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	]);
 	$text = "";
     $post = get_last_post();
+    print_r($author);
     $text .= $post->description;
     $pos = strpos($text, "src=\"") + 5;
     $text = substr($text,$pos);
@@ -33,7 +34,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 
     $telegram->sendMessage([
         'chat_id' => $chat_id,
-        'text' => $author,
-        // 'parse_mode' => "Markdown",
+        'text' => $final_text,
+        'parse_mode' => "Markdown",
     ]);
 }
