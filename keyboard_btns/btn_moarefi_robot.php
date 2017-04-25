@@ -5,12 +5,9 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 	switch ($state) {
 		case MOAREFI_ROBOT:
 			$post_line = $text;
-			log_debug("vahid");
-
+			
 			$file = new Posts_file();
 			$file->add_post($post_line);
-			/*$file = fopen("channel-posts.txt", "w");
-			fwrite($file, $post_line . PHP_EOL);*/
 
 			$db->reset_state();
 			break;
@@ -21,5 +18,3 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			break;
 	}
 }
-
-?>
