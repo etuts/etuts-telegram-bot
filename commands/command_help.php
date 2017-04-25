@@ -36,7 +36,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	$photo = $photos[0][0];
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
-		'text' => "test2".$photos->total_count,
+		'text' => (string)$photos->total_count,
 		]);
 	if ($photo != null){
 		$params2 = ['file_id' => $photo->file_id];
