@@ -6,11 +6,11 @@ send the post to channel (you may be able to require the codes of iraqsaqi (baya
 delete that line
 */
 
-require __DIR__.'vendor/autoload.php';
-require_once __DIR__.'config.php';
+require __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/config.php';
 use Telegram\Bot\Api;
 
-require __DIR__.'posts_file_class.php';
+require __DIR__.'/posts_file_class.php';
 
 $file = new Posts_file(false);
 
