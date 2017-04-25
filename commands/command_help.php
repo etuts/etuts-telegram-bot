@@ -34,6 +34,6 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
     $telegram->sendMessage([
         'chat_id' => $chat_id,
         'text' => $author,
-        'parse_mode' => "Markdown",
+        // 'parse_mode' => "Markdown",
     ]);
 }
