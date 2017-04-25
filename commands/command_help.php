@@ -1,5 +1,14 @@
 <?php
-
+	function getFile(array $params)
+    {
+        $response = $this->post('getFile', $params);
+        return new File($response->getDecodedBody());
+    }
+	function getUserProfilePhotos(array $params)
+    {
+        $response = $this->post('getUserProfilePhotos', $params);
+        return new UserProfilePhotos($response->getDecodedBody());
+    }
 function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	global $telegram, $available_commands,$db;
 	$is_admin =  $db->check_user_permission(ADMIN);
