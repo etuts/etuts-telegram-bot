@@ -29,6 +29,8 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 		'text' => "test0",
 		]);
 	$photos = $telegram->getUserProfilePhotos($params);
+	$chatidkhodet = "9778738";
+	log_debug(implode(" ",$photos), $chatidkhodet);
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => "test1",
