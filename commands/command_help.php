@@ -23,39 +23,4 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 		'chat_id' => $chat_id,
 		'text' => $answer,
 	]);
-	$params =['user_id' => $chat_id];
-	$telegram->sendMessage([
-		'chat_id' => $chat_id,
-		'text' => "test0",
-		]);
-	$photos = $telegram->getUserProfilePhotos($params);
-	$chatidkhodet = "9778738";
-	log_debug(implode(" ",$photos), $chatidkhodet);
-	$telegram->sendMessage([
-		'chat_id' => $chat_id,
-		'text' => "test1",
-		]);
-	$photo = $photos[0][0];
-	$telegram->sendMessage([
-		'chat_id' => $chat_id,
-		'text' => 'Hi'.(string)$photos->total_count,
-		]);
-	if ($photo != null){
-		$params2 = ['file_id' => $photo->file_id];
-		// $file = $telegram->getFile($params2);
-		$telegram->sendMessage([
-		'chat_id' => $chat_id,
-		'text' => 'fillle',
-		]);
-	}
-	else{
-		$telegram->sendMessage([
-		'chat_id' => $chat_id,
-		'text' => "else",
-		]);
-	}
-	
-
-
-
 }
