@@ -59,11 +59,10 @@ function display_latest_post_in_channel() {
     $text = strip_tags($post->description);
     $text = substr($text, 0,strlen($text)-9);
     $image_link = "[".emoji('image-icon')."](".$link.")";
-    $author = $post->creator;
     // $link_to_site = " ";
     $link_to_site = $post->link;
     $link_to_site = "[برای مشاهده ی مطلب کلیک کنید](".$link_to_site.")";
-    $final_text = $post->title.$image_link."\n".$text."\n".$link_to_site."\n".$author;
+    $final_text = $post->title.$image_link."\n".$text."\n".$link_to_site;
 
 
     $telegram->sendMessage([
