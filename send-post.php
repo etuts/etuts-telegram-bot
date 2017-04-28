@@ -16,6 +16,9 @@ $db = new Database($db_name, $db_user, $db_pass);
 $telegram = new Api($token);
 
 $post_data = $db->read_post();
+if ($post_data === false)
+	die("no posts");
+
 $type = $post_data['type'];
 // echo "\n";
 // var_export($post_data);
