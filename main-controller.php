@@ -10,9 +10,6 @@ define("AUTHOR", 2);
 //--------------------- database class ---------------------------
 require('database_class.php');
 
-//--------------------- posts_file class -------------------------
-require('posts_file_class.php');
-
 //--------------------- database functions -----------------------
 require('handle_state.php');
 
