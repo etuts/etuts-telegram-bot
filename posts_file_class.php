@@ -27,7 +27,7 @@ class Posts_file {
 	}
 	function read_post() {
 		$telegram_data = false;
-		if (filesize($this->the_file) == 0) {
+		if (filesize($this->the_file) !== 0) {
 			$post_line = fgets($this->the_file);
 			// remove the line from file
 			$contents = file_get_contents($this->pfile_name);
