@@ -85,4 +85,11 @@ class Database {
 	function get_chat_id() {
 		return $this->chat_id;
 	}
+	function get_users_with_permission($permission) {
+		$result = mysqli_query($this->db, "SELECT `chat_id` FROM `chats` WHERE permission = '$permission' ");
+		while ($row = mysql_fetch_array($result)) {
+		    $result_array[] = $row['chat_id'];
+		}
+		return $result_array;
+	}
 }

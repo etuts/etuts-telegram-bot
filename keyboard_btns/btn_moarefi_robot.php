@@ -5,8 +5,8 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 	switch ($state) {
 		case MOAREFI_ROBOT_SCHEDULE_POST:
 			$data = json_decode($db->get_data(), true);
-			$image = $message->getPhoto();
 
+			$image = ($message->isType('photo')) ? $message->getPhoto() : false;
 			$final_text = make_post_moarefi_robot_for_channel($data['bot_id'], $image, $data['title'], $data['description']);
 			$file = new Posts_file();
 			$file->add_post($final_text);
@@ -26,9 +26,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			$data = json_decode($db->get_data(), true);
 			$data['bot_id'] = $text;
 			$db->set_data(json_encode($data));
-			/*$file = new Posts_file();
-			$file->add_post($post_line);*/
-
+			
 			reply('توضیحات مربوط به ربات رو وارد کنید', $message_id, true);
 			$db->set_state(MOAREFI_ROBOT_BOT_IMAGE);
 			break;
@@ -48,10 +46,25 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 }
 
 function make_post_moarefi_robot_for_channel($bot_id, $bot_image, $title, $description) {
-	$final_text = $title . "\n" .
+	$chat_id = get_chat_id();
+
+	$text = $title . "\n" .
 					$bot_id . "\n" .
 					$description . "\n" .
 					"@etuts";
-	log_debug($final_text);
-	return $final_text;
+
+	if ($bot_image == false) {
+		$final_text = [
+			'chat_id' => $chat_id,
+			'text' => $text,
+		];
+	} else {
+		$bot_image = $bot_image[count($bot_image)-1];	
+		$final_text = [
+			'chat_id' => $chat_id,
+			'photo' => $bot_image['file_id'],
+			'caption' => $text,
+		];
+	}
+	return json_encode($final_text);
 }
