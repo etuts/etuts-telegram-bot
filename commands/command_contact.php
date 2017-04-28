@@ -16,7 +16,7 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 		
 		case CONTACT_ADMIN_ANSWER:
 			// this the answer of admin to the user who has sent it
-			$data = json_decode($db->get_data(), true);
+			$data = $db->get_data();
 			$dest_chat_id = $data['chat_id'];
 			$dest_message_id = $data['message_id'];
 			$fullname = get_fullname();
