@@ -23,12 +23,6 @@ if ($message != null) {
 	$user = $message->getFrom();
 	$username = $user->getUsername();
 	$fullname = $user->getFirstName() . ' ' . $user->getLastName();
-	if ($message->has('photo')){
-		$telegram->sendMessage([
-		'chat_id' => $chat_id,
-		'text' => $answer,
-		]);
-	}
 	try {
 		$db = new Database($db_name, $db_user, $db_pass, $chat_id);
 		// vahid tests

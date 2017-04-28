@@ -49,6 +49,12 @@ function get_last_post(){
     $last_item = $rss->channel->item;
     return $last_item;
 }
+function get_last_topic(){
+	file_put_contents("feed", fopen("http://etuts.ir/topics/feed", 'r'));
+	$rss = simplexml_load_file('feed');
+	$last_item = $rss->channel->item;
+	return $rss;
+}
 function make_post_for_channel($title, $description, $image_link = false, $link_to_site = false) {
     
     $image_link = ($image_link === false) ? '' : "[".emoji('image-icon')."](".$image_link.")";
@@ -63,6 +69,7 @@ function display_latest_post_in_channel() {
     $description = $post->description;
     $title = $post->title;
 
+    //Getting image link from description 
     $text = "";
     $text .= $description;
     $pos = strpos($text, "src=\"") + 5;
@@ -71,7 +78,7 @@ function display_latest_post_in_channel() {
     $image_link = substr($text,0,$pos2);
 
     $description = strip_tags($description);
-    $description = substr($description, 0,strlen($description)-9);
+    $description = substr($description, 0,strlen($description)-9);	//Removing garbage characters from description
     
     $link_to_site = $post->link;
 

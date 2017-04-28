@@ -1,14 +1,4 @@
 <?php
-	function getFile(array $params)
-    {
-        $response = $this->post('getFile', $params);
-        return new File($response->getDecodedBody());
-    }
-	function getUserProfilePhotos(array $params)
-    {
-        $response = $this->post('getUserProfilePhotos', $params);
-        return new UserProfilePhotos($response->getDecodedBody());
-    }
 function run_help_command($chat_id, $text, $message_id, $message, $state) {
 	global $telegram, $available_commands,$db;
 	$is_admin =  $db->check_user_permission(ADMIN);
@@ -23,4 +13,12 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 		'chat_id' => $chat_id,
 		'text' => $answer,
 	]);
+	// $topic = get_last_topic();
+	// $text = " ";
+	// $text .= $topic->guid;
+	// log_debug(var_export($topic,true),97778738);
+	// $telegram->sendMessage([
+	// 	'chat_id' => $chat_id,
+	// 	'text' => $text,
+	// ]);
 }
