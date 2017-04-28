@@ -33,7 +33,9 @@ class Posts_file {
 			$contents = file_get_contents($this->pfile_name);
 			$contents = implode('', explode($post_line, $contents, 2)); // replace first occurrence
 			file_put_contents($this->pfile_name, $contents);
+
+			$telegram_data = json_decode($post_line);
 		}
-		return $post_line;
+		return $telegram_data;
 	}
 }
