@@ -4,6 +4,7 @@ $callback_query_functions = [
 
 	"admn_answr_cntct",
 	"rqst_acc_dny",
+	"pst_vldshn",
 
 ];
 
