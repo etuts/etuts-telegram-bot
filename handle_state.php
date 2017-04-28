@@ -34,8 +34,7 @@ function get_chat_state($text, $username, $fullname) {
 function handle_state($state, $chat_id, $text, $message_id, $message) {
 	switch ($state) {
 		case IDLE:
-			// user has sent chert o pert! execute help command
-			break;
+			return false;
 		case CONTACT:
 			run_contact_command($chat_id, $text, $message_id, $message, CONTACT);
 			break;
@@ -60,7 +59,10 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 		case REQUEST_POST:
 			run_request_post_command($chat_id, $text, $message_id, $message,REQUEST_POST);
 			break;
+		default:
+			return false;
 	}
+	return true;
 }
 function add_admin($admin_chat_id) {
 	global $db;
