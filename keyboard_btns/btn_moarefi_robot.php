@@ -53,7 +53,7 @@ function make_post_moarefi_robot_for_channel($bot_id, $bot_image, $title, $descr
 					$bot_id . "\n" .
 					$description . "\n" .
 					"@etuts" . "\n" .
-					"#telegram #bot";
+					"#bot";
 	
 	if ($bot_image == false) {
 		$final_text = [
@@ -65,7 +65,7 @@ function make_post_moarefi_robot_for_channel($bot_id, $bot_image, $title, $descr
 		$bot_image = $bot_image[count($bot_image)-1];	
 		$final_text = [
 			'type' => 'photo',
-			'chat_id' => '@etuts',
+			'chat_id' => 92454,
 			'photo' => $bot_image['file_id'],
 			'caption' => $text,
 		];
