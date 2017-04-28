@@ -8,8 +8,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 
 			$image = ($message->isType('photo')) ? $message->getPhoto() : false;
 			$final_text = make_post_moarefi_robot_for_channel($data['bot_id'], $image, $data['title'], $data['description']);
-			$file = new Posts_file();
-			$file->add_post($final_text);
+			$db->add_post($final_text);
 
 			$db->reset_state();
 			send_thank_message($message_id);
