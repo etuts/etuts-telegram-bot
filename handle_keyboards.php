@@ -6,11 +6,11 @@ $keyboard_buttons = [
 
 	],
 	"start"=>[
-		"contact"=>array("name"=>"contact", "permission"=>USER),
+		"contact"=>array("name"=>"تماس با ما", "permission"=>USER),
 		// "help"=>array("name"=>"help", "permission"=>USER),
-		"post_valiation"=>array("name"=>"post_validation", "permission"=>AUTHOR),
-		"schedule_post"=>array("name"=>"schedule_post", "permission"=>ADMIN),
-		"request_post"=>array("name"=>"request_post", "permission"=>USER),
+		"post_valiation"=>array("name"=>"تایید مطلب", "permission"=>AUTHOR),
+		"schedule_post"=>array("name"=>"ارسال مطلب به کانال", "permission"=>ADMIN),
+		"request_post"=>array("name"=>"درخواست مطلب آموزشی", "permission"=>USER),
 	],
 
 ];

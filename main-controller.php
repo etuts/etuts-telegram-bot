@@ -11,13 +11,16 @@ define("AUTHOR", 2);
 define("IDLE", 0);
 
 define("CONTACT", 1);
-define("CONTACT_ADMIN_ANSWER", 5);
+define("CONTACT_ADMIN_ANSWER", 2);
 
-define("POST_VALIDATION_SEND_POST_TITLE", 2);
+define("POST_VALIDATION_SEND_POST_TITLE", 3);
 
-define("MOAREFI_ROBOT", 3);
+define("MOAREFI_ROBOT_BOT_ID", 4);
+define("MOAREFI_ROBOT_BOT_DESCRIPTION", 5);
+define("MOAREFI_ROBOT_BOT_IMAGE", 8);
+define("MOAREFI_ROBOT_SCHEDULE_POST", 7);
 
-define("REQUEST_POST",4);
+define("REQUEST_POST",6);
 
 //--------------------- database class ---------------------------
 require('database_class.php');

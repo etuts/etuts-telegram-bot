@@ -9,6 +9,8 @@ function convert_to_english($text) {
 	$english = array('q','w','e','r','t','y','u','i','o','p','_1','_2','a','s','d','f','g','h','j','k','l','_3','_4','z','x','cv','b','n','m','_5','_');
 	return str_replace($persian, $english, $text);
 }
+// araye intory bar migardoone:     [["0", "1"]
+//                                  ["2", "3"]] ...
 function array_duplex($arr){
     $ans = array();
     $cnt = 0;
@@ -61,7 +63,10 @@ function make_post_for_channel($title, $description, $image_link = false, $link_
 
     $link_to_site = ($link_to_site === false) ? '' : "[برای مشاهده ی مطلب کلیک کنید](".$link_to_site.")";
 
-    $final_text = $title.$image_link."\n".$description."\n".$link_to_site;
+    $final_text =   $title.$image_link."\n".
+                    $description."\n".
+                    $link_to_site."\n".
+                    "@etuts";
 }
 function display_latest_post_in_channel() {
     global $telegram;
