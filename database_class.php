@@ -87,7 +87,7 @@ class Database {
 	}
 	function get_users_with_permission($permission) {
 		$result = mysqli_query($this->db, "SELECT `chat_id` FROM `chats` WHERE permission = '$permission' ");
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
 		    $result_array[] = $row['chat_id'];
 		}
 		return $result_array;
