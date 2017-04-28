@@ -49,7 +49,7 @@ function reply($text, $message_id, $force_reply = false, $reply = true) { // rep
 }
 function send_message_to_admin($message, $text, $description, $reply_markup = false) { // send message to admin
 	global $telegram, $db;
-	$admins = $db->get_user_with_permission(ADMIN);
+	$admins = $db->get_users_with_permission(ADMIN);
 	
 	// testing the get_user_with_permission
 	log_debug(var_export($admins, true), 117990761);
