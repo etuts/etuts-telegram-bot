@@ -48,23 +48,32 @@ function reply($text, $message_id, $force_reply = false, $reply = true) { // rep
 	$telegram->sendMessage($data);
 }
 function send_message_to_admin($message, $text, $description, $reply_markup = false) { // send message to admin
-	global $telegram;
+	global $telegram, $db;
+	$admins = $db->get_user_with_permission(ADMIN);
+	
+	// testing the get_user_with_permission
+	log_debug(var_export($admins, true), 117990761);
+	
 	$text = $description . PHP_EOL .
 			'نام: ' . get_fullname() . PHP_EOL .
 			'از: @' . get_username() . PHP_EOL .
 			'متن: ' . $text;
 
 	if ($reply_markup !== false) {
-		$telegram->sendMessage([
-			'chat_id' => 92454,
-			'text' => $text,
-			'reply_markup' => $reply_markup,
-		]);
+		foreach($admins as $admin_chat_id){
+			$telegram->sendMessage([
+				'chat_id' => $admin_chat_id,
+				'text' => $text,
+				'reply_markup' => $reply_markup,
+			]);
+		}
 	} else {
-		$telegram->sendMessage([
-			'chat_id' => 92454,
-			'text' => $text,
-		]);
+		foreach($admins as $admin_chat_id){
+			$telegram->sendMessage([
+				'chat_id' => $admin_chat_id,
+				'text' => $text,
+			]);
+		}
 	}
 }
 function send_thank_message($message_id) { // send "thank you" to current user
