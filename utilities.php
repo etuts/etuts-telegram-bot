@@ -63,6 +63,7 @@ function display_latest_post_in_channel() {
     $description = $post->description;
     $title = $post->title;
 
+    //Getting image link from description 
     $text = "";
     $text .= $description;
     $pos = strpos($text, "src=\"") + 5;
@@ -71,7 +72,7 @@ function display_latest_post_in_channel() {
     $image_link = substr($text,0,$pos2);
 
     $description = strip_tags($description);
-    $description = substr($description, 0,strlen($description)-9);
+    $description = substr($description, 0,strlen($description)-9);	//Removing garbage characters from description
     
     $link_to_site = $post->link;
 
