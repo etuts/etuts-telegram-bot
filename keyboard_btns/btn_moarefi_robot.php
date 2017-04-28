@@ -15,6 +15,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			send_thank_message($message_id);
 			break;
 		case MOAREFI_ROBOT_BOT_IMAGE:
+			if (strlen($text))
 			$data = json_decode($db->get_data(), true);
 			$data['description'] = $text;
 			$db->set_data(json_encode($data));
@@ -46,12 +47,13 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 }
 
 function make_post_moarefi_robot_for_channel($bot_id, $bot_image, $title, $description) {
-	$chat_id = get_chat_id();
+	// $chat_id = get_chat_id();
 
 	$text = $title . "\n" .
 					$bot_id . "\n" .
 					$description . "\n" .
-					"@etuts";
+					"@etuts" . "\n" .
+					"#telegram #bot";
 
 	if ($bot_image == false) {
 		$final_text = [
@@ -63,7 +65,7 @@ function make_post_moarefi_robot_for_channel($bot_id, $bot_image, $title, $descr
 		$bot_image = $bot_image[count($bot_image)-1];	
 		$final_text = [
 			'type' => 'photo',
-			'chat_id' => $chat_id,
+			'chat_id' => '@etuts',
 			'photo' => $bot_image['file_id'],
 			'caption' => $text,
 		];

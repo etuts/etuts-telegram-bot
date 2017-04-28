@@ -25,14 +25,14 @@ if ($file) {
 		case 'text':
 			$telegram->sendMessage([
 				'chat_id' => $post_data['chat_id'],
-				'text' => $post_data['text'],
+				'text' => utf8_decode($post_data['text']),
 			]);
 			break;
 		case 'photo':
 			$telegram->sendPhoto([
 				'chat_id' => $post_data['chat_id'],
 				'photo' => $post_data['photo'],
-				'caption' => $post_data['caption'],
+				'caption' => utf8_decode($post_data['caption']),
 			]);
 			break;
 	}
