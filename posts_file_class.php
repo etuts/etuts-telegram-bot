@@ -26,15 +26,15 @@ class Posts_file {
 		fwrite($this->the_file, $post_line . "\n");
 	}
 	function read_post() {
-		$post_line = false;
-		if (!feof($this->the_file)) {
+		$telegram_data = false;
+		if (filesize($this->the_file) == 0) {
 			$post_line = fgets($this->the_file);
 			// remove the line from file
 			$contents = file_get_contents($this->pfile_name);
 			$contents = implode('', explode($post_line, $contents, 2)); // replace first occurrence
 			file_put_contents($this->pfile_name, $contents);
 
-			$telegram_data = json_decode($post_line);
+			$telegram_data = json_decode($post_line, true);
 		}
 		return $telegram_data;
 	}
