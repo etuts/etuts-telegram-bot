@@ -1,15 +1,17 @@
 <?php
 
 function run_start_command($chat_id, $text, $message_id, $message, $state) {
-	global $telegram, $available_commands, $db;
+	global $telegram, $keyboard_buttons, $db;
 	
 	$is_admin =  $db->check_user_permission(ADMIN);
 	$is_author = $db->check_user_permission(AUTHOR);
 	$permission = $is_admin ? ADMIN : $is_author ? AUTHOR : USER;
+	$buttons = $keyboard_buttons["start"];
+	log_debug(var_export($buttons, true), 117990761);
 	$commands = array();
 	$commands_to_ignore = array("help", "cancel", "start");
 	
-	foreach ($available_commands as $command) {
+	foreach ($buttons as $command) {
 		if ($command["permission"] <= $permission)
 			if(!in_array($command["name"], $commands_to_ignore))
 				array_push($commands, $command["name"]);
