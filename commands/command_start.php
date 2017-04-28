@@ -7,7 +7,6 @@ function run_start_command($chat_id, $text, $message_id, $message, $state) {
 	$is_author = $db->check_user_permission(AUTHOR);
 	$permission = $is_admin ? ADMIN : $is_author ? AUTHOR : USER;
 	$buttons = $keyboard_buttons["start"];
-	log_debug(var_export($buttons, true), 117990761);
 	$commands = array();
 	$commands_to_ignore = array("help", "cancel", "start");
 	
