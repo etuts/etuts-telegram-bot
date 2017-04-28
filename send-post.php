@@ -15,15 +15,27 @@ require __DIR__.'/posts_file_class.php';
 $file = new Posts_file(false);
 
 if ($file) {
-	
-	$post = $file->read_post();
-	
 	$telegram = new Api($token);
-	
-	$telegram->sendMessage([
-		'chat_id' => 92454,
-		'text' => $post,
-	]);
+
+	$post_data = $file->read_post();
+	$type = $post_data['type'];
+	if ($type == '')
+		die();
+	switch ($type) {
+		case 'text':
+			$telegram->sendMessage([
+				'chat_id' => $post_data['chat_id'],
+				'text' => $post_data['text'],
+			]);
+			break;
+		case 'photo':
+			$telegram->sendPhoto([
+				'chat_id' => $post_data['chat_id'],
+				'photo' => $post_data['photo'],
+				'caption' => $post_data['caption'],
+			]);
+			break;
+	}
 } else
 	echo 'failed' . PHP_EOL;
 
