@@ -15,7 +15,7 @@ $keyboard_buttons = [
 
 ];
 
-function run_keyboard_buttons($text, $chat_id, $message_id, $message) {
+function run_keyboard_button($text, $chat_id, $message_id, $message) {
 	global $keyboard_buttons;
 	
 	foreach ($keyboard_buttons as $keyboard_name => $btns) {

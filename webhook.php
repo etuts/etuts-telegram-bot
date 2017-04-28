@@ -34,7 +34,7 @@ if ($message != null) {
 
 		$state = get_chat_state($text, $username, $fullname);
 		if (!handle_state($state, $chat_id, $text, $message_id, $message))
-			if (!run_keyboard_buttons($text, $chat_id, $message_id, $message))
+			if (!run_keyboard_button($text, $chat_id, $message_id, $message))
 				run_commands($text, $chat_id, $message_id, $message);
 		
 	} catch (Exception $e) {
