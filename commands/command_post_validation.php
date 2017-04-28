@@ -5,8 +5,8 @@ function run_post_validation_command($chat_id, $text, $message_id, $message, $st
 	switch ($state) {
 		case POST_VALIDATION_SEND_POST_TITLE:
 			// user has sent title and link of a post to validate
-			$btn1 = create_glassy_btn(emoji('like'), 'rqst_acc_dny', $chat_id, $message_id, '"acc":1');
-			$btn2 = create_glassy_btn(emoji('dislike'), 'rqst_acc_dny', $chat_id, $message_id, '"acc":0');
+			$btn1 = create_glassy_btn(emoji('like'), 'pst_vldshn', $chat_id, $message_id, '"acc":1');
+			$btn2 = create_glassy_btn(emoji('dislike'), 'pst_vldshn', $chat_id, $message_id, '"acc":0');
 			$reply_markup = create_glassy_keyboard([[$btn1, $btn2]]);
 			send_message_to_admin($message, $text, 'مطلب جدید در انتظار بررسی', $reply_markup);
 			$db->reset_state();
