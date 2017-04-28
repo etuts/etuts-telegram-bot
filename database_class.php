@@ -103,6 +103,9 @@ class Database {
 	}
 	function read_post() {
 		$result = mysqli_query($this->db, "SELECT data FROM channelposts LIMIT 1 ");
+		
+		if (mysqli_num_rows($result) == 0)
+			return false;
 
 		$data = (string)$result->fetch_assoc()['data'];
 		// var_export($data);
