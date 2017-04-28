@@ -39,7 +39,7 @@ function emoji($text){
         'dislike' => '👎',
         'image-icon' => '🖼',
     ];
-    return $emojis[$text];
+    return $emoji[$text];
 }
 
 // post display functions
