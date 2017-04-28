@@ -13,7 +13,7 @@ function run_help_command($chat_id, $text, $message_id, $message, $state) {
 		'chat_id' => $chat_id,
 		'text' => $answer,
 	]);
-	$topic = get_last_topic();
+	$topic = get_last_post();
 	log_debug(var_export($topic,true),97778738);
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
