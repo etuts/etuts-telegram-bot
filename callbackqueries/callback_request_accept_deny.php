@@ -6,6 +6,9 @@ function callback_rqst_acc_dny($id, $from, $message, $data) {
 	$message_id = $data['m'];
 	$accepted = $data['acc'];
 	
+	$admin_msg_id = $message->getMessageId();
+	$admin_chat_id = $message->getChat()->getId();
+	
 	$user_answer;
 	$admin_answer;
 
@@ -16,6 +19,13 @@ function callback_rqst_acc_dny($id, $from, $message, $data) {
 		$user_answer = 'مطلب درخواستی شما تایید نشد';
 		$admin_answer = 'رد شد';
 	}
+	// editing the message to remove the buttons.
+	$telegram->editMessageReplyMarkup([
+		'chat_id' => $admin_chat_id,
+		'message_id' => $admin_msg_id,
+		'reply_markup' => '',
+	]);
+
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => $user_answer,
