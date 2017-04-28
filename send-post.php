@@ -32,10 +32,34 @@ switch ($type) {
 		]);
 		break;
 	case 'photo':
-		$telegram->sendPhoto([
+		$text = '';
+		$caption = $post_data['caption'];
+		if (strlen($caption) > 200) {
+			$pos_of_third_line = strposX($caption, "\n", 2) +1;
+			$text = substr($caption, $pos_of_third_line);
+			$caption = substr($caption, 0, $pos_of_third_line);
+		}
+		$message = $telegram->sendPhoto([
 			'chat_id' => $post_data['chat_id'],
 			'photo' => $post_data['photo'],
-			'caption' => $post_data['caption'],
+			'caption' => $caption,
 		]);
+		if (strlen($text) != 0) {
+			$telegram->sendPhoto([
+				'chat_id' => $post_data['chat_id'],
+				'text' => $text,
+				'reply_to_message_id' => $message->getMessageId(),
+			]);
+		}
 		break;
+}
+
+function strposX($haystack, $needle, $number){
+    if($number == '1'){
+        return strpos($haystack, $needle);
+    }elseif($number > '1'){
+        return strpos($haystack, $needle, strposX($haystack, $needle, $number - 1) + strlen($needle));
+    }else{
+        return error_log('Error: Value for parameter $number is out of range');
+    }
 }
