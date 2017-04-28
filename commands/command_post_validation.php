@@ -5,20 +5,12 @@ function run_post_validation_command($chat_id, $text, $message_id, $message, $st
 	switch ($state) {
 		case POST_VALIDATION_SEND_POST_TITLE:
 			// user has sent title and link of a post to validate
-			send_thank_message($message_id);
-			$keyboard = [
-				['text' => 'تایید', 'url' => 'http://etuts.ir'],
-				['text' => '7', 'url' => 'http://etuts.ir'],
-			];
-			$reply_markup = Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
-
-			$telegram->sendMessage([
-				'chat_id' => 92454, 
-				'text' => 'Hello World', 
-				'reply_markup' => $reply_markup,
-			]);
+			$btn1 = create_glassy_btn(emoji('like'), 'rqst_acc_dny', $chat_id, $message_id, '"acc":1');
+			$btn2 = create_glassy_btn(emoji('dislike'), 'rqst_acc_dny', $chat_id, $message_id, '"acc":0');
+			$reply_markup = create_glassy_keyboard([[$btn1, $btn2]]);
 			send_message_to_admin($message, $text, 'مطلب جدید در انتظار بررسی');
 			$db->reset_state();
+			send_thank_message($message_id);
 			break;
 		
 		default:
