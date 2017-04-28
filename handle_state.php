@@ -1,4 +1,21 @@
 <?php 
+
+//--------------------- Enum of STATEs ---------------------------
+define("IDLE", 0);
+
+define("CONTACT", 1);
+define("CONTACT_ADMIN_ANSWER", 2);
+
+define("POST_VALIDATION_SEND_POST_TITLE", 3);
+
+define("MOAREFI_ROBOT_BOT_ID", 4);
+define("MOAREFI_ROBOT_BOT_DESCRIPTION", 5);
+define("MOAREFI_ROBOT_BOT_IMAGE", 8);
+define("MOAREFI_ROBOT_SCHEDULE_POST", 7);
+
+define("REQUEST_POST",6);
+
+
 // get chat state from database
 function get_chat_state($text, $username, $fullname) {
 	global $db;
@@ -28,8 +45,17 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 		case POST_VALIDATION_SEND_POST_TITLE:
 			run_post_validation_command($chat_id, $text, $message_id, $message, POST_VALIDATION_SEND_POST_TITLE);
 			break;
-		case MOAREFI_ROBOT:
-			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT);
+		case MOAREFI_ROBOT_BOT_ID:
+			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT_BOT_ID);
+			break;
+		case MOAREFI_ROBOT_BOT_DESCRIPTION:
+			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT_BOT_DESCRIPTION);
+			break;
+		case MOAREFI_ROBOT_BOT_IMAGE:
+			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT_BOT_IMAGE);
+			break;
+		case MOAREFI_ROBOT_SCHEDULE_POST:
+			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT_SCHEDULE_POST);
 			break;
 		case REQUEST_POST:
 			run_request_post_command($chat_id, $text, $message_id, $message,REQUEST_POST);
