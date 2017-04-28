@@ -86,11 +86,9 @@ class Database {
 		return $this->chat_id;
 	}
 	function get_users_with_permission($permission) {
-		// log_debug("ds");
 		$result = mysqli_query($this->db, "SELECT `chat_id` FROM `chats` WHERE permission = '$permission' ");
-		// log_debug(var_export($result,true));
-		while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
-		    $result_array[] = $row['chat_id'];
+		while ($row = mysqli_fetch_assoc($result)) {
+			$result_array[] = $row['chat_id'];
 		}
 		return $result_array;
 	}
