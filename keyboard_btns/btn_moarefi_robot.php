@@ -55,12 +55,14 @@ function make_post_moarefi_robot_for_channel($bot_id, $bot_image, $title, $descr
 
 	if ($bot_image == false) {
 		$final_text = [
+			'type' => 'text',
 			'chat_id' => $chat_id,
 			'text' => $text,
 		];
 	} else {
 		$bot_image = $bot_image[count($bot_image)-1];	
 		$final_text = [
+			'type' => 'photo',
 			'chat_id' => $chat_id,
 			'photo' => $bot_image['file_id'],
 			'caption' => $text,
