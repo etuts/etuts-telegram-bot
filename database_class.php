@@ -6,7 +6,7 @@ class Database {
 	protected static $db;
 	protected $chat_id;
 
-	function __construct($db_name, $db_user, $db_pass, $chat_id) {
+	function __construct($db_name, $db_user, $db_pass, $chat_id = false) {
 		$this->db_name = $db_name;
 		$this->db_user = $db_user;
 		$this->db_pass = $db_pass;
