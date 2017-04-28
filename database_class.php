@@ -3,7 +3,7 @@ class Database {
 	protected $db_name;
 	protected $db_user;
 	protected $db_pass;
-	protected static $db;
+	protected $db;
 	protected $chat_id;
 
 	function __construct($db_name, $db_user, $db_pass, $chat_id = false) {
@@ -30,6 +30,8 @@ class Database {
 		return mysqli_query($this->db, "UPDATE `chats` SET state = '$state' WHERE chat_id = '$this->chat_id' ");
 	}
 	function set_data($data_string) {
+		$data_string = json_encode($data_string);
+		$data_string = addslashes($data_string);
 		return mysqli_query($this->db, "UPDATE `chats` SET data = '$data_string' WHERE chat_id = '$this->chat_id' ");
 	}
 	function set_username($username) {
@@ -51,7 +53,9 @@ class Database {
 		if ($chat_id === false)
 			$chat_id = $this->chat_id;
 		$result = mysqli_query($this->db, "SELECT `data` FROM `chats` WHERE chat_id = '$chat_id' ");
-		return (string)$result->fetch_assoc()['data'];
+		$data = (string)$result->fetch_assoc()['data'];
+		$data= json_decode($data, true);
+		return $data;
 	}
 	function get_username($chat_id = false) {
 		if ($chat_id === false)
@@ -95,12 +99,16 @@ class Database {
 
 	// channelposts table
 	function add_post($post_line, $priority = false) {
-		return mysqli_query($this->db, "INSERT INTO `channelposts` (data) VALUES ('$data') ");
+		return mysqli_query($this->db, "INSERT INTO `channelposts` (data) VALUES ('$post_line') ");
 	}
 	function read_post() {
-		$result = mysqli_query($this->db, "SELECT `data` FROM `channelposts` WHERE ROWNUM < 2 ");
+		$result = mysqli_query($this->db, "SELECT data FROM channelposts LIMIT 1 ");
+
 		$data = (string)$result->fetch_assoc()['data'];
-		$data = json_decode($data);
+		// var_export($data);
+		$data = json_decode($data, true);
+		// echo json_last_error();
+		// var_export($data);
 		// mysqli_query($this->db, "DELETE FROM `channelposts` WHERE ROWNUM < 2 "); // delete the row
 		return $data;
 	}
