@@ -8,8 +8,6 @@ function callback_rqst_acc_dny($id, $from, $message, $data) {
 	
 	$admin_msg_id = $message->getMessageId();
 	$admin_chat_id = $message->getChat()->getId();
-	log_debug($admin_msg_id, 117990761);
-	log_debug($admin_chat_id, 117990761);
 	
 	$user_answer;
 	$admin_answer;
