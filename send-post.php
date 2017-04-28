@@ -17,20 +17,22 @@ $telegram = new Api($token);
 
 $post_data = $db->read_post();
 $type = $post_data['type'];
+// echo "\n";
+// var_export($post_data);
 if ($type == '')
-	die();
+	die("no type");
 switch ($type) {
 	case 'text':
 		$telegram->sendMessage([
 			'chat_id' => $post_data['chat_id'],
-			'text' => utf8_decode($post_data['text']),
+			'text' => $post_data['text'],
 		]);
 		break;
 	case 'photo':
 		$telegram->sendPhoto([
 			'chat_id' => $post_data['chat_id'],
 			'photo' => $post_data['photo'],
-			'caption' => utf8_decode($post_data['caption']),
+			'caption' => $post_data['caption'],
 		]);
 		break;
 }
