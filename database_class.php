@@ -92,4 +92,16 @@ class Database {
 		}
 		return $result_array;
 	}
+
+	// channelposts table
+	function add_post($post_line, $priority = false) {
+		return mysqli_query($this->db, "INSERT INTO `channelposts` (data) VALUES ('$data') ");
+	}
+	function read_post() {
+		$result = mysqli_query($this->db, "SELECT `data` FROM `channelposts` WHERE ROWNUM < 2 ");
+		$data = (string)$result->fetch_assoc()['data'];
+		$data = json_decode($data);
+		// mysqli_query($this->db, "DELETE FROM `channelposts` WHERE ROWNUM < 2 "); // delete the row
+		return $data;
+	}
 }
