@@ -28,3 +28,5 @@ function callback_pst_vldshn($id, $from, $message, $data) {
 
 	return $answer_data;
 }
+
+?>

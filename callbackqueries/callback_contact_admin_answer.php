@@ -14,3 +14,5 @@ function callback_admn_answr_cntct($id, $from, $message, $data) {
 
 	return $answer_data;
 }
+
+?>

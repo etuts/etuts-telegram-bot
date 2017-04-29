@@ -103,3 +103,25 @@ function display_latest_post_in_channel() {
         'parse_mode' => "Markdown",
     ]);
 }
+
+$categories_array = [
+    ['emoji'=>'game', 'name'=>'بازی'], 
+    ['emoji'=>'electricity', 'name'=>'برق'], 
+    ['emoji'=>'desktop', 'name'=>'دسکتاپ'], 
+    ['emoji'=>'design', 'name'=>'طراحی'], 
+    ['emoji'=>'mobile', 'name'=>'موبایل'], 
+    ['emoji'=>'web', 'name'=>'وب'], 
+];
+
+$lots_of_dots = str_repeat('.', 100);
+
+
+function create_categories_keyboard_reply_markup($checked){
+    global $categories_array, $lots_of_dots;
+    $btns = [];
+    foreach($categories_array as $num => $category){
+        $txt = emoji($checked[$num] ? 'checked':'not_checked') . '. ' . emoji($category["emoji"]) . ' ' . $category["name"] . $lots_of_dots;
+        $btns[] = [create_glassy_btn($txt , 'chck_cats', $chat_id, $message_id, '"t":'.$num)];
+    }
+    return create_glassy_keyboard($btns);
+}

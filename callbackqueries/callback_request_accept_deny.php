@@ -38,3 +38,5 @@ function callback_rqst_acc_dny($id, $from, $message, $data) {
 
 	return $answer_data;
 }
+
+?>
