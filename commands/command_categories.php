@@ -6,7 +6,7 @@
 		// $checked = db->get_categories_checked_array(); // this must be taken from database to see if it is checked or not.
 		// temp:
 
-		$checked = [0, 0, 0, 0, 0, 0];
+		$checked = $db->get_categories_checked_array();
 		
 		$reply_markup = create_categories_keyboard_reply_markup($checked, $chat_id, $message_id);
 			
