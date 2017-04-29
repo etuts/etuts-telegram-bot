@@ -15,7 +15,7 @@
 		$btns = [];
 		foreach($categories_array as $category => $name){
 			$checked = 0; // this must be taken from database to see if it is checked or not.
-			$txt = emoji($checked ? 'checked':'not_checked') . '. ' . emoji($category) . ' ' . $name;// . $lots_of_dots;
+			$txt = emoji($checked ? 'checked':'not_checked') . '. ' . emoji($category) . ' ' . $name . $lots_of_dots;
 			$btns[] = [create_glassy_btn($txt , 'check', $chat_id, $message_id, '"c":'.$checked)];
 		}
 		$reply_markup = create_glassy_keyboard($btns);
