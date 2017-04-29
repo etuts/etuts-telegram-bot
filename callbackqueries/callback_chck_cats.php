@@ -1,6 +1,6 @@
 <?php 
 
-function callback_check_cats($id, $from, $message, $data) {
+function callback_chck_cats($id, $from, $message, $data) {
 	log_debug("1", 117990761);
 	global $db, $telegram;
 	log_debug("2", 117990761);
