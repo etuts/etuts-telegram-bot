@@ -47,7 +47,7 @@ class Database {
 	function set_categories_checked_array($cats) {
 		$cats = json_encode($cats);
 		$cats = addslashes($cats);
-		return mysqli_query($this->db, "UPDATE `chats` SET cats = '$cats' WHERE chat_id = '$chat_id' ");
+		return mysqli_query($this->db, "UPDATE `chats` SET cats = '$cats' WHERE chat_id = '$this->chat_id' ");
 	}
 	function get_state($chat_id = false) {
 		if ($chat_id === false)
