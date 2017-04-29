@@ -24,7 +24,7 @@ if ($message != null) {
 	$username = $user->getUsername();
 	$fullname = $user->getFirstName() . ' ' . $user->getLastName();
 	try {
-		$db = new Database($db_name, $db_user, $db_pass, $chat_id);
+		$db = new Database($db_name, $db_user, $db_pass, $chat_id, $message_id);
 		// vahid tests
 		/*if ($chat_id == 92454) {
 		}*/
