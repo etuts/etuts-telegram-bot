@@ -23,6 +23,17 @@ function run_commands($text, $chat_id, $message_id, $message) {
 	}
 }
 
+function is_cancel_command($text, $chat_id, $message_id, $message) {
+	global $available_commands;
+
+	if (contains_word($text, "/cancel")) {
+		$func = 'run_' . $available_commands["/cancel"]['name'] . '_command';
+		$func($chat_id, $text, $message_id, $message, IDLE);
+		return true;
+	}
+	return false;
+}
+
 foreach (glob("./commands/command_*.php") as $filename) {
     require ($filename);
 }
