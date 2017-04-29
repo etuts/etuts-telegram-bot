@@ -14,6 +14,9 @@ function log_debug($text, $chat_id = 92454) {
 }
 
 // getters
+function get_message_id() {
+	global $db->get_message_id();
+}
 function get_chat_id() {
 	global $db;
 	return $db->get_chat_id();
@@ -31,13 +34,15 @@ function get_username($chat_id = false) {
 function sendMessage($text, $force_reply = false) { // send message to current user
 	reply($text, null, $force_reply, false);
 }
-function reply($text, $message_id, $force_reply = false, $reply = true) { // reply to current user
+function reply($text, $message_id = false, $force_reply = false, $reply = true) { // reply to current user
 	global $telegram;
 	$chat_id = get_chat_id();
 	$data = [
 		'chat_id' => $chat_id,
 		'text' => $text
 	];
+	if ($message_id === false)
+		$message_id = get_message_id();
 	if ($force_reply) {
 		$reply_markup = $telegram->forceReply();
 		$data['reply_markup'] = $reply_markup;
