@@ -7,7 +7,7 @@
 		'mobile'=>'موبایل', 
 		'web'=>'وب'
 	];
-	$lots_of_dots = '...........................................................';
+	$lots_of_dots = str_repeat('.', 100);
 
 	function run_categories_command($chat_id, $text, $message_id, $message, $state){
 		global $telegram, $db, $categories_array, $lots_of_dots;
