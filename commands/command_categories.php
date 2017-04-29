@@ -7,6 +7,7 @@
 		// temp:
 
 		$checked = $db->get_categories_checked_array();
+		log_debug(var_export($checked, true), 117990761);
 		
 		$reply_markup = create_categories_keyboard_reply_markup($checked, $chat_id, $message_id);
 			
