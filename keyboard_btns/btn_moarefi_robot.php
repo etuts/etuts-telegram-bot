@@ -62,6 +62,10 @@ function make_post_moarefi_robot_for_channel($bot_id, $bot_image, $title, $descr
 			'text' => $text,
 		];
 	} else {
+		$len_text = strlen($text);
+		if ($len_text > 200) {
+			reply('طول کپشن عکس برابر '. $len_text .' کارکتر است که از ۲۰۰ کارکتر بیشتر است!');
+		}
 		$bot_image = $bot_image[count($bot_image)-1];	
 		$final_text = [
 			'type' => 'photo',
