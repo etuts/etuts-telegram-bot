@@ -116,7 +116,7 @@ $categories_array = [
 $lots_of_dots = str_repeat('.', 100);
 
 
-function create_categories_keyboard_reply_markup($checked){
+function create_categories_keyboard_reply_markup($checked, $chat_id, $message_id){
     global $categories_array, $lots_of_dots;
     $btns = [];
     foreach($categories_array as $num => $category){

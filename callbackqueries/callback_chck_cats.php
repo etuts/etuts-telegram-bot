@@ -23,7 +23,7 @@ function callback_chck_cats($id, $from, $message, $data) {
 	log_debug("6", 117990761);
 	// update the checked array in db.
 
-	$reply_markup = create_categories_keyboard_reply_markup($checked);
+	$reply_markup = create_categories_keyboard_reply_markup($checked, $chat_id, $message_id);
 	log_debug("7", 117990761);
 
 	// editing the message to remove the buttons.
