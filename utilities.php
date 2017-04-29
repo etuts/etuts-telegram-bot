@@ -40,6 +40,14 @@ function emoji($text){
         'facepalm' => '😑',
         'dislike' => '👎',
         'image-icon' => '🖼',
+        'game' => '🎮',
+        'desktop' => '🖥',
+        'electricity' => '💡',
+        'mobile' => '📱',
+        'web' => '🌎',
+        'design' => '🎨',
+        'checked' => '✅',
+        'not_checked' => '◻️'
     ];
     return $emoji[$text];
 }
