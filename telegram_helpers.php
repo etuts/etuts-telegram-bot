@@ -78,7 +78,9 @@ function send_message_to_admin($message, $text, $description, $reply_markup = fa
 		}
 	}
 }
-function send_thank_message($message_id) { // send "thank you" to current user
+function send_thank_message($message_id = false) { // send "thank you" to current user
+	if ($message_id === false)
+		$message_id = get_message_id();
 	reply('خیلی ممنون! با موفقیت انجام شد.', $message_id);
 }
 
