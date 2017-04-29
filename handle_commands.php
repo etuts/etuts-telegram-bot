@@ -17,7 +17,7 @@ function run_commands($text, $chat_id, $message_id, $message) {
 
 	foreach ($available_commands as $cmd=>$command_array) {
 		if (contains_word($text, $cmd)) {
-			$func = 'run_' . $available_commands[$cmd]["name"] . '_command';
+			$func = 'run_' . $command_array["name"] . '_command';
 			$func($chat_id, $text, $message_id, $message, IDLE);
 		}
 	}

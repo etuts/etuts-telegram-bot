@@ -10,7 +10,8 @@
 	$lots_of_dots = '...........................................................';
 
 	function run_categories_command($chat_id, $text, $message_id, $message, $state){
-		global $telegram, $db, $categories_array;
+		global $telegram, $db, $categories_array, $lots_of_dots;
+		log_debug("sahdia", 117990761);
 
 		$btns = [];
 		foreach($categories_array as $category => $name){
@@ -22,7 +23,7 @@
 
 		$telegram->sendMessage([
 			'chat_id' => $chat_id,
-			'text' => $answer,
+			'text' => 'دسته بندی هایی که می‌خواهید مطالبشان برایتان ارسال شود را انتخاب کنید.',
 			'reply_markup' => $reply_markup,
 		]);
 
