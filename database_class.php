@@ -105,6 +105,9 @@ class Database {
 	function get_chat_id() {
 		return $this->chat_id;
 	}
+	function get_message_id() {
+		return $this->message_id;
+	}
 	function get_users_with_permission($permission) {
 		$result = mysqli_query($this->db, "SELECT `chat_id` FROM `chats` WHERE permission = '$permission' ");
 		while ($row = mysqli_fetch_assoc($result)) {
