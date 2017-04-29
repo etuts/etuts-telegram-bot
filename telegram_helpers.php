@@ -15,7 +15,8 @@ function log_debug($text, $chat_id = 92454) {
 
 // getters
 function get_message_id() {
-	global $db->get_message_id();
+	global $db;
+	$db->get_message_id();
 }
 function get_chat_id() {
 	global $db;
