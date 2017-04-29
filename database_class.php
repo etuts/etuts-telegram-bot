@@ -128,7 +128,10 @@ class Database {
 		$data = json_decode($data, true);
 		// echo json_last_error();
 		// var_export($data);
-		mysqli_query($this->db, "DELETE FROM `channelposts` WHERE ROWNUM < 2 "); // delete the row
+		mysqli_query($this->db, "DELETE FROM `channelposts` LIMIT 1 "); // delete the row
 		return $data;
+	}
+	function remove_last_channelpost() {
+		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id desc LIMIT 1 "); // delete the row
 	}
 }
