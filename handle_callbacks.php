@@ -13,7 +13,6 @@ function run_callback_queries($id, $from, $message, $data) {
 	global $callback_query_functions, $telegram;
 	$data = json_decode($data, true);
 	$callback_func = $data['f'];
-	log_debug($callback_func, 117990761);
 
 	if (in_array($callback_func, $callback_query_functions)) {
 		$func = 'callback_' . $callback_func;
