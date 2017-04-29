@@ -135,11 +135,14 @@ class Database {
 		return $data;
 	}
 	function remove_last_channelpost() {
-		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id desc LIMIT 1 "); // delete the row
+		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id desc LIMIT 1 ");
+	}
+	function remove_first_channelpost() {
+		return remove_nth_channelpost(1);
 	}
 	function remove_nth_channelpost($n) {
 		if ($n < 1)
 			return false;
-		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id asc LIMIT $n "); // delete the row
+		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id asc LIMIT $n ");
 	}
 }
