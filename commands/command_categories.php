@@ -11,15 +11,14 @@
 
 	function run_categories_command($chat_id, $text, $message_id, $message, $state){
 		global $telegram, $db, $categories_array, $lots_of_dots;
-		log_debug("sahdia", 117990761);
 
 		$btns = [];
 		foreach($categories_array as $category => $name){
 			$checked = 0; // this must be taken from database to see if it is checked or not.
 			$txt = emoji($checked ? 'checked':'not_checked') . '. ' . emoji($category) . ' ' . $name . $lots_of_dots;
-			$btns[] = create_glassy_btn($txt , 'check', $chat_id, $message_id, '"c":'.$checked);
+			$btns[] = [create_glassy_btn($txt , 'check', $chat_id, $message_id, '"c":'.$checked)];
 		}
-		$reply_markup = create_glassy_keyboard([$btns]);
+		$reply_markup = create_glassy_keyboard($btns);
 
 		$telegram->sendMessage([
 			'chat_id' => $chat_id,
