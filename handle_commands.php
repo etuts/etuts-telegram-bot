@@ -11,6 +11,7 @@ $available_commands = [
 	"/request_post" => array("name"=>"request_post", "description"=>"description of request_post", "permission"=>USER),
 	"/categories" => array("name"=>"categories", "description"=>"description of categories", "permission"=>USER),
 	"/remove_last_post" => array("name"=>"remove_last_channel_post", "description"=>"description of remove last channel post", "permission"=>ADMIN),
+	"/remove_nth_post" => array("name"=>"remove_nth_channel_post", "description"=>"description of remove nth channel post", "permission"=>ADMIN),
 ];
 
 function run_commands($text, $chat_id, $message_id, $message) {
