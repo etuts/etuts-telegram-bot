@@ -137,4 +137,9 @@ class Database {
 	function remove_last_channelpost() {
 		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id desc LIMIT 1 "); // delete the row
 	}
+	function remove_nth_channelpost($n) {
+		if ($n < 1)
+			return false;
+		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id asc LIMIT $n "); // delete the row
+	}
 }
