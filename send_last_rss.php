@@ -33,7 +33,7 @@ $description = $post->description;
     
     $link_to_site = $post->link;
 
-    $final_text = make_post_for_channel($title, $description, $image_link, $link_to_site);
+    $final_text = make_post_for_channel($title, $description, $image_link, $link_to_site)."Salam";
 
     $telegram->sendMessage([
         'chat_id' => 9778738,
