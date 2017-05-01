@@ -10,10 +10,11 @@ define("POST_VALIDATION_SEND_POST_TITLE", 3);
 
 define("MOAREFI_ROBOT_BOT_ID", 4);
 define("MOAREFI_ROBOT_BOT_DESCRIPTION", 5);
-define("MOAREFI_ROBOT_BOT_IMAGE", 8);
-define("MOAREFI_ROBOT_SCHEDULE_POST", 7);
+define("MOAREFI_ROBOT_BOT_IMAGE", 6);
+define("MOAREFI_ROBOT_CAPTION", 7);
+define("MOAREFI_ROBOT_SCHEDULE_POST", 8);
 
-define("REQUEST_POST",6);
+define("REQUEST_POST",9);
 
 
 // get chat state from database
