@@ -94,8 +94,8 @@ function display_latest_post($chat_id) {
     $description = substr($description, 0,strlen($description)-9);	//Removing garbage characters from description
     
     $link_to_site = $post->link;
-
-    $final_text = make_post_for_channel($title, $description, $image_link, $link_to_site);
+    $final_text = "Debug ";
+    $final_text .= make_post_for_channel($title, $description, $image_link, $link_to_site);
 
     $telegram->sendMessage([
         'chat_id' => $chat_id,
