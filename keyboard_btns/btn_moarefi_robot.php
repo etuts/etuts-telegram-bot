@@ -16,7 +16,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 
 			$len_text = strlen($text);
 			if ($len_text > 200) {
-				reply('طول کپشن عکس برابر '. $len_text .' کارکتر است که از ۲۰۰ کارکتر بیشتر است! لطفا یک کپشن ۲۰۰ کارکتری وارد کنید.', $message_id, true);
+				reply('طول کپشن عکس برابر '. $len_text .' کارکتر است که از ۲۰۰ کارکتر بیشتر است! لطفا یک کپشن دیگر وارد کنید.', $message_id, true);
 				break;
 			}
 
