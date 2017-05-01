@@ -52,6 +52,7 @@ function emoji($text){
     return $emoji[$text];
 }
 
+<<<<<<< HEAD
 // post display functions
 function get_last_post(){
     file_put_contents("feed", fopen("http://etuts.ir/feed", 'r'));
@@ -113,9 +114,9 @@ $categories_array = [
     ['emoji'=>'web', 'name'=>'وب'], 
 ];
 
+=======
+>>>>>>> origin/master
 $lots_of_dots = str_repeat('.', 100);
-
-
 function create_categories_keyboard_reply_markup($checked, $chat_id, $message_id){
     global $categories_array, $lots_of_dots;
     $btns = [];

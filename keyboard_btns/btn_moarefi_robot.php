@@ -29,7 +29,8 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 		case MOAREFI_ROBOT_BOT_IMAGE:
 			$data = $db->get_data();
 			if ($message->isType('photo')) {
-				$data['image_file_id'] = ($message->getPhoto())[count($bot_image)-1]['file_id'];
+				$bot_image = $message->getPhoto();
+				$data['image_file_id'] = ($bot_image)[count($bot_image)-1]['file_id'];
 				reply('لطفا کپشن عکس را وارد کنید', $message_id, true);
 				$db->set_data($data);
 				$db->set_state(MOAREFI_ROBOT_CAPTION);
@@ -76,13 +77,11 @@ function make_post_moarefi_robot_for_channel($bot_id, $bot_image, $title, $descr
 	if ($bot_image == false) {
 		$final_text = [
 			'type' => 'text',
-			'chat_id' => 92454,
 			'text' => $text,
 		];
 	} else {
 		$final_text = [
 			'type' => 'photo',
-			'chat_id' => 92454,
 			'photo' => $bot_image,
 			'caption' => $text,
 		];
