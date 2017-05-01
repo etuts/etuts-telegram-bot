@@ -31,6 +31,9 @@ if ($message != null) {
 		// mamad tests
 		/*if ($chat_id == 117990761) {
 		}*/
+		// shahryar tests
+		/*if ($chat_id == 97778738) {
+		}*/
 
 		$state = get_chat_state($text, $username, $fullname);
 		if (!is_cancel_command($text, $chat_id, $message_id, $message))
