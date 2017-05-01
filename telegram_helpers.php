@@ -33,9 +33,19 @@ function get_username($chat_id = false) {
 
 // senders - they send something to user with $telegram
 function sendMessage($text, $force_reply = false) { // send message to current user
-	reply($text, null, $force_reply, false);
+	global $telegram;
+	$chat_id = get_chat_id();
+	$data = [
+		'chat_id' => $chat_id,
+		'text' => $text
+	];
+	if ($force_reply) {
+		$reply_markup = $telegram->forceReply();
+		$data['reply_markup'] = $reply_markup;
+	}
+	$telegram->sendMessage($data);
 }
-function reply($text, $message_id = false, $force_reply = false, $reply = true) { // reply to current user
+function reply($text, $force_reply = false, $message_id = false) { // reply to current user
 	global $telegram;
 	$chat_id = get_chat_id();
 	$data = [
@@ -48,9 +58,7 @@ function reply($text, $message_id = false, $force_reply = false, $reply = true) 
 		$reply_markup = $telegram->forceReply();
 		$data['reply_markup'] = $reply_markup;
 	}
-	if ($reply) {
-		$data['reply_to_message_id'] = $message_id;
-	}
+	$data['reply_to_message_id'] = $message_id;
 	$telegram->sendMessage($data);
 }
 function send_message_to_admin($message, $text, $description, $reply_markup = false) { // send message to admin
@@ -82,7 +90,7 @@ function send_message_to_admin($message, $text, $description, $reply_markup = fa
 function send_thank_message($message_id = false) { // send "thank you" to current user
 	if ($message_id === false)
 		$message_id = get_message_id();
-	reply('خیلی ممنون! با موفقیت انجام شد.', $message_id);
+	reply('با موفقیت انجام شد.');
 }
 
 // keyboard functions
