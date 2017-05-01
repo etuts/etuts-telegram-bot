@@ -15,8 +15,31 @@ require __DIR__.'/database_class.php';
 
 $db = new Database($db_name, $db_user, $db_pass);
 $telegram = new Api($token);
-display_latest_post(9778738);
-$rss = get_last_post();
+// display_latest_post(9778738);
+$post = get_last_post();
+$description = $post->description;
+    $title = $post->title;
+
+    //Getting image link from description 
+    $text = "";
+    $text .= $description;
+    $pos = strpos($text, "src=\"") + 5;
+    $text = substr($text,$pos);
+    $pos2 = strpos($text, "\"");
+    $image_link = substr($text,0,$pos2);
+
+    $description = strip_tags($description);
+    $description = substr($description, 0,strlen($description)-9);	//Removing garbage characters from description
+    
+    $link_to_site = $post->link;
+
+    $final_text = make_post_for_channel($title, $description, $image_link, $link_to_site);
+
+    $telegram->sendMessage([
+        'chat_id' => $chat_id,
+        'text' => $final_text,
+        'parse_mode' => "Markdown",
+    ]);
 
 
 
