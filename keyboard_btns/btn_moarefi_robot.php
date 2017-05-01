@@ -29,7 +29,8 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 		case MOAREFI_ROBOT_BOT_IMAGE:
 			$data = $db->get_data();
 			if ($message->isType('photo')) {
-				$data['image_file_id'] = ($message->getPhoto())[count($bot_image)-1]['file_id'];
+				$bot_image = $message->getPhoto();
+				$data['image_file_id'] = ($bot_image)[count($bot_image)-1]['file_id'];
 				reply('لطفا کپشن عکس را وارد کنید', $message_id, true);
 				$db->set_data($data);
 				$db->set_state(MOAREFI_ROBOT_CAPTION);
