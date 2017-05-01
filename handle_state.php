@@ -37,28 +37,21 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 		case IDLE:
 			return false;
 		case CONTACT:
-			run_contact_command($chat_id, $text, $message_id, $message, CONTACT);
-			break;
 		case CONTACT_ADMIN_ANSWER:
-			run_contact_command($chat_id, $text, $message_id, $message, CONTACT_ADMIN_ANSWER);
+			run_contact_command($chat_id, $text, $message_id, $message, $state);
 			break;
 		case POST_VALIDATION_SEND_POST_TITLE:
-			run_post_validation_command($chat_id, $text, $message_id, $message, POST_VALIDATION_SEND_POST_TITLE);
+			run_post_validation_command($chat_id, $text, $message_id, $message, $state);
 			break;
 		case MOAREFI_ROBOT_BOT_ID:
-			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT_BOT_ID);
-			break;
 		case MOAREFI_ROBOT_BOT_DESCRIPTION:
-			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT_BOT_DESCRIPTION);
-			break;
 		case MOAREFI_ROBOT_BOT_IMAGE:
-			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT_BOT_IMAGE);
-			break;
+		case MOAREFI_ROBOT_CAPTION:
 		case MOAREFI_ROBOT_SCHEDULE_POST:
-			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT_SCHEDULE_POST);
+			btn_moarefi_robot($chat_id, $text, $message_id, $message, $state);
 			break;
 		case REQUEST_POST:
-			run_request_post_command($chat_id, $text, $message_id, $message,REQUEST_POST);
+			run_request_post_command($chat_id, $text, $message_id, $message, $state);
 			break;
 		default:
 			return false;
