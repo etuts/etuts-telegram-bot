@@ -84,7 +84,7 @@ function get_last_topic(){
 }
 function make_post_for_channel($title, $description, $image_link = false, $link_to_site = false) {
     
-    $image_link = ($image_link === false) ? '' : "[".emoji('image-icon')."](".$image_link.")";
+    $image_link = ($image_link === false) ? '' : "[".'🖼'."](".$image_link.")";
 
     $link_to_site = ($link_to_site === false) ? '' : "[برای مشاهده ی مطلب کلیک کنید](".$link_to_site.")";
 
