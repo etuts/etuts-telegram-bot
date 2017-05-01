@@ -2,7 +2,7 @@
 $keyboard_buttons = [
 
 	"schedule_post"=>[
-		"moarefi_robot" => array("name"=>'معرفی ربات و کانال', "permission"=>ADMIN)
+		"moarefi_robot" => array("name"=>'معرفی ربات', "permission"=>ADMIN)
 
 	],
 	"start"=>[
