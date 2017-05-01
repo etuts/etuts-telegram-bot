@@ -76,7 +76,7 @@ function make_post_for_channel($title, $description, $image_link = false, $link_
                     $link_to_site."\n".
                     "@etuts";
 }
-function display_latest_post_in_channel() {
+function display_latest_post($chat_id) {
     global $telegram;
     $post = get_last_post();
     $description = $post->description;
