@@ -17,7 +17,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 
 			$len_text = strlen($text) + strlen($data['bot_id']) + strlen($data['title']) + 4 + strlen("#bot");
 			if ($len_text > 200) {
-				reply('طول کپشن عکس برابر '. $len_text .' کارکتر است که از 200 کارکتر بیشتر است! لطفا یک کپشن دیگر وارد کنید.', $message_id, true);
+				reply('طول کپشن عکس برابر '. $len_text .' کارکتر است که از 200 کارکتر بیشتر است! لطفا یک کپشن دیگر وارد کنید.', true);
 				break;
 			}
 
@@ -31,7 +31,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			if ($message->isType('photo')) {
 				$bot_image = $message->getPhoto();
 				$data['image_file_id'] = ($bot_image)[count($bot_image)-1]['file_id'];
-				reply('لطفا کپشن عکس را وارد کنید', $message_id, true);
+				reply('لطفا کپشن عکس را وارد کنید', true);
 				$db->set_data($data);
 				$db->set_state(MOAREFI_ROBOT_CAPTION);
 				break;
@@ -48,19 +48,19 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 
 			$db->set_data($data);
 			
-			reply('اگر پست عکس داره، عکس رو بفرست وگرنه توضیحات مربوط به ربات رو وارد کن', $message_id, true);
+			reply('اگر پست عکس داره، عکس رو بفرست وگرنه توضیحات مربوط به ربات رو وارد کن', true);
 			$db->set_state(MOAREFI_ROBOT_BOT_IMAGE);
 			break;
 		case MOAREFI_ROBOT_BOT_ID:
 			$data['title'] = $text;
 			$db->set_data($data);
 
-			reply('آی دی ربات رو با @ وارد کن', $message_id, true);
+			reply('آی دی ربات رو با @ وارد کن', true);
 			$db->set_state(MOAREFI_ROBOT_BOT_DESCRIPTION);
 			break;
 		
 		default:
-			reply('عنوان وارد کن', $message_id, true);
+			reply('عنوان وارد کن', true);
 			$db->set_state(MOAREFI_ROBOT_BOT_ID);
 			break;
 	}
