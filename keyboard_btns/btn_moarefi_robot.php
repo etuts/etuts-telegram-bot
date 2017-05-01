@@ -13,18 +13,18 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			send_thank_message($message_id);
 			break;
 		case MOAREFI_ROBOT_CAPTION:
+			$data = $db->get_data();
 
-			$len_text = strlen($text);
+			$len_text = strlen($text) + strlen($data['bot_id']) + strlen($data['title']) + 4 + strlen("@etuts#bot");
 			if ($len_text > 200) {
 				reply('طول کپشن عکس برابر '. $len_text .' کارکتر است که از ۲۰۰ کارکتر بیشتر است! لطفا یک کپشن دیگر وارد کنید.', $message_id, true);
 				break;
 			}
 
-			$data = $db->get_data();
 			$data['description'] = $text;
 			$db->set_data($data);
 
-			$db->set_state(MOAREFI_ROBOT_SCHEDULE_POST);
+			btn_moarefi_robot($chat_id, $text, $message_id, $message, MOAREFI_ROBOT_SCHEDULE_POST);
 			break;
 		case MOAREFI_ROBOT_BOT_IMAGE:
 			$data = $db->get_data();
