@@ -6,21 +6,39 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 		case MOAREFI_ROBOT_SCHEDULE_POST:
 			$data = $db->get_data();
 
-			$image = ($message->isType('photo')) ? $message->getPhoto() : false;
-			$final_text = make_post_moarefi_robot_for_channel($data['bot_id'], $image, $data['title'], $data['description']);
+			$final_text = make_post_moarefi_robot_for_channel($data['bot_id'], $data['image_file_id'], $data['title'], $data['description']);
 			$db->add_post($final_text);
 
 			$db->reset_state();
 			send_thank_message($message_id);
 			break;
-		case MOAREFI_ROBOT_BOT_IMAGE:
-			// if (strlen($text))
+		case MOAREFI_ROBOT_CAPTION:
+
+			$len_text = strlen($text);
+			if ($len_text > 200) {
+				reply('طول کپشن عکس برابر '. $len_text .' کارکتر است که از ۲۰۰ کارکتر بیشتر است! لطفا یک کپشن ۲۰۰ کارکتری وارد کنید.', $message_id, true);
+				break;
+			}
+
 			$data = $db->get_data();
 			$data['description'] = $text;
 			$db->set_data($data);
 
-			reply('اگر برای معرفی این ربات عکسی دارید بفرستید وگرنه عبارت no را تایپ کنید', $message_id, true);
 			$db->set_state(MOAREFI_ROBOT_SCHEDULE_POST);
+			break;
+		case MOAREFI_ROBOT_BOT_IMAGE:
+			$data = $db->get_data();
+			if ($message->isType('photo')) {
+				$data['image_file_id'] = ($message->getPhoto())[count($bot_image)-1]['file_id'];
+				reply('لطفا کپشن عکس را وارد کنید', $message_id, true);
+				$db->set_data($data);
+				$db->set_state(MOAREFI_ROBOT_CAPTION);
+				break;
+			} //else {
+			$data['image_file_id'] = false;
+			$data['description'] = $text;
+			$db->set_data($data);
+
 			break;
 		case MOAREFI_ROBOT_BOT_DESCRIPTION:
 			$data = $db->get_data();
@@ -28,7 +46,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 
 			$db->set_data($data);
 			
-			reply('توضیحات مربوط به ربات رو وارد کنید', $message_id, true);
+			reply('اگر پست عکس داره، عکس رو بفرست وگرنه توضیحات مربوط به ربات رو وارد کن', $message_id, true);
 			$db->set_state(MOAREFI_ROBOT_BOT_IMAGE);
 			break;
 		case MOAREFI_ROBOT_BOT_ID:
@@ -62,15 +80,10 @@ function make_post_moarefi_robot_for_channel($bot_id, $bot_image, $title, $descr
 			'text' => $text,
 		];
 	} else {
-		$len_text = strlen($text);
-		if ($len_text > 200) {
-			reply('طول کپشن عکس برابر '. $len_text .' کارکتر است که از ۲۰۰ کارکتر بیشتر است!');
-		}
-		$bot_image = $bot_image[count($bot_image)-1];	
 		$final_text = [
 			'type' => 'photo',
 			'chat_id' => 92454,
-			'photo' => $bot_image['file_id'],
+			'photo' => $bot_image,
 			'caption' => $text,
 		];
 	}
