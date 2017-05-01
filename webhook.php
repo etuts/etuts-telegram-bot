@@ -34,9 +34,12 @@ if ($message != null) {
 		// shahryar tests
 		if ($chat_id == 97778738) {
 			if ($message->getText() == "rss"){
+				$rss = get_last_topic();
+				$title = "shahryar ";
+				$title .= $rss->title;
 				$telegram->sendMessage([
 					'chat_id' => 97778738,
-					'text' => "rss test",
+					'text' => $title,
 				]);
 			}
 		}
