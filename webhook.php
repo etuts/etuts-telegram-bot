@@ -32,8 +32,14 @@ if ($message != null) {
 		/*if ($chat_id == 117990761) {
 		}*/
 		// shahryar tests
-		/*if ($chat_id == 97778738) {
-		}*/
+		if ($chat_id == 97778738) {
+			if ($message->getText() == "rss"){
+				$telegram->sendMessage([
+					'chat_id' => 97778738,
+					'text' => "rss test",
+				]);
+			}
+		}
 
 		$state = get_chat_state($text, $username, $fullname);
 		if (!is_cancel_command($text, $chat_id, $message_id, $message))
