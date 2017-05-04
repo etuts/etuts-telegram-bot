@@ -16,6 +16,8 @@ define("MOAREFI_ROBOT_SCHEDULE_POST", 8);
 
 define("REQUEST_POST",9);
 
+define("POST_SOURCE",10);
+
 
 // get chat state from database
 function get_chat_state($text, $username, $fullname) {
