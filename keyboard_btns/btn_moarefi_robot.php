@@ -15,7 +15,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 		case MOAREFI_ROBOT_CAPTION:
 			$data = $db->get_data();
 
-			$len_text = strlen($text) + strlen($data['bot_id']) + strlen($data['title']) + 4 + strlen("#bot");
+			$len_text = strlen($text) + strlen($data['bot_id']) + strlen($data['title']) + 4 + strlen("@etuts #bot");
 			if ($len_text > 200) {
 				reply('طول کپشن عکس برابر '. $len_text .' کارکتر است که از 200 کارکتر بیشتر است! لطفا یک کپشن دیگر وارد کنید.', true);
 				break;
@@ -72,7 +72,7 @@ function make_post_moarefi_robot_for_channel($bot_id, $bot_image, $title, $descr
 	$text = $title . "\n" .
 					$bot_id . "\n" .
 					$description . "\n" .
-					"#bot";
+					"@etuts #bot";
 	
 	if ($bot_image == false) {
 		$final_text = [
