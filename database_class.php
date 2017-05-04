@@ -127,10 +127,7 @@ class Database {
 			return false;
 
 		$data = (string)$result->fetch_assoc()['data'];
-		// var_export($data);
 		$data = json_decode($data, true);
-		// echo json_last_error();
-		// var_export($data);
 		mysqli_query($this->db, "DELETE FROM `channelposts` LIMIT 1 "); // delete the row
 		return $data;
 	}
