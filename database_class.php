@@ -145,4 +145,8 @@ class Database {
 			return false;
 		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id asc LIMIT $n ");
 	}
+	function get_num_of_posts_left() {
+		$result = mysql_query($this->db, "SELECT * FROM `channelposts`");
+		return mysqli_num_rows($result);
+	}
 }
