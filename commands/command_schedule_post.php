@@ -2,7 +2,7 @@
 
 function run_schedule_post_command($chat_id, $text, $message_id, $message, $state) {
 	global $telegram, $db;
-	$answer = 'نوع مطلبی که میخوای بفرستی رو مشخص کن' . PHP_EOL;
+	$answer = 'نوع مطلبی که میخوای بفرستی رو مشخص کن';
 	$keyboard = [['معرفی ربات', 'معرفی ابزار']];
 	$reply_markup = $telegram->replyKeyboardMarkup([
 		'keyboard' => $keyboard, 
