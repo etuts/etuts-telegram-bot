@@ -4,14 +4,12 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 	global $telegram, $db;
 	switch ($state) {
 		case CONTACT:
-			// user has sent a message to admin! Wow!!
-			send_thank_message($message_id);
-			
 			$btn = create_glassy_btn('پاسخ', 'admn_answr_cntct', (string)$chat_id, (string)$message_id);
 			$reply_markup = create_glassy_keyboard([[$btn]]);
 
 			send_message_to_admin($message, $text, 'یک تماس جدید', $reply_markup);
 			$db->reset_state();
+			send_thank_message($message_id);
 			break;
 		
 		case CONTACT_ADMIN_ANSWER:
