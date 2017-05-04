@@ -115,8 +115,14 @@ function show_keyboard($keyboard_name, $text) { // gets the name of a keyboard f
 		'reply_markup' => $reply_markup,
 	]);
 }
-function create_glassy_btn($text, $callback_function, $chat_id, $message_id, $more_data = '') { // create and get a glassy btn
-	return ['text' => $text, 'callback_data' => '{"f":"'.$callback_function.'","c":'.$chat_id.',"m":'.$message_id. (($more_data == '') ? $more_data : ',' . $more_data) .'}'];
+function create_glassy_btn($text, $callback_function, $params = '') { // returns glassy btn
+	$callback_data = [];
+	$callback_data['f'] = $callback_function;
+	$callback_data = array_merge($callback_data, $params);
+	return [
+		'text' => $text,
+		'callback_data' => json_encode($callback_data),
+	];
 }
 function create_glassy_keyboard($keyboard) { // just makes a given glassy keyboard
 	return Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
