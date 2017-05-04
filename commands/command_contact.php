@@ -4,7 +4,7 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 	global $telegram, $db;
 	switch ($state) {
 		case CONTACT:
-			$btn = create_glassy_btn('پاسخ', 'admn_answr_cntct', (string)$chat_id, (string)$message_id);
+			$btn = create_glassy_btn('پاسخ', 'admn_answr_cntct', ['c' => $chat_id, 'm' => $message_id]);
 			$reply_markup = create_glassy_keyboard([[$btn]]);
 
 			send_message_to_admin($message, $text, 'یک تماس جدید', $reply_markup);
@@ -19,7 +19,7 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 			$dest_message_id = $data['message_id'];
 			$fullname = get_fullname();
 
-			$btn = create_glassy_btn('پاسخ', 'admn_answr_cntct', (string)$chat_id, (string)$message_id);
+			$btn = create_glassy_btn('پاسخ', 'admn_answr_cntct', ['c' => $chat_id, 'm' => $message_id]);
 			$reply_markup = create_glassy_keyboard([[$btn]]);
 
 			$telegram->sendMessage([
