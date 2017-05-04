@@ -58,7 +58,7 @@ function create_categories_keyboard_reply_markup($checked, $chat_id, $message_id
     $btns = [];
     foreach($categories_array as $num => $category){
         $txt = emoji($checked[$num] ? 'checked':'not_checked') . '. ' . emoji($category["emoji"]) . ' ' . $category["name"] . $lots_of_dots;
-        $btns[] = [create_glassy_btn($txt , 'chck_cats', $chat_id, $message_id, '"t":'.$num)];
+        $btns[] = [create_glassy_btn($txt , 'chck_cats', ['c' => $chat_id, 'm' => $message_id, 't' => $num])];
     }
     return create_glassy_keyboard($btns);
 }
