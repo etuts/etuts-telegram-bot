@@ -12,6 +12,7 @@ $available_commands = [
 	"/categories" => array("name"=>"categories", "description"=>"description of categories", "permission"=>USER),
 	"/remove_last_post" => array("name"=>"remove_last_channel_post", "description"=>"description of remove last channel post", "permission"=>ADMIN),
 	"/remove_nth_post" => array("name"=>"remove_nth_channel_post", "description"=>"description of remove nth channel post", "permission"=>ADMIN),
+	"/"
 ];
 
 function run_commands($text, $chat_id, $message_id, $message) {
@@ -19,8 +20,14 @@ function run_commands($text, $chat_id, $message_id, $message) {
 
 	foreach ($available_commands as $cmd=>$command_array) {
 		if (contains_word($text, $cmd)) {
-			$func = 'run_' . $command_array["name"] . '_command';
-			$func($chat_id, $text, $message_id, $message, IDLE);
+			if ($command_array['permission'] == AUTHOR && !($db->check_user_permission(AUTHOR) || $db->check_user_permission(ADMIN))) {
+				reply('ببخشید اما شما نویسنده ی سایت نیستید!');
+			} else if ($command_array['permission'] == ADMIN && !$db->check_user_permission(ADMIN)) {
+				reply('برای استفاده از این دستور باید ادمین کانال باشید');
+			} else {
+				$func = 'run_' . $command_array["name"] . '_command';
+				$func($chat_id, $text, $message_id, $message, IDLE);
+			}
 		}
 	}
 }
