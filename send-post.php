@@ -7,30 +7,39 @@ use Telegram\Bot\Api;
 
 require __DIR__.'/database_class.php';
 
-$db = new Database($db_name, $db_user, $db_pass);
-$telegram = new Api($token);
+try {
+	$db = new Database($db_name, $db_user, $db_pass);
+	$telegram = new Api($token);
 
-$post_data = $db->read_post();
-if ($post_data === false)
-	die("no posts");
+	$post_data = $db->read_post();
+	if ($post_data === false)
+		die("no posts");
 
-$type = $post_data['type'];
+	$type = $post_data['type'];
 
-if ($type == '')
-	die("no type");
+	if ($type == '')
+		die("no type");
 
-switch ($type) {
-	case 'text':
-		$telegram->sendMessage([
-			'chat_id' => $channel_id,
-			'text' => $post_data['text'],
-		]);
-		break;
-	case 'photo':
-		$message = $telegram->sendPhoto([
-			'chat_id' => $channel_id,
-			'photo' => $post_data['photo'],
-			'caption' => $post_data['caption'],
-		]);
-		break;
+	switch ($type) {
+		case 'text':
+			$telegram->sendMessage([
+				'chat_id' => $channel_id,
+				'text' => $post_data['text'],
+			]);
+			break;
+		case 'photo':
+			$telegram->sendPhoto([
+				'chat_id' => $channel_id,
+				'photo' => $post_data['photo'],
+				'caption' => $post_data['caption'],
+			]);
+			break;
+	}
+	$num_of_posts_left = $db->get_num_of_posts_left();
+	$telegram->sendMessage([
+		'chat_id' => $admin_id,
+		'text' => 'تنها' . $num_of_posts_left . 'برای ارسال در کانال باقی مانده.',
+	]);
+} catch (Exception $e) {
+	log_debug($e->getPrevious());
 }
