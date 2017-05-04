@@ -5,8 +5,8 @@ function run_request_post_command($chat_id, $text, $message_id, $message, $state
 	switch ($state) {
 		case REQUEST_POST:
 			// user has sent a message to admin! Wow!!
-			$btn1 = create_glassy_btn(emoji('like'), 'rqst_acc_dny', $chat_id, $message_id, '"acc":1');
-			$btn2 = create_glassy_btn(emoji('dislike'), 'rqst_acc_dny', $chat_id, $message_id, '"acc":0');
+			$btn1 = create_glassy_btn(emoji('like'), 'rqst_acc_dny', ['c' => $chat_id, 'm' => $message_id, 'acc' => 1]);
+			$btn2 = create_glassy_btn(emoji('dislike'), 'rqst_acc_dny', ['c' => $chat_id, 'm' => $message_id, 'acc' => 0]);
 			$reply_markup = create_glassy_keyboard([[$btn1, $btn2]]);
 			send_message_to_admin($message, $text, 'یک درخواست جدید', $reply_markup);
 			$db->reset_state();
