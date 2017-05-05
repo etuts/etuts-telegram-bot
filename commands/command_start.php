@@ -1,28 +1,9 @@
 <?php
 
 function run_start_command($chat_id, $text, $message_id, $message, $state) {
-	global $telegram, $keyboard_buttons, $db;
-	
-	$is_admin =  $db->check_user_permission(ADMIN);
-	$is_author = $db->check_user_permission(AUTHOR);
-	$permission = $is_admin ? ADMIN : $is_author ? AUTHOR : USER;
-	$buttons = $keyboard_buttons["start"];
-	$commands = array();
-	$commands_to_ignore = array("help", "cancel", "start");
-	
-	foreach ($buttons as $command) {
-		if ($command["permission"] <= $permission)
-			if(!in_array($command["name"], $commands_to_ignore))
-				array_push($commands, $command["name"]);
-	}
+	global $telegram;
 
-	$keyboard = array_duplex($commands);
-
-	$reply_markup = $telegram->replyKeyboardMarkup([
-		'keyboard' => $keyboard, 
-		'resize_keyboard' => true, 
-		'one_time_keyboard' => true
-	]);
+	$reply_markup = get_initial_keyboard();
 
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
