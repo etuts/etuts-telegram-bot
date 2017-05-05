@@ -152,7 +152,7 @@ class Database {
 		return mysqli_query($this->db, "INSERT INTO `site_recommend_posts` (post) VALUES ('$post_line') ");
 	}
 	function get_site_recommend_post() {
-		$result = mysqli_query($this->db, "SELECT post FROM `site_recommend_posts` LIMIT 1 ");
+		$result = mysqli_query($this->db, "SELECT post FROM `site_recommend_posts` WHERE NOT state = '".RESERVED."' LIMIT 1 ");
 		
 		if (mysqli_num_rows($result) == 0)
 			return false;
