@@ -16,7 +16,7 @@ $available_commands = [
 ];
 
 function run_commands($text, $chat_id, $message_id, $message) {
-	global $available_commands;
+	global $available_commands, $db;
 
 	foreach ($available_commands as $cmd=>$command_array) {
 		if (contains_word($text, $cmd)) {
