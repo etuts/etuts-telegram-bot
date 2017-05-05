@@ -8,7 +8,7 @@
 
 		$checked = $db->get_categories_checked_array();
 
-		$reply_markup = create_categories_keyboard_reply_markup($checked, $chat_id, $message_id);
+		$reply_markup = create_categories_keyboard_reply_markup($checked);
 			
 		$telegram->sendMessage([
 			'chat_id' => $chat_id,
