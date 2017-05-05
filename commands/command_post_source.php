@@ -5,7 +5,7 @@ function run_post_source_command($chat_id, $text, $message_id, $message, $state)
 	switch ($state) {
 		case POST_SOURCE:
 			$db->add_site_recommend_post($text);
-			$db->reset_state();
+			reset_state(THANK_MESSAGE);
 			break;
 		
 		default:
