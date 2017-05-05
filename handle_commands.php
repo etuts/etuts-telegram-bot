@@ -13,6 +13,7 @@ $available_commands = [
 	"/remove_last_post" => array("name"=>"remove_last_channel_post", "description"=>"description of remove last channel post", "permission"=>ADMIN),
 	"/remove_nth_post" => array("name"=>"remove_nth_channel_post", "description"=>"description of remove nth channel post", "permission"=>ADMIN),
 	"/post_source" => array("name"=>"post_source", "description"=>"description of post source", "permission"=>ADMIN),
+	"/get_recommended_post" => array("name"=>"get_recommended_post", "description"=> "description of get recommended post", "permission"=>AUTHOR)
 ];
 
 function run_commands($text, $chat_id, $message_id, $message) {
