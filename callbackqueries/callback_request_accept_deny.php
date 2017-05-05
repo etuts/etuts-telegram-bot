@@ -33,10 +33,5 @@ function callback_rqst_acc_dny($id, $from, $message, $data) {
 	]);
 	
 	$answer_data = ['text' => $admin_answer];
-	
-	$db->reset_state();
-
 	return $answer_data;
 }
-
-?>
