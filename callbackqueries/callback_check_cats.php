@@ -23,12 +23,6 @@ function callback_chck_cats($id, $from, $message, $data) {
 		'reply_markup' => $reply_markup,
 	]);
 
-	$db->reset_state();
-
 	$answer_data = ['text' => 'با موفقیت تغییر کرد.'];
-
 	return $answer_data;
 }
-
-
-?>
