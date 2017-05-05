@@ -8,9 +8,8 @@ function run_post_validation_command($chat_id, $text, $message_id, $message, $st
 			$btn1 = create_glassy_btn(emoji('like'), 'pst_vldshn', ['c' => $chat_id, 'm' => $message_id, 'acc' => 1]);
 			$btn2 = create_glassy_btn(emoji('dislike'), 'pst_vldshn', ['c' => $chat_id, 'm' => $message_id, 'acc' => 0]);
 			$reply_markup = create_glassy_keyboard([[$btn1, $btn2]]);
-			send_message_to_admin($message, $text, 'مطلب جدید در انتظار بررسی', $reply_markup);
-			$db->reset_state();
-			send_thank_message($message_id);
+			send_message_to_admin(create_report_from_a_user_message('مطلب جدید در انتظار بررسی', $text), $reply_markup);
+			reset_state(THANK_MESSAGE);
 			break;
 		
 		default:
