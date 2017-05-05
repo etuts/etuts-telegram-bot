@@ -11,7 +11,7 @@ try {
 	$db = new Database($db_name, $db_user, $db_pass);
 	$telegram = new Api($token);
 
-	$post_data = $db->read_post();
+	$post_data = $db->read_channelpost();
 	if ($post_data === false)
 		die("no posts");
 
