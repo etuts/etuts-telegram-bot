@@ -35,7 +35,7 @@ try {
 			]);
 			break;
 	}
-	$num_of_posts_left = $db->get_num_of_posts_left();
+	$num_of_posts_left = $db->get_num_of_channelposts_left();
 	$telegram->sendMessage([
 		'chat_id' => $admin_id,
 		'text' => 'تنها' . var_export($num_of_posts_left, true) . 'برای ارسال در کانال باقی مانده.',
