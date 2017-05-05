@@ -47,7 +47,8 @@ function emoji($text){
         'web' => '🌎',
         'design' => '🎨',
         'checked' => '✅',
-        'not_checked' => '◻️'
+        'not_checked' => '◻️',
+        'alert' => '⚠️',
     ];
     return $emoji[$text];
 }
