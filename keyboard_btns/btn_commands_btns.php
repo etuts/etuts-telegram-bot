@@ -29,5 +29,5 @@ function btn_post_source($chat_id, $text, $message_id, $message, $state){
 }
 
 function btn_get_site_recommend_post($chat_id, $text, $message_id, $message, $state){
-	run_get_site_recommend_post_command($chat_id, $text, $message_id, $message, $state);
+	run_get_recommended_post_command($chat_id, $text, $message_id, $message, $state);
 }
