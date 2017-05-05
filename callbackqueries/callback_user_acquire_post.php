@@ -16,9 +16,6 @@ function callback_usr_acuir_post($id, $from, $message, $data) {
 		'text' => $glassy_text . PHP_EOL . PHP_EOL . emoji('alert') . ' توجه: شما این مطلب را برای نوشتن انتخاب کرده اید',
 	]);
 
-	$db->reset_state();
-
 	$answer_data = ['text' => 'با موفقیت تغییر کرد.'];
-
 	return $answer_data;
 }
