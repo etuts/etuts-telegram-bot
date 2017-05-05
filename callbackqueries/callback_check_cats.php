@@ -16,7 +16,7 @@ function callback_chck_cats($id, $from, $message, $data) {
 
 	$reply_markup = create_categories_keyboard_reply_markup($checked);
 
-	// editing the message to remove the buttons.
+	// editing inline buttons.
 	$telegram->editMessageReplyMarkup([
 		'chat_id' => $glassy_chat_id,
 		'message_id' => $glassy_msg_id,
