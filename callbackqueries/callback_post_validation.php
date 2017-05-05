@@ -1,7 +1,7 @@
 <?php 
 
 function callback_pst_vldshn($id, $from, $message, $data) {
-	global $db, $telegram;
+	global $telegram;
 	$chat_id = $data['c'];
 	$message_id = $data['m'];
 	$accepted = $data['acc'];
@@ -24,9 +24,5 @@ function callback_pst_vldshn($id, $from, $message, $data) {
 	
 	$answer_data = ['text' => $admin_answer];
 	
-	$db->reset_state();
-
 	return $answer_data;
 }
-
-?>
