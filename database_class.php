@@ -117,6 +117,37 @@ class Database {
 	}
 
 	// channelposts table
+	function add_channelpost($post_line, $priority = false) {
+		return mysqli_query($this->db, "INSERT INTO `channelposts` (data) VALUES ('$post_line') ");
+	}
+	function read_channelpost() {
+		$result = mysqli_query($this->db, "SELECT data FROM channelposts LIMIT 1 ");
+		
+		if (mysqli_num_rows($result) == 0)
+			return false;
+
+		$data = (string)$result->fetch_assoc()['data'];
+		$data = json_decode($data, true);
+		mysqli_query($this->db, "DELETE FROM `channelposts` LIMIT 1 "); // delete the row
+		return $data;
+	}
+	function remove_last_channelpost() {
+		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id desc LIMIT 1 ");
+	}
+	function remove_first_channelpost() {
+		return remove_nth_channelpost(1);
+	}
+	function remove_nth_channelpost($n) {
+		if ($n < 1)
+			return false;
+		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id asc LIMIT $n ");
+	}
+	function get_num_of_posts_left() {
+		$result = mysql_query($this->db, "SELECT * FROM `channelposts`");
+		return mysqli_num_rows($result);
+	}
+
+	// channelposts table
 	function add_post($post_line, $priority = false) {
 		return mysqli_query($this->db, "INSERT INTO `channelposts` (data) VALUES ('$post_line') ");
 	}
