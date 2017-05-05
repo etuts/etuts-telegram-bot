@@ -3,8 +3,6 @@
 function callback_chck_cats($id, $from, $message, $data) {
 	global $db, $telegram;
 
-	$chat_id = $data['c']; // not needed.
-	$message_id = $data['m']; // not needed.
 	$changed_ind = $data['t'];
 	
 	$glassy_msg_id = $message->getMessageId();
@@ -16,7 +14,7 @@ function callback_chck_cats($id, $from, $message, $data) {
 	// update the checked array in db.
 	$db->set_categories_checked_array($checked);
 
-	$reply_markup = create_categories_keyboard_reply_markup($checked, $chat_id, $message_id);
+	$reply_markup = create_categories_keyboard_reply_markup($checked);
 
 	// editing the message to remove the buttons.
 	$telegram->editMessageReplyMarkup([
