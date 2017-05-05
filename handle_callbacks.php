@@ -6,6 +6,7 @@ $callback_query_functions = [
 	"rqst_acc_dny",
 	"pst_vldshn",
 	"chck_cats",
+	"usr_acuir_post",
 
 ];
 
