@@ -61,15 +61,16 @@ function reply($text, $force_reply = false, $message_id = false) { // reply to c
 	$data['reply_to_message_id'] = $message_id;
 	$telegram->sendMessage($data);
 }
-function send_message_to_admin($message, $text, $description, $reply_markup = false) { // send message to admin
-	global $telegram, $db;
-	$admins = $db->get_users_with_permission(ADMIN);
-	
-	$text = $description . PHP_EOL .
+function create_report_from_a_user_message($pre_text, $text) {
+	return $pre_text . PHP_EOL .
 			'نام: ' . get_fullname() . PHP_EOL .
 			'از: @' . get_username() . PHP_EOL .
 			'متن: ' . $text;
-
+}
+function send_message_to_admin($text, $reply_markup = false) { // send message to admin
+	global $telegram, $db;
+	$admins = $db->get_users_with_permission(ADMIN);
+	
 	if ($reply_markup !== false) {
 		foreach($admins as $admin_chat_id){
 			$telegram->sendMessage([
@@ -88,9 +89,7 @@ function send_message_to_admin($message, $text, $description, $reply_markup = fa
 	}
 }
 function send_thank_message($message_id = false) { // send "thank you" to current user
-	if ($message_id === false)
-		$message_id = get_message_id();
-	reply('با موفقیت انجام شد.');
+	reply(THANK_MESSAGE, false, $message_id);
 }
 
 // keyboard functions
@@ -126,4 +125,43 @@ function create_glassy_btn($text, $callback_function, $params = []) { // returns
 }
 function create_glassy_keyboard($keyboard) { // just makes a given glassy keyboard
 	return Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
+}
+function reset_state($text = false) {
+	global $db, $telegram;
+	if ($text !== false) {
+		$chat_id = get_chat_id();
+		$reply_markup = get_initial_keyboard();
+
+		$telegram->sendMessage([
+			'chat_id' => $chat_id,
+			'text' => $text,
+			'reply_markup' => $reply_markup,
+		]);
+	}
+	$db->reset_state();
+}
+function get_initial_keyboard() {
+	global $keyboard_buttons, $db;
+	$is_admin =  $db->check_user_permission(ADMIN);
+	$is_author = $db->check_user_permission(AUTHOR);
+	$permission = $is_admin ? ADMIN : $is_author ? AUTHOR : USER;
+	$buttons = $keyboard_buttons["start"];
+	$commands = array();
+	$commands_to_ignore = array("help", "cancel", "start");
+	
+	foreach ($buttons as $command) {
+		if ($command["permission"] <= $permission)
+			if(!in_array($command["name"], $commands_to_ignore))
+				array_push($commands, $command["name"]);
+	}
+
+	$keyboard = array_duplex($commands);
+
+	$reply_markup = $telegram->replyKeyboardMarkup([
+		'keyboard' => $keyboard, 
+		'resize_keyboard' => true, 
+		'one_time_keyboard' => true
+	]);
+
+	return $reply_markup;
 }
