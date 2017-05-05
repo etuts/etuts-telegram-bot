@@ -7,7 +7,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			$data = $db->get_data();
 
 			$final_text = make_post_moarefi_robot_for_channel($data['bot_id'], $data['image_file_id'], $data['title'], $data['description']);
-			$db->add_post($final_text);
+			$db->add_channelpost($final_text);
 
 			$db->reset_state();
 			send_thank_message($message_id);
