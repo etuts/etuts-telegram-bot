@@ -36,28 +36,31 @@ function get_chat_state($text, $username, $fullname) {
 }
 function handle_state($state, $chat_id, $text, $message_id, $message) {
 	switch ($state) {
-		case IDLE:
-			return false;
 		case CONTACT:
 		case CONTACT_ADMIN_ANSWER:
-			run_contact_command($chat_id, $text, $message_id, $message, $state);
+			$func = 'run_contact_command';
 			break;
 		case POST_VALIDATION_SEND_POST_TITLE:
-			run_post_validation_command($chat_id, $text, $message_id, $message, $state);
+			$func = 'run_post_validation_command';
 			break;
 		case MOAREFI_ROBOT_BOT_ID:
 		case MOAREFI_ROBOT_BOT_DESCRIPTION:
 		case MOAREFI_ROBOT_BOT_IMAGE:
 		case MOAREFI_ROBOT_CAPTION:
 		case MOAREFI_ROBOT_SCHEDULE_POST:
-			btn_moarefi_robot($chat_id, $text, $message_id, $message, $state);
+			$func = 'btn_moarefi_robot';
 			break;
 		case REQUEST_POST:
-			run_request_post_command($chat_id, $text, $message_id, $message, $state);
+			$func = 'run_request_post_command';
 			break;
+		case POST_SOURCE:
+			$func = 'run post_source_command';
+			break;
+		case IDLE:
 		default:
 			return false;
 	}
+	$func($chat_id, $text, $message_id, $message, $state);
 	return true;
 }
 function add_admin($admin_chat_id) {
