@@ -7,9 +7,8 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 			$btn = create_glassy_btn('پاسخ', 'admn_answr_cntct', ['c' => $chat_id, 'm' => $message_id]);
 			$reply_markup = create_glassy_keyboard([[$btn]]);
 
-			send_message_to_admin($message, $text, 'یک تماس جدید', $reply_markup);
-			$db->reset_state();
-			send_thank_message($message_id);
+			send_message_to_admin(create_report_from_a_user_message('یک تماس جدید', $text), $reply_markup);
+			reset_state(THANK_MESSAGE);
 			break;
 		
 		case CONTACT_ADMIN_ANSWER:
@@ -29,7 +28,7 @@ function run_contact_command($chat_id, $text, $message_id, $message, $state) {
 				'reply_to_message_id' => $dest_message_id,
 				'reply_markup' => $reply_markup,
 			]);
-			$db->reset_state();
+			reset_state();
 			break;
 		default:
 			$db->set_state(CONTACT);
