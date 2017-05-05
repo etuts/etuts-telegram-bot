@@ -7,8 +7,7 @@ $keyboard_buttons = [
 	],
 	"start"=>[
 		"contact"=>array("name"=>"تماس با ما", "permission"=>USER),
-		// "help"=>array("name"=>"help", "permission"=>USER),
-		"post_validation"=>array("name"=>"تایید مطلب", "permission"=>AUTHOR),
+		"post_validation"=>array("name"=>"تایید مطلب توسط مدیر برای نوشتن در سایت", "permission"=>AUTHOR),
 		"schedule_post"=>array("name"=>"ارسال مطلب به کانال", "permission"=>ADMIN),
 		"request_post"=>array("name"=>"درخواست مطلب آموزشی", "permission"=>USER),
 		"categories"=>array("name"=>"دریافت مطالب سایت", "permission"=>USER),
