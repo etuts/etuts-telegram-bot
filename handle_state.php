@@ -54,7 +54,7 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 			$func = 'run_request_post_command';
 			break;
 		case POST_SOURCE:
-			$func = 'run post_source_command';
+			$func = 'run_post_source_command';
 			break;
 		case IDLE:
 		default:
