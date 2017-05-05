@@ -1,7 +1,7 @@
 <?php 
 
 function callback_rqst_acc_dny($id, $from, $message, $data) {
-	global $db, $telegram;
+	global $telegram;
 	$chat_id = $data['c'];
 	$message_id = $data['m'];
 	$accepted = $data['acc'];
