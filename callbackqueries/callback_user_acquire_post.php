@@ -10,14 +10,10 @@ function callback_usr_acuir_post($id, $from, $message, $data) {
 	$db->set_site_recommend_first_post_state(RESERVED);
 	
 	// editing the message to remove the buttons.
-	/*$telegram->editMessageReplyMarkup([
-		'chat_id' => $glassy_chat_id,
-		'message_id' => $glassy_msg_id,
-	]);*/
 	$telegram->editMessageText([
 		'chat_id' => $glassy_chat_id,
 		'message_id' => $glassy_msg_id,
-		'text' => $glassy_text . PHP_EOL . PHP_EOL . emoji('alert') . 'شما این مطلب را برای نوشتن انتخاب کرده اید',
+		'text' => $glassy_text . PHP_EOL . PHP_EOL . emoji('alert') . ' توجه: شما این مطلب را برای نوشتن انتخاب کرده اید',
 	]);
 
 	$db->reset_state();
