@@ -7,6 +7,7 @@ $callback_query_functions = [
 	"pst_vldshn",
 	"chck_cats",
 	"usr_acuir_post",
+	"rmv_chnlpost",
 
 ];
 
