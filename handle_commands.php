@@ -11,7 +11,6 @@ $available_commands = [
 	"/request_post" => array("name"=>"request_post", "description"=>"description of request_post", "permission"=>USER),
 	"/categories" => array("name"=>"categories", "description"=>"description of categories", "permission"=>USER),
 	"/remove_last_post" => array("name"=>"remove_last_channel_post", "description"=>"description of remove last channel post", "permission"=>ADMIN),
-	"/remove_nth_post" => array("name"=>"remove_nth_channel_post", "description"=>"description of remove nth channel post", "permission"=>ADMIN),
 	"/post_source" => array("name"=>"post_source", "description"=>"description of post source", "permission"=>ADMIN),
 	"/get_recommended_post" => array("name"=>"get_recommended_post", "description"=> "description of get recommended post", "permission"=>AUTHOR),
 	"/manage_channel_posts" => array("name"=>"manage_channel_posts", "description"=> "description of manage channel posts", "permission"=>ADMIN),
