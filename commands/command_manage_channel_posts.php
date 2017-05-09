@@ -7,10 +7,14 @@ function run_manage_channel_posts_command($chat_id, $text, $message_id, $message
 		reply('هیچ مطلبی در دیتابیس وجود ندارد!');
 		return;
 	}
+	
 	$btns = array();
-	foreach ($channelposts as $id => $data) {
-		$btns[] = create_glassy_btn($data, 'rmv_chnlpost', ['id' => $id]);
+	foreach ($channelposts as $post) {
+		$data = $post['data'];
+		$data = json_decode($data, true);
+		$btns[] = create_glassy_btn($data['text'], 'rmv_chnlpost', ['id' => $post['id']]);
 	}
+	
 	$keyboard = array_duplex($btns);
 	$reply_markup = create_glassy_keyboard($keyboard);
 	$telegram->sendMessage([
