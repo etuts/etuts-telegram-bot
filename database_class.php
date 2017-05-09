@@ -117,6 +117,13 @@ class Database {
 	}
 
 	// channelposts table
+	function get_channelposts() {
+		$result = mysqli_query($this->db, "SELECT * FROM channelposts ");
+		while($row = mysqli_fetch_assoc($result)) {
+			$result_array[] = ['id' => $row['id'] , 'data' => $row['data']];
+		}
+		return $result_array;
+	}
 	function add_channelpost($post_line) {
 		return mysqli_query($this->db, "INSERT INTO `channelposts` (data) VALUES ('$post_line') ");
 	}
