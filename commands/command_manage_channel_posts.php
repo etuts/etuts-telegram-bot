@@ -12,10 +12,10 @@ function run_manage_channel_posts_command($chat_id, $text, $message_id, $message
 	foreach ($channelposts as $post) {
 		$data = $post['data'];
 		$data = json_decode($data, true);
-		$btns[] = create_glassy_btn($data['text'], 'rmv_chnlpost', ['id' => $post['id']]);
+		$btns[] = [create_glassy_btn($data['text'], 'rmv_chnlpost', ['id' => $post['id']])];
 	}
 	
-	$keyboard = array_duplex($btns);
+	$keyboard = $btns;
 	$reply_markup = create_glassy_keyboard($keyboard);
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
