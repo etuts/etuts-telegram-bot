@@ -143,7 +143,7 @@ class Database {
 		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id asc LIMIT $n ");
 	}
 	function get_num_of_channelposts_left() {
-		$result = mysql_query($this->db, "SELECT * FROM `channelposts`");
+		$result = mysqli_query($this->db, "SELECT * FROM `channelposts`");
 		return mysqli_num_rows($result);
 	}
 
@@ -175,7 +175,7 @@ class Database {
 		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id asc LIMIT $n ");
 	}*/
 	function get_num_of_site_recommend_posts_left() {
-		$result = mysql_query($this->db, "SELECT * FROM `site_recommend_posts`");
+		$result = mysqli_query($this->db, "SELECT * FROM `site_recommend_posts`");
 		return mysqli_num_rows($result);
 	}
 }
