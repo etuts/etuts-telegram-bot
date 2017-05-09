@@ -144,10 +144,8 @@ class Database {
 	function remove_first_channelpost() {
 		return remove_nth_channelpost(1);
 	}
-	function remove_nth_channelpost($n) {
-		if ($n < 1)
-			return false;
-		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id asc LIMIT $n ");
+	function remove_channelpost($id) {
+		return mysqli_query($this->db, "DELETE FROM `channelposts` WHERE id = '$id' ");
 	}
 	function get_num_of_channelposts_left() {
 		$result = mysqli_query($this->db, "SELECT * FROM `channelposts`");
