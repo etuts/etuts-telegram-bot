@@ -14,7 +14,7 @@ require __DIR__.'/database_class.php';
 
 $db = new Database($db_name, $db_user, $db_pass);
 $telegram = new Api($token);
-display_latest_post(9778738);
+display_latest_post(97778738);
 // $rss = get_last_post();
 
 
