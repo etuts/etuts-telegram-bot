@@ -7,7 +7,7 @@ delete that line
 */
 
 require __DIR__.'/vendor/autoload.php';
-require_once __DIR__.'/config.php';
+require __DIR__.'/config.php';
 use Telegram\Bot\Api;
 require __DIR__.'/database_class.php';
 
