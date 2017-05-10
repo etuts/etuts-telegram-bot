@@ -86,7 +86,7 @@ function send_last_post_to_users(){
     for ($i = 0 ; $i < count($categories_array); $i++)
         if ($categories_array[i]['name'] == $post_category)
             $category_index = $i;
-    $users_chat_id = get_all_users_chat_id();
+    $users_chat_id = $db->get_all_users_chat_id();
     foreach ($users_chat_id as $user){
         $user_categories = get_categories_checked_array($user);
         if ($user_categories[$category_index] == 1)
