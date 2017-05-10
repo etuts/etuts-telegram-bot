@@ -5,6 +5,9 @@ function callback_pst_vldshn($id, $from, $message, $data) {
 	$chat_id = $data['c'];
 	$message_id = $data['m'];
 	$accepted = $data['acc'];
+		
+	$admin_msg_id = $message->getMessageId();
+	$admin_chat_id = $message->getChat()->getId();
 	
 	$user_answer;
 	$admin_answer;
@@ -16,6 +19,15 @@ function callback_pst_vldshn($id, $from, $message, $data) {
 		$user_answer = 'متاسفانه مطلب شما تایید نشد';
 		$admin_answer = 'رد شد';
 	}
+
+	// editing the message to remove the buttons.
+	$telegram->editMessageReplyMarkup([
+		'chat_id' => $admin_chat_id,
+		'message_id' => $admin_msg_id,
+		'reply_markup' => '',
+	]);
+
+
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => $user_answer,
