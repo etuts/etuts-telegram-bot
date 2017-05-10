@@ -33,6 +33,7 @@ if ($message != null) {
 		}*/
 		// shahryar tests
 		if ($chat_id == 97778738) {
+			log_debug("Ok",97778738);
 			if ($message->getText() == "rss"){
 				$rss = get_last_topic();
 				
