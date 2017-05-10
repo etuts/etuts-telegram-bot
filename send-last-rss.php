@@ -63,12 +63,8 @@ function display_latest_post($chat_id) {
     $link_to_site = $post->link;
 
     $final_text = make_post_for_channel($title, $description, $image_link, $link_to_site);
-    // echo $final_text."ECGHO";
-    $chat_id = 9778738;
-    echo "chat id = ".$chat_id;
-    // log_debug("Here",9778738);
     $telegram->sendMessage([
-        'chat_id' => "97778738",
+        'chat_id' => $chat_id,
         'text' => $final_text,
         'parse_mode' => "Markdown",
     ]);
