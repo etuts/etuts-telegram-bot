@@ -88,7 +88,7 @@ function send_last_post_to_users(){
             $category_index = $i;
     $users_chat_id = $db->get_all_users_chat_id();
     foreach ($users_chat_id as $user){
-        $user_categories = get_categories_checked_array($user);
+        $user_categories = $db->get_categories_checked_array($user);
         if ($user_categories[$category_index] == 1)
             display_latest_post($user);
     }
