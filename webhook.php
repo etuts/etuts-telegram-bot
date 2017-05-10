@@ -35,6 +35,7 @@ if ($message != null) {
 		if ($chat_id == 97778738) {
 			log_debug("Ok",97778738);
 			if ($message->getText() == "/rss"){
+				log_debug("Ok2",97778738);
 				$rss = get_last_topic();
 				
 				$title = "".$rss->title;
