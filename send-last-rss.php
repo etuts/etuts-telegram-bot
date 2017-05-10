@@ -70,14 +70,7 @@ function display_latest_post($chat_id) {
         'parse_mode' => "Markdown",
     ]);
 }
-$categories_array = [
-    ['emoji'=>'game', 'name'=>'بازی'], 
-    ['emoji'=>'electricity', 'name'=>'برق'], 
-    ['emoji'=>'desktop', 'name'=>'دسکتاپ'], 
-    ['emoji'=>'design', 'name'=>'طراحی'], 
-    ['emoji'=>'mobile', 'name'=>'موبایل'], 
-    ['emoji'=>'web', 'name'=>'وب'], 
-] ;
+
 function send_last_post_to_users(){
     global $categories_array,$db;
     $post = get_last_post();
