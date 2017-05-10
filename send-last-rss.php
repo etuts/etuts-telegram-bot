@@ -14,7 +14,6 @@ require __DIR__.'/database_class.php';
 
 $db = new Database($db_name, $db_user, $db_pass);
 $telegram = new Api($token);
-echo $token;
 display_latest_post(9778738);
 // $rss = get_last_post();
 
@@ -69,9 +68,9 @@ function display_latest_post($chat_id) {
     echo "chat id = ".$chat_id;
     // log_debug("Here",9778738);
     $telegram->sendMessage([
-        'chat_id' => 9778738,
+        'chat_id' => $chat_id,
         'text' => $final_text,
-        'parse_mode' => "Markdown",
+        //'parse_mode' => "Markdown",
     ]);
 }
 $categories_array = [
