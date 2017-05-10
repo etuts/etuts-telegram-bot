@@ -46,6 +46,7 @@ function make_post_for_channel($title, $description, $image_link = false, $link_
 function display_latest_post($chat_id) {
     global $telegram;
     $chat_id = 9778738;
+    echo "chat id = ".$chat_id;
     $post = get_last_post();
     $description = $post->description;
     $title = $post->title;
