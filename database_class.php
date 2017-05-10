@@ -115,6 +115,13 @@ class Database {
 		}
 		return $result_array;
 	}
+	function get_all_users_chat_id() {
+		$result = mysqli_query($this->db, "SELECT `chat_id` FROM `chats` ");
+		while($row = mysqli_fetch_assoc($result)) {
+			$result_array[] = $row['chat_id'];
+		}
+		return $result_array;
+	}
 
 	// channelposts table
 	function get_channelposts() {
