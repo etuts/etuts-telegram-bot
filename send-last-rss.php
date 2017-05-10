@@ -26,6 +26,7 @@ function get_last_post(){
     return $last_item;
 }
 function get_last_topic(){
+    log_debug("entered functuon",97778738);
 	file_put_contents("feed", fopen("http://etuts.ir/topics/feed", 'r'));
 	$rss = simplexml_load_file('feed');
 	$last_item = $rss->channel->item;
