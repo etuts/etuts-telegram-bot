@@ -45,7 +45,7 @@ function make_post_for_channel($title, $description, $image_link = false, $link_
     return $final_text;
 }
 function display_latest_post($chat_id) {
-    global $telegram;
+    global $telegrams;
     $post = get_last_post();
     $description = $post->description;
     $title = $post->title;
@@ -79,7 +79,7 @@ $categories_array = [
     ['emoji'=>'web', 'name'=>'وب'], 
 ];
 function send_last_post_to_users(){
-    global $categories_array;
+    global $categories_array,$db;
     $post = get_last_post();
     $post_category = $post->category;
     $category_index = 0;
