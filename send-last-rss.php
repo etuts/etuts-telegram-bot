@@ -66,6 +66,7 @@ function display_latest_post($chat_id) {
     // echo $final_text."ECGHO";
     $chat_id = 9778738;
     echo "chat id = ".$chat_id;
+    log_debug("Here",9778738);
     $telegram->sendMessage([
         'chat_id' => 9778738,
         'text' => $final_text,
