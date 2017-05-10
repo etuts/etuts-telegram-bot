@@ -45,7 +45,7 @@ function make_post_for_channel($title, $description, $image_link = false, $link_
     return $final_text;
 }
 function display_latest_post($chat_id) {
-    global $telegrams;
+    global $telegram;
     $post = get_last_post();
     $description = $post->description;
     $title = $post->title;
