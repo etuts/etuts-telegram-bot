@@ -77,7 +77,7 @@ $categories_array = [
     ['emoji'=>'design', 'name'=>'طراحی'], 
     ['emoji'=>'mobile', 'name'=>'موبایل'], 
     ['emoji'=>'web', 'name'=>'وب'], 
-];
+] ;
 function send_last_post_to_users(){
     global $categories_array,$db;
     $post = get_last_post();
@@ -91,5 +91,5 @@ function send_last_post_to_users(){
         $user_categories = $db->get_categories_checked_array($user);
         if ($user_categories[$category_index] == 1)
             display_latest_post($user);
-    }
+  }
 }
