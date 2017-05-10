@@ -43,8 +43,9 @@ function make_post_for_channel($title, $description, $image_link = false, $link_
                     "@etuts";
     return $final_text;
 }
-function display_latest_post($chat_id = 97778738) {
+function display_latest_post($chat_id) {
     global $telegram;
+    $chat_id = 97778738;
     $post = get_last_post();
     $description = $post->description;
     $title = $post->title;
