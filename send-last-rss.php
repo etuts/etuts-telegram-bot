@@ -26,6 +26,7 @@ function get_last_post(){
     return $last_item;
 }
 function get_last_topic(){
+    log_debug("entered functuon",97778738);
 	file_put_contents("feed", fopen("http://etuts.ir/topics/feed", 'r'));
 	$rss = simplexml_load_file('feed');
 	$last_item = $rss->channel->item;
@@ -40,9 +41,11 @@ function make_post_for_channel($title, $description, $image_link = false, $link_
                     $description."\n".
                     $link_to_site."\n".
                     "@etuts";
+    return $final_text;
 }
 function display_latest_post($chat_id) {
     global $telegram;
+    $chat_id = 97778738;
     $post = get_last_post();
     $description = $post->description;
     $title = $post->title;
@@ -61,6 +64,7 @@ function display_latest_post($chat_id) {
     $link_to_site = $post->link;
 
     $final_text = make_post_for_channel($title, $description, $image_link, $link_to_site);
+    // echo $final_text."ECGHO";
 
     $telegram->sendMessage([
         'chat_id' => $chat_id,

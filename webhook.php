@@ -32,17 +32,19 @@ if ($message != null) {
 		/*if ($chat_id == 117990761) {
 		}*/
 		// shahryar tests
-		/*if ($chat_id == 97778738) {
-			if ($message->getText() == "rss"){
-				$rss = get_last_topic();
-				
-				$title = "".$rss->title;
-				$telegram->sendMessage([
-					'chat_id' => 97778738,
-					'text' => $title,
-				]);
-			}
-		}*/
+		// if ($chat_id == 97778738) {
+		// 	log_debug("Ok",97778738);
+		// 	if ($message->getText() == "/rss"){
+		// 		$rss = get_last_topic();
+		// 		log_debug("Ok1.5",97778738);
+		// 		$title = "".$rss->title;
+		// 		log_debug("Ok2",97778738);
+		// 		$telegram->sendMessage([
+		// 			'chat_id' => 97778738,
+		// 			'text' => $title,
+		// 		]);
+		// 	}
+		// }
 
 		$state = get_chat_state($text, $username, $fullname);
 		if (!is_cancel_command($text, $chat_id, $message_id, $message))
