@@ -67,11 +67,11 @@ function display_latest_post($chat_id) {
     $chat_id = 9778738;
     echo "chat id = ".$chat_id;
     // log_debug("Here",9778738);
-    // $telegram->sendMessage([
-    //     'chat_id' => 9778738,
-    //     'text' => $final_text,
-    //     'parse_mode' => "Markdown",
-    // ]);
+    $telegram->sendMessage([
+        'chat_id' => 9778738,
+        'text' => $final_text,
+        'parse_mode' => "Markdown",
+    ]);
 }
 $categories_array = [
     ['emoji'=>'game', 'name'=>'بازی'], 
