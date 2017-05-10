@@ -14,6 +14,7 @@ require __DIR__.'/database_class.php';
 
 $db = new Database($db_name, $db_user, $db_pass);
 $telegram = new Api($token);
+file_put_contents("feed", fopen("http://etuts.ir/feed", 'r'));
 send_last_post_to_users();
 // display_latest_post(97778738);
 // $rss = get_last_post();
@@ -27,7 +28,6 @@ function get_last_post(){
     return $last_item;
 }
 function get_last_topic(){
-    log_debug("entered functuon",97778738);
 	file_put_contents("feed", fopen("http://etuts.ir/topics/feed", 'r'));
 	$rss = simplexml_load_file('feed');
 	$last_item = $rss->channel->item;
