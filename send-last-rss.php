@@ -7,18 +7,14 @@ delete that line
 */
 
 require __DIR__.'/vendor/autoload.php';
-require __DIR__.'/config.php';
+require_once __DIR__.'/config.php';
 use Telegram\Bot\Api;
 require __DIR__.'/database_class.php';
 
 
 $db = new Database($db_name, $db_user, $db_pass);
 $telegram = new Api($token);
-$telegram->sendMessage([
-        'chat_id' => 9778738,
-        'text' => "HI",
-        'parse_mode' => "Markdown",
-    ]);
+echo $token;
 display_latest_post(9778738);
 // $rss = get_last_post();
 
