@@ -83,7 +83,7 @@ function send_last_post_to_users(){
     $post = get_last_post();
     $post_category = $post->category;
     $category_index = 0;
-    for ($i = 0 ; $i < len($categories_array); $i++)
+    for ($i = 0 ; $i < count($categories_array); $i++)
         if ($categories_array[i]['name'] == $post_category)
             $category_index = $i;
     $users_chat_id = get_all_users_chat_id();
