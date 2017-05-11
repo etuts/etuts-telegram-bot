@@ -8,6 +8,7 @@ $callback_query_functions = [
 	"chck_cats",
 	"usr_acuir_post",
 	"rmv_chnlpost",
+	"gt_anthr_post",
 
 ];
 
