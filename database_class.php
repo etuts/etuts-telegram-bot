@@ -169,8 +169,8 @@ class Database {
 		$post = (string)$result->fetch_assoc()['post'];
 		return $post;
 	}
-	function set_site_recommend_first_post_state($state) {
-		return mysqli_query($this->db, "UPDATE `site_recommend_posts` SET state = '$state' WHERE NOT state = '$state' LIMIT 1"); // Update state
+	function set_site_recommend_post_state($state, $index = 0) {
+		return mysqli_query($this->db, "UPDATE `site_recommend_posts` SET state = '$state' order by id asc LIMIT 1 OFFSET $index"); // Update state
 	}
 	function remove_last_site_recommend_post() {
 		return mysqli_query($this->db, "DELETE FROM `site_recommend_posts` order by id desc LIMIT 1 ");
