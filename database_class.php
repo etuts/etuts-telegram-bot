@@ -148,9 +148,6 @@ class Database {
 	function remove_last_channelpost() {
 		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id desc LIMIT 1 ");
 	}
-	function remove_first_channelpost() {
-		return remove_nth_channelpost(1);
-	}
 	function remove_channelpost($id) {
 		return mysqli_query($this->db, "DELETE FROM `channelposts` WHERE id = '$id' ");
 	}
@@ -163,8 +160,8 @@ class Database {
 	function add_site_recommend_post($post_line) {
 		return mysqli_query($this->db, "INSERT INTO `site_recommend_posts` (post) VALUES ('$post_line') ");
 	}
-	function get_site_recommend_post() {
-		$result = mysqli_query($this->db, "SELECT post FROM `site_recommend_posts` WHERE NOT state = '".RESERVED."' LIMIT 1 ");
+	function get_site_recommend_post($index = 1) {
+		$result = mysqli_query($this->db, "SELECT post FROM `site_recommend_posts` WHERE NOT state = '".RESERVED."' order by id asc LIMIT $index ");
 		
 		if (mysqli_num_rows($result) == 0)
 			return false;
@@ -173,7 +170,7 @@ class Database {
 		return $post;
 	}
 	function set_site_recommend_first_post_state($state) {
-		return mysqli_query($this->db, "UPDATE `site_recommend_posts` SET state = '$state' WHERE NOT state = '".RESERVED."' LIMIT 1"); // Update state
+		return mysqli_query($this->db, "UPDATE `site_recommend_posts` SET state = '$state' WHERE NOT state = '$state' LIMIT 1"); // Update state
 	}
 	function remove_last_site_recommend_post() {
 		return mysqli_query($this->db, "DELETE FROM `site_recommend_posts` order by id desc LIMIT 1 ");
