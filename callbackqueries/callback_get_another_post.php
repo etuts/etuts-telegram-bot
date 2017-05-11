@@ -21,6 +21,6 @@ function callback_gt_anthr_post($id, $from, $message, $data) {
 		'reply_markup' => $reply_markup,
 	]);
 
-	$answer_data = ['text' => 'مطلب جدید'];
+	$answer_data = ['text' => 'مطلب جدید' . $new_index];
 	return $answer_data;
 }
