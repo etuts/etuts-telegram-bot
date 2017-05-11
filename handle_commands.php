@@ -2,18 +2,18 @@
 
 $available_commands = [
 
-	"/contact" => array("name"=>"contact", "description"=>"description of contact", "permission"=>USER),
-	"/post_validation" => array("name"=>"post_validation", "description"=>"description of post_validation", "permission"=>AUTHOR),
-	"/cancel" => array("name"=>"cancel", "description"=>"description of cancel", "permission"=>USER),
-	"/schedule_post" => array("name"=>"schedule_post", "description"=>"description of schedule_post", "permission"=>ADMIN),
-	"/start" => array("name"=>"start", "description"=>"description of start", "permission"=>USER),
-	"/help" => array("name"=>"help", "description"=>"description of help", "permission"=>USER),
-	"/request_post" => array("name"=>"request_post", "description"=>"description of request_post", "permission"=>USER),
-	"/categories" => array("name"=>"categories", "description"=>"description of categories", "permission"=>USER),
-	"/remove_last_post" => array("name"=>"remove_last_channel_post", "description"=>"description of remove last channel post", "permission"=>ADMIN),
-	"/post_source" => array("name"=>"post_source", "description"=>"description of post source", "permission"=>ADMIN),
-	"/get_recommended_post" => array("name"=>"get_recommended_post", "description"=> "description of get recommended post", "permission"=>AUTHOR),
-	"/manage_channel_posts" => array("name"=>"manage_channel_posts", "description"=> "description of manage channel posts", "permission"=>ADMIN),
+	"/contact" => array("name"=>"contact", "description"=>"تماس با ما", "permission"=>USER),
+	"/post_validation" => array("name"=>"post_validation", "description"=>"نویسنده های سایت می توانند مطلبی که می خواهند بنویسند را از این طریق به ادمین اطلاع دهند تا ادمین تایید کند", "permission"=>AUTHOR),
+	"/cancel" => array("name"=>"cancel", "description"=>"لغو هر عملیاتی که در حال انجام آن هستید", "permission"=>USER),
+	"/schedule_post" => array("name"=>"schedule_post", "description"=>"زمانبندی مطلب برای ارسال در کانال", "permission"=>ADMIN),
+	"/start" => array("name"=>"start", "description"=>"شروع ربات", "permission"=>USER),
+	"/help" => array("name"=>"help", "description"=>"دستور راهنما", "permission"=>USER),
+	"/request_post" => array("name"=>"request_post", "description"=>"درخواست مطلب آموزشی - اگر آموزشی لازم دارید به ما اطلاع دهید", "permission"=>USER),
+	"/categories" => array("name"=>"categories", "description"=>"انتخاب دسته بندی ها برای دریافت آخرین مطالب سایت", "permission"=>USER),
+	"/remove_last_post" => array("name"=>"remove_last_channel_post", "description"=>"پاک کردن آخرین پست زمانبندی شده ی کانال", "permission"=>ADMIN),
+	"/post_source" => array("name"=>"post_source", "description"=>"پیشنهاد دادن مطلبی برای نویسنده ها که در سایت بنویسند", "permission"=>ADMIN),
+	"/get_recommended_post" => array("name"=>"get_recommended_post", "description"=> "یک مطلب برای نوشتن در سایت به شما پیشنهاد می دهد", "permission"=>AUTHOR),
+	"/manage_channel_posts" => array("name"=>"manage_channel_posts", "description"=> "مدیریت پست های زمانبندی شده برای کانال", "permission"=>ADMIN),
 ];
 
 function run_commands($text, $chat_id, $message_id, $message) {
