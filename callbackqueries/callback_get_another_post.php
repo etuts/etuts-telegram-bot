@@ -7,8 +7,8 @@ function callback_gt_anthr_post($id, $from, $message, $data) {
 	$glassy_chat_id = $message->getChat()->getId();
 	$glassy_text = $message->getText();
 
-	$new_index = $data['i']+1;
-	$post = $db->get_site_recommend_post($new_index-1);
+	$index = $data['i'];
+	$post = $db->get_site_recommend_post($index);
 
 	if ($post === false) {
 		$btn3 = create_glassy_btn('نمایش اولین مطلب پیشنهادی', 'gt_anthr_post', ['i' => 0]);
@@ -16,7 +16,7 @@ function callback_gt_anthr_post($id, $from, $message, $data) {
 		$text = 'به پایان مطالب پیشنهادی رسیدیم!';
 	} else {
 		$btn = create_glassy_btn('این مطلب را تهیه میکنم', 'usr_acuir_post', ['r' => RESERVED]);
-	$btn2 = create_glassy_btn('یک مطلب دیگه پیشنهاد بده', 'gt_anthr_post', ['i' => $new_index]);
+	$btn2 = create_glassy_btn('یک مطلب دیگه پیشنهاد بده', 'gt_anthr_post', ['i' => $index+1]);
 		$reply_markup = create_glassy_keyboard([[$btn], [$btn2]]);
 		$text = 'مطلب پیشنهاد شده برای نوشتن در سایت:' . PHP_EOL . PHP_EOL . $post;
 	}
@@ -29,6 +29,6 @@ function callback_gt_anthr_post($id, $from, $message, $data) {
 		'reply_markup' => $reply_markup,
 	]);
 
-	$answer_data = ['text' => 'مطلب جدید' . $new_index];
+	$answer_data = ['text' => 'مطلب جدید'];
 	return $answer_data;
 }
