@@ -160,8 +160,8 @@ class Database {
 	function add_site_recommend_post($post_line) {
 		return mysqli_query($this->db, "INSERT INTO `site_recommend_posts` (post) VALUES ('$post_line') ");
 	}
-	function get_site_recommend_post($index = 1) {
-		$result = mysqli_query($this->db, "SELECT post FROM `site_recommend_posts` WHERE NOT state = '".RESERVED."' order by id asc LIMIT $index ");
+	function get_site_recommend_post($index = 0) {
+		$result = mysqli_query($this->db, "SELECT post FROM `site_recommend_posts` WHERE NOT state = '".RESERVED."' order by id asc LIMIT 1 OFFSET $index ");
 		
 		if (mysqli_num_rows($result) == 0)
 			return false;
