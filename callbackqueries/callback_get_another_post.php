@@ -15,8 +15,8 @@ function callback_gt_anthr_post($id, $from, $message, $data) {
 		$reply_markup = create_glassy_keyboard([[$btn3]]);
 		$text = 'به پایان مطالب پیشنهادی رسیدیم!';
 	} else {
-		$btn = create_glassy_btn('این مطلب را تهیه میکنم', 'usr_acuir_post', ['r' => RESERVED]);
-	$btn2 = create_glassy_btn('یک مطلب دیگه پیشنهاد بده', 'gt_anthr_post', ['i' => $index+1]);
+		$btn = create_glassy_btn('این مطلب را تهیه میکنم', 'usr_acuir_post', ['r' => RESERVED, 'i' => $index]);
+		$btn2 = create_glassy_btn('یک مطلب دیگه پیشنهاد بده', 'gt_anthr_post', ['i' => $index+1]);
 		$reply_markup = create_glassy_keyboard([[$btn], [$btn2]]);
 		$text = 'مطلب پیشنهاد شده برای نوشتن در سایت:' . PHP_EOL . PHP_EOL . $post;
 	}
