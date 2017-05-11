@@ -11,7 +11,7 @@ function callback_gt_anthr_post($id, $from, $message, $data) {
 	$post = $db->get_site_recommend_post($new_index-1);
 
 	if ($post === false) {
-		$btn3 = create_glassy_btn('نمیاش اولین مطلب پیشنهادی', 'gt_anthr_post', ['i' => 0]);
+		$btn3 = create_glassy_btn('نمایش اولین مطلب پیشنهادی', 'gt_anthr_post', ['i' => 0]);
 		$reply_markup = create_glassy_keyboard([[$btn3]]);
 		$text = 'به پایان مطالب پیشنهادی رسیدیم!';
 	} else {
