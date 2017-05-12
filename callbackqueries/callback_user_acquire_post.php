@@ -8,15 +8,15 @@ function callback_usr_acuir_post($id, $from, $message, $data) {
 	$glassy_text = $message->getText();
 
 	$reserved = $data['r'];
-	$index = $data['i'];
+	$id = $data['i'];
 
-	$db->set_site_recommend_post_state($reserved, $index-1);
+	$db->set_site_recommend_post_state($reserved, $id);
 	if ($reserved) {
-		$btn = create_glassy_btn('پشیمون شدم! نمیتونم تهیه ش کنم', 'usr_acuir_post', ['r' => NOT_RESERVED, 'i' => $index]);
+		$btn = create_glassy_btn('پشیمون شدم! نمیتونم تهیه ش کنم', 'usr_acuir_post', ['r' => NOT_RESERVED, 'i' => $id]);
 		$text = $glassy_text . PHP_EOL . PHP_EOL . emoji('alert') . ' توجه: شما این مطلب را برای نوشتن انتخاب کرده اید';
 	}
 	else {
-		$btn = create_glassy_btn('این مطلب را تهیه میکنم', 'usr_acuir_post', ['r' => RESERVED, 'i' => $index]);
+		$btn = create_glassy_btn('این مطلب را تهیه میکنم', 'usr_acuir_post', ['r' => RESERVED, 'i' => $id]);
 		$text = substr($glassy_text, 0, strrpos($glassy_text, "\n")); // remove last line from text
 	}
 	$reply_markup = create_glassy_keyboard([[$btn]]);
