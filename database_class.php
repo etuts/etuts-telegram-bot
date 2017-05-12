@@ -160,8 +160,8 @@ class Database {
 	function add_site_recommend_post($post_line) {
 		return mysqli_query($this->db, "INSERT INTO `site_recommend_posts` (post) VALUES ('$post_line') ");
 	}
-	function get_site_recommend_post($index = 0) {
-		$result = mysqli_query($this->db, "SELECT post, ROW_NUMBER() OVER(ORDER BY id) AS index FROM `site_recommend_posts` WHERE NOT state = '".RESERVED."' order by id asc LIMIT 1 OFFSET $index ");
+	function get_site_recommend_post($id = 0) {
+		$result = mysqli_query($this->db, "SELECT * FROM `site_recommend_posts` WHERE NOT state = '".RESERVED."' AND id > '$id' ");
 		
 		if (mysqli_num_rows($result) == 0)
 			return false;
@@ -170,9 +170,7 @@ class Database {
 
 		return $row;
 	}
-	function set_site_recommend_post_state($state, $index = 0) {
-		$result = mysqli_query($this->db, "SELECT id FROM `site_recommend_posts` order by id asc LIMIT 1 OFFSET $index ");
-		$id = (int) $result->fetch_assoc()['id'];
+	function set_site_recommend_post_state($state, $id = 1) {
 		return mysqli_query($this->db, "UPDATE `site_recommend_posts` SET state = '$state' WHERE id = $id ");
 	}
 	function remove_last_site_recommend_post() {
