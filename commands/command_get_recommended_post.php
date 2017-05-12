@@ -3,13 +3,13 @@
 function run_get_recommended_post_command($chat_id, $text, $message_id, $message, $state) {
 	global $db, $telegram;
 	$row = $db->get_site_recommend_post();
-	$post = $row['post'];
-	$id = $row['id'];
-	if ($post === false) {
+	if ($row === false) {
 		reply('هیچ مطلبی برای پیشنهاد وجود ندارد');
 		send_message_to_admin('هیچ مطلبی برای پیشنهاد وجود ندارد');
 		return;
 	}
+	$post = $row['post'];
+	$id = $row['id'];
 	$btn = create_glassy_btn('این مطلب را تهیه میکنم', 'usr_acuir_post', ['r' => RESERVED, 'i' => $id]);
 	$btn2 = create_glassy_btn('یک مطلب دیگه پیشنهاد بده', 'gt_anthr_post', ['i' => $id]);
 	$reply_markup = create_glassy_keyboard([[$btn], [$btn2]]);
