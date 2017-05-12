@@ -170,19 +170,13 @@ class Database {
 		return $post;
 	}
 	function set_site_recommend_post_state($state, $index = 0) {
-		return mysqli_query($this->db, "UPDATE `site_recommend_posts` SET state = '$state' order by id asc LIMIT 1 OFFSET $index"); // Update state
+		$result = mysqli_query($this->db, "SELECT id FROM `site_recommend_posts` order by id asc LIMIT 1 OFFSET $index ");
+		$id = (int) $result->fetch_assoc()['id'];
+		return mysqli_query($this->db, "UPDATE `site_recommend_posts` SET state = '$state' WHERE id = $id ");
 	}
 	function remove_last_site_recommend_post() {
 		return mysqli_query($this->db, "DELETE FROM `site_recommend_posts` order by id desc LIMIT 1 ");
 	}
-	/*function remove_first_channelpost() {
-		return remove_nth_channelpost(1);
-	}
-	function remove_nth_channelpost($n) {
-		if ($n < 1)
-			return false;
-		return mysqli_query($this->db, "DELETE FROM `channelposts` order by id asc LIMIT $n ");
-	}*/
 	function get_num_of_site_recommend_posts_left() {
 		$result = mysqli_query($this->db, "SELECT * FROM `site_recommend_posts`");
 		return mysqli_num_rows($result);
