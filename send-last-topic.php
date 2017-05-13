@@ -21,7 +21,7 @@ function get_last_topic(){
 function send_last_topic($chat_id){
 	global $telegram;
 	$topic = get_last_topic();
-	$text = "sh".$topic->title;
+	$text = "عنوان آخرین تاپیک : \n".$topic->title;
 	$telegram->sendMessage([
         'chat_id' => $chat_id,
         'text' => $text,
