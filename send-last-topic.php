@@ -22,6 +22,6 @@ function send_last_topic($chat_id){
 	$text = "sh".$topic->title;
 	$telegram->sendMessage([
         'chat_id' => 97778738,
-        'text' => $text,
+        'text' => "Salam",
     ]);
 }
