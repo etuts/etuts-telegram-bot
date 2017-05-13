@@ -79,7 +79,7 @@ function get_last_id_in_config(){
 }
 function update_id($new_id){
         $file = file_get_contents("config.php");
-        $id = get_last_id();
+        $id = get_last_id_in_config();
         //$new_id = "12345678";
         $file = str_replace($id,$new_id,$file); 
         file_put_contents("config.php", $file);
