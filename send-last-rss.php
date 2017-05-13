@@ -70,10 +70,34 @@ function display_latest_post($chat_id) {
         'parse_mode' => "Markdown",
     ]);
 }
-
+function get_last_id_in_config(){
+        $file = file_get_contents("config.php");
+        $semi_colon_pos = strpos($file,";");
+        $equal_pos = strpos($file,"=");
+        $id = substr($file,$equal_pos+1,$semi_colon_pos - $equal_pos-1);
+        return $id;
+}
+function update_id($new_id){
+        $file = file_get_contents("config.php");
+        $id = get_last_id();
+        //$new_id = "12345678";
+        $file = str_replace($id,$new_id,$file); 
+        file_put_contents("config.php", $file);
+}
+function get_last_feed_post_id($post){
+        $short_link = $post->guid;
+        $equal_pos = strpos($short_link,"=");
+        $id = substr($short_link,$equal_pos + 1);
+        return $id;
+    }
 function send_last_post_to_users(){
     global $categories_array,$db;
     $post = get_last_post();
+    $post_id = get_last_feed_post_id($post);
+    $config_id = get_last_id_in_config();
+    if ($post_id == $config_id)
+        return;
+    update_id($post_id);
     $post_category = $post->category;
     $category_index = 0;
     for ($i = 0 ; $i < count($categories_array); $i++)
