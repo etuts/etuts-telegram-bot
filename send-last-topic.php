@@ -10,6 +10,7 @@ require_once __DIR__.'/config.php';
 use Telegram\Bot\Api;
 require __DIR__.'/database_class.php';
 
+$telegram = new Api($token);
 send_last_topic(97778738);
 function get_last_topic(){
 	file_put_contents("feed", fopen("http://etuts.ir/topics/feed", 'r'));
@@ -18,6 +19,7 @@ function get_last_topic(){
 	return $last_item;
 }
 function send_last_topic($chat_id){
+	global $telegram;
 	$topic = get_last_topic();
 	$text = "sh".$topic->title;
 	$telegram->sendMessage([
