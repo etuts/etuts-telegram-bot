@@ -11,7 +11,9 @@ use Telegram\Bot\Api;
 require __DIR__.'/database_class.php';
 
 $telegram = new Api($token);
-send_last_topic(97778738);
+send_last_topic($admin_id);
+
+
 function get_last_topic(){
 	file_put_contents("feed", fopen("http://etuts.ir/topics/feed", 'r'));
 	$rss = simplexml_load_file('feed');

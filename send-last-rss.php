@@ -27,12 +27,6 @@ function get_last_post(){
     $last_item = $rss->channel->item;
     return $last_item;
 }
-function get_last_topic(){
-	file_put_contents("feed", fopen("http://etuts.ir/topics/feed", 'r'));
-	$rss = simplexml_load_file('feed');
-	$last_item = $rss->channel->item;
-	return $last_item;
-}
 function make_post_for_channel($title, $description, $image_link = false, $link_to_site = false) {
     $image_link = ($image_link === false) ? '' : "[".'🖼'."](".$image_link.")";
 
