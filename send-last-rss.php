@@ -102,5 +102,5 @@ function send_last_post_to_users(){
 		$user_categories = $db->get_categories_checked_array($user);
 		if ($user_categories[$category_index] == 1)
 			display_latest_post($user);
-  }
+	}
 }
