@@ -13,8 +13,9 @@ function run_commands($text, $chat_id, $message_id, $message) {
 		} else if ($permission == ADMIN && !$is_admin) {
 			reply('برای استفاده از این دستور باید ادمین کانال باشید');
 		} else {
-		$command = new $command_class();
-		$command->run($chat_id, $text, $message_id, $message, IDLE);
+			$command = new $command_class();
+			$command->run($chat_id, $text, $message_id, $message, IDLE);
+		}
 	}
 }
 
