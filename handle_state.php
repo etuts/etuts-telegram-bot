@@ -38,10 +38,12 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 	switch ($state) {
 		case CONTACT:
 		case CONTACT_ADMIN_ANSWER:
-			$func = 'run_contact_command';
+			$command = new contact_command();
+			$func = $command.'->run';
 			break;
 		case POST_VALIDATION_SEND_POST_TITLE:
-			$func = 'run_post_validation_command';
+			$command = new post_validation_command();
+			$func = $command.'->run';
 			break;
 		case MOAREFI_ROBOT_BOT_ID:
 		case MOAREFI_ROBOT_BOT_DESCRIPTION:
@@ -51,10 +53,12 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 			$func = 'btn_moarefi_robot';
 			break;
 		case REQUEST_POST:
-			$func = 'run_request_post_command';
+			$command = new request_post_command();
+			$func = $command.'->run';
 			break;
 		case POST_SOURCE:
-			$func = 'run_post_source_command';
+			$command = new post_source_command();
+			$func = $command.'->run';
 			break;
 		case IDLE:
 		default:
