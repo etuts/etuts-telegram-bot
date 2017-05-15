@@ -12,7 +12,7 @@ class contact_command extends base_command {
 				$reply_markup = create_glassy_keyboard([[$btn]]);
 
 				send_message_to_admin(create_report_from_a_user_message('یک تماس جدید', $text), $reply_markup);
-				reset_state(SUCCESS_MESSAGE);
+				reset_state(THANK_MESSAGE);
 				break;
 			
 			case CONTACT_ADMIN_ANSWER:
