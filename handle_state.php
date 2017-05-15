@@ -35,15 +35,14 @@ function get_chat_state($text, $username, $fullname) {
 	return $state;
 }
 function handle_state($state, $chat_id, $text, $message_id, $message) {
+	$func = $class = '';
 	switch ($state) {
 		case CONTACT:
 		case CONTACT_ADMIN_ANSWER:
-			$command = new contact_command();
-			$func = $command.'->run';
+			$class = 'contact_command';
 			break;
 		case POST_VALIDATION_SEND_POST_TITLE:
-			$command = new post_validation_command();
-			$func = $command.'->run';
+			$class = 'post_validation_command';
 			break;
 		case MOAREFI_ROBOT_BOT_ID:
 		case MOAREFI_ROBOT_BOT_DESCRIPTION:
@@ -53,18 +52,22 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 			$func = 'btn_moarefi_robot';
 			break;
 		case REQUEST_POST:
-			$command = new request_post_command();
-			$func = $command.'->run';
+			$class = 'request_post_command';
 			break;
 		case POST_SOURCE:
-			$command = new post_source_command();
-			$func = $command.'->run';
+			$class = 'post_source_command';
 			break;
 		case IDLE:
 		default:
 			return false;
 	}
-	$func($chat_id, $text, $message_id, $message, $state);
+	if (class_exists($class)) {
+		$command = new $class();
+		$command->run($chat_id, $text, $message_id, $message, $state);
+	} else if ($func !== '') {
+		$func($chat_id, $text, $message_id, $message, $state);
+	}
+	
 	return true;
 }
 function add_admin($admin_chat_id) {
