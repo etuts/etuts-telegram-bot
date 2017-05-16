@@ -1,2 +1,8 @@
-# etuts-telegram-bot
-etuts.ir Telegram bot
+# [Etuts Telegram Bot](https://t.me/etutsbot)
+This is a Telegram bot for [etuts.ir website](http://etuts.ir). etuts.ir contains tutorials for computer and technology.
+
+## Features
+ - Sends scheduled posts to [@etuts channel](https://t.me/etuts)
+ - Sends etuts.ir latest posts to users based on the categories each user chooses
+ - Sends latest forum topics to admins
+ - Contacting admin and requesting posts from authors
