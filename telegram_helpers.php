@@ -123,6 +123,12 @@ function create_glassy_btn($text, $callback_function, $params = []) { // returns
 		'callback_data' => json_encode($callback_data),
 	];
 }
+function create_glassy_link_btn($text, $url) { // returns glassy link btn
+	return [
+		'text' => $text,
+		'url' => $url,
+	];
+}
 function create_glassy_keyboard($keyboard) { // just makes a given glassy keyboard
 	return Telegram\Bot\Keyboard\Keyboard::make([ 'inline_keyboard' => $keyboard, ]);
 }

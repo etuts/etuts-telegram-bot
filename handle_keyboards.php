@@ -15,6 +15,7 @@ $keyboard_buttons = [
 		"post_source"=>array("name"=>"پیشنهاد مطلب به نویسنده ها", "permission"=>ADMIN),
 		"get_site_recommend_post"=>array("name"=>"مطلب برای نوشتن تو سایت", "permission"=>AUTHOR),
 		"manage_channel_posts"=>array("name"=>"مدیریت مطالب زمانبندی شده کانال", "permission"=>ADMIN),
+		"about_us"=>array("name"=>"درباره ما", "permission"=>USER),
 	],
 
 ];
