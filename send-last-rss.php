@@ -65,14 +65,14 @@ function display_latest_post($chat_id) {
 	]);
 }
 function get_last_id_in_config(){
-	$file = file_get_contents("config.php");
+	$file = file_get_contents(__DIR__ . "config.php");
 	$semi_colon_pos = strpos($file,";");
 	$equal_pos = strpos($file,"=");
 	$id = substr($file,$equal_pos+1,$semi_colon_pos - $equal_pos-1);
 	return $id;
 }
 function update_id($new_id){
-	$file = file_get_contents("config.php");
+	$file = file_get_contents(__DIR__ . "config.php");
 	$id = get_last_id_in_config();
 	//$new_id = "12345678";
 	$file = str_replace($id,$new_id,$file); 
