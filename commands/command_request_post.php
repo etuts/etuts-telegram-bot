@@ -21,7 +21,8 @@ class request_post_command extends base_command {
 				$reply_markup = $telegram->forceReply();
 				$telegram->sendMessage([
 					'chat_id' => $chat_id,
-					'text' => 'لطفا عنوان مطلب را وارد کنید.',
+					'text' => "در این قسمت شما می توانید مطلبی درخواست کنید تا ما آن را در سایت تهیه کنیم.\n\n
+								برای لغو این عملیات، دستور /cancel را انتخاب کنید.",
 					'reply_to_message_id' => $message_id,
 					'reply_markup' => $reply_markup
 				]);
