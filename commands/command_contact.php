@@ -36,7 +36,8 @@ class contact_command extends base_command {
 				break;
 			default:
 				$db->set_state(CONTACT);
-				reply('لطفا پیام تان را بفرستید', true);
+				reply("اگر پیشنهاد یا انتقادی دارید لطفا بنویسید. پیام شما مستقیما برای مدیریت سایت etuts.ir فرستاده می شود.\n\n
+							برای لغو این عملیات، دستور /cancel را انتخاب کنید.", true);
 				break;
 		}
 	}
