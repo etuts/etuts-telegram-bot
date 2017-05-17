@@ -28,6 +28,7 @@ function is_cancel_command($text, $chat_id, $message_id, $message) {
 	return false;
 }
 
+require "./commands/base_command.php";
 foreach (glob("./commands/command_*.php") as $filename) {
     require ($filename);
 }

@@ -63,3 +63,19 @@ function create_categories_keyboard_reply_markup($checked){
     }
     return create_glassy_keyboard($btns);
 }
+
+function create_about_us_keyboard_reply_markup(){
+    global $lots_of_dots;
+    $btns = [];
+    $vahid = "وحید محمدی";
+    $url_vahid = "http://github.com/gvmohzibat";
+    $mamad = "محمد فغان‌پور گنجی";
+    $url_mamad = "https://github.com/MohGanji";
+    $shahr = "شهریار سلطان‌پور";
+    $url_shahr = "https://github.com/sh-soltanpour";
+    $btns[] = [create_glassy_link_btn($vahid, $url_vahid)];
+    $btns[] = [create_glassy_link_btn($mamad, $url_mamad)];
+    $btns[] = [create_glassy_link_btn($shahr, $url_shahr)];
+
+    return create_glassy_keyboard($btns);
+}

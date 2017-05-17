@@ -1,5 +1,10 @@
 <?php 
 
+function btn_about_us($chat_id, $text, $message_id, $message, $state) {
+	$command = new about_us_command();
+	$command->run($chat_id, $text, $message_id, $message, $state);
+}
+
 function btn_contact($chat_id, $text, $message_id, $message, $state) {
 	$command = new contact_command();
 	$command->run($chat_id, $text, $message_id, $message, $state);
