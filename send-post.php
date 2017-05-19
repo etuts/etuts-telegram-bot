@@ -38,8 +38,11 @@ try {
 	$num_of_posts_left = $db->get_num_of_channelposts_left();
 	$telegram->sendMessage([
 		'chat_id' => $admin_id,
-		'text' => 'تنها' . $num_of_posts_left . 'برای ارسال در کانال باقی مانده.',
+		'text' => 'تنها ' . $num_of_posts_left . ' مطلب برای ارسال در کانال باقی مانده.',
 	]);
 } catch (Exception $e) {
-	log_debug($e->getPrevious());
+	$telegram->sendMessage([
+		'chat_id' => $admin_id,
+		'text' => $e->getPrevious(),
+	]);
 }
