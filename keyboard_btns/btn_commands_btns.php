@@ -31,7 +31,7 @@ function btn_categories($chat_id, $text, $message_id, $message, $state){
 }
 
 function btn_remove_last_channelpost($chat_id, $text, $message_id, $message, $state){
-	$command = new remove_last_channel_post_command();
+	$command = new remove_last_post_command();
 	$command->run($chat_id, $text, $message_id, $message, $state);
 }
 
