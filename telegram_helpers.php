@@ -174,5 +174,5 @@ function get_file_link($file_id) {
 	$file = $telegram->getFile([
 		'file_id' => $file_id
 	]);
-	return 'https://api.telegram.org/file/bot' . $token . '/' . $file->file_path;
+	return 'https://api.telegram.org/file/bot' . $token . '/' . $file->getFilePath();
 }
