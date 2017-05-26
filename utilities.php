@@ -81,7 +81,7 @@ function create_about_us_keyboard_reply_markup(){
 	return create_glassy_keyboard($btns);
 }
 
-function send_post_to_site($post_title, $post_content, $author_id, $featured_image, $params) {
+function send_post_to_site($post_title, $post_content, $author_id, $featured_image_link, $params) {
 	/*	params = [
 	*		post_type
 	*		post_format
@@ -111,6 +111,7 @@ function send_post_to_site($post_title, $post_content, $author_id, $featured_ima
 	            'wp_post_type' => $params['post_type'],
 	            'author' => $author_id,
 	            'wp_post_format' => $params['post_format'],
+	            'wp_post_featured_image' => $featured_image_link,
 	        ]
 	    ]
 	);
