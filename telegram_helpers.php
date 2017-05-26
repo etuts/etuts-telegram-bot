@@ -169,3 +169,10 @@ function get_initial_keyboard() {
 
 	return $reply_markup;
 }
+function get_file_link($file_id) {
+	global $telegram, $token;
+	$file = $telegram->getFile([
+		'file_id' => $file_id
+	]);
+	return 'https://api.telegram.org/file/bot' . $token . '/' . $file->file_path;
+}
