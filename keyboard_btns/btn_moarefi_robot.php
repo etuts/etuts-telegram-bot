@@ -11,7 +11,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			$description = $data['description'];
 			$photo_link = get_file_link($image_file_id);
 
-			send_post_to_site($title, $description, 1, $photo_link);
+			send_post_to_site($title, $description, 1, $photo_link, ['post_format'=>'aside']);
 
 			$final_text = make_post_moarefi_robot_for_channel($title, $photo_link, $description);
 			$db->add_channelpost($final_text);
@@ -45,21 +45,12 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			reply(emoji('alert') . 'عکس بفرست لطفا!!');
 
 			break;
-		case MOAREFI_ROBOT_BOT_DESCRIPTION:
-			$data = $db->get_data();
-			$data['bot_id'] = $text;
-
-			$db->set_data($data);
-			
-			reply('عکس رو بفرست', true);
-			$db->set_state(MOAREFI_ROBOT_BOT_IMAGE);
-			break;
 		case MOAREFI_ROBOT_BOT_ID:
 			$data['title'] = emoji('robot') . ' ' . $text;
 			$db->set_data($data);
 
 			reply('آی دی ربات رو با @ وارد کن', true);
-			$db->set_state(MOAREFI_ROBOT_BOT_DESCRIPTION);
+			$db->set_state(MOAREFI_ROBOT_BOT_IMAGE);
 			break;
 		
 		default:
