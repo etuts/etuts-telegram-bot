@@ -9,7 +9,6 @@ require __DIR__.'/database_class.php';
 
 try {
 	$telegram = new Api($token);
-
 	if (empty($_POST) || !isset($_POST['text']) || !isset($_POST['image_link']))
 		die;
 
@@ -20,10 +19,11 @@ try {
 		$text = '[‍ ](' . $image_link . ')' . $text;
 	}
 	$text .= "\n" . "\n" . "@etuts #bot";
-	
+
 	$telegram->sendMessage([
 		'chat_id' => $channel_id,
 		'text' => $text,
+		'parse_mode' => 'Markdown',
 	]);
 
 } catch (Exception $e) {
