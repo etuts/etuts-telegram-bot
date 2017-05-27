@@ -11,7 +11,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			$description = $data['description'];
 			$photo_link = get_file_link($image_file_id);
 
-			send_post_to_site($title, $description, 1, $photo_link, ['post_format'=>'aside']);
+			$photo_link = send_post_to_site($title, $description, 1, $photo_link, ['post_format'=>'aside']);
 
 			$final_text = make_post_moarefi_robot_for_channel($title, $photo_link, $description);
 			$db->add_channelpost($final_text);
@@ -61,7 +61,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 }
 
 function make_post_moarefi_robot_for_channel($title, $bot_image, $description) {
-	$text = '(' . $bot_image . ')' . $title . "\n" .
+	$text = '[‍ ](' . $bot_image . ')' . $title . "\n" .
 			$description . "\n" .
 			"@etuts #bot";
 	
