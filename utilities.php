@@ -101,26 +101,21 @@ function send_post_to_site($post_title, $post_content, $author_id, $featured_ima
 
 	// Create a POST request
 	$response = $client->request(
-	    'POST',
-	    $new_post_url,
-	    [
-	        'form_params' => [
-	            'submit' => 'submit',
-	            'title' => $post_title,
-	            'content' => $post_content,
-	            'wp_post_type' => $params['post_type'],
-	            'author' => $author_id,
-	            'wp_post_format' => $params['post_format'],
-	            'wp_post_featured_image' => $featured_image_link,
-	        ]
-	    ]
+		'POST',
+		$new_post_url,
+		[
+			'form_params' => [
+				'submit' => 'submit',
+				'title' => $post_title,
+				'content' => $post_content,
+				'wp_post_type' => $params['post_type'],
+				'author' => $author_id,
+				'wp_post_format' => $params['post_format'],
+				'wp_post_featured_image' => $featured_image_link,
+			]
+		]
 	);
-/* debug
 	// Parse the response object, e.g. read the headers, body, etc.
-	$headers = $response->getHeaders();
-	$body = $response->getBody();
-
-	// Output headers and body for debugging purposes
-	var_dump($headers, $body);
-*/
+	$featured_image_link = $response->getHeaders()['featured_image_link'][0];
+	return $featured_image_link;
 }
