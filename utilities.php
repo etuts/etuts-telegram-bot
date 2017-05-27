@@ -112,6 +112,7 @@ function send_post_to_site($post_title, $post_content, $author_id, $featured_ima
 				'author' => $author_id,
 				'wp_post_format' => $params['post_format'],
 				'wp_post_featured_image' => $featured_image_link,
+				'status' => 'publish',
 			]
 		]
 	);
