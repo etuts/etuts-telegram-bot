@@ -8,38 +8,24 @@ use Telegram\Bot\Api;
 require __DIR__.'/database_class.php';
 
 try {
-	$db = new Database($db_name, $db_user, $db_pass);
 	$telegram = new Api($token);
 
-	$post_data = $db->read_channelpost();
-	if ($post_data === false)
-		die("no posts");
+	if (empty($_POST) || !isset($_POST['text']) || !isset($_POST['image_link']))
+		die;
 
-	$type = $post_data['type'];
+	$text = $_POST['text'];
+	$image_link = $_POST['image_link'];
 
-	if ($type == '')
-		die("no type");
-
-	switch ($type) {
-		case 'text':
-			$telegram->sendMessage([
-				'chat_id' => $channel_id,
-				'text' => $post_data['text'],
-			]);
-			break;
-		case 'photo':
-			$telegram->sendPhoto([
-				'chat_id' => $channel_id,
-				'photo' => $post_data['photo'],
-				'caption' => $post_data['caption'],
-			]);
-			break;
+	if ($image_link != false) {
+		$text = '[‍ ](' . $image_link . ')' . $text;
 	}
-	$num_of_posts_left = $db->get_num_of_channelposts_left();
+	$text .= "\n" . "\n" . "@etuts #bot";
+	
 	$telegram->sendMessage([
-		'chat_id' => $admin_id,
-		'text' => 'تنها ' . $num_of_posts_left . ' مطلب برای ارسال در کانال باقی مانده.',
+		'chat_id' => $channel_id,
+		'text' => $text,
 	]);
+
 } catch (Exception $e) {
 	$telegram->sendMessage([
 		'chat_id' => $admin_id,
