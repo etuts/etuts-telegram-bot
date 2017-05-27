@@ -46,16 +46,25 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 
 			break;
 		case MOAREFI_ROBOT_BOT_ID:
+			$data = $db->get_data();
+			$data['bot_id'] = $text;
+			$db->set_data($data);
+
+			reply('حالا عکسش رو بفرست', true);
+			$db->set_state(MOAREFI_ROBOT_BOT_IMAGE);
+			break;
+
+		case MOAREFI_ROBOT_BOT_TITLE:
 			$data['title'] = emoji('robot') . ' ' . $text;
 			$db->set_data($data);
 
 			reply('آی دی ربات رو با @ وارد کن', true);
-			$db->set_state(MOAREFI_ROBOT_BOT_IMAGE);
+			$db->set_state(MOAREFI_ROBOT_BOT_ID);
 			break;
 		
 		default:
 			reply('عنوان وارد کن', true);
-			$db->set_state(MOAREFI_ROBOT_BOT_ID);
+			$db->set_state(MOAREFI_ROBOT_BOT_TITLE);
 			break;
 	}
 }

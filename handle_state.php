@@ -9,7 +9,7 @@ define("CONTACT_ADMIN_ANSWER", 2);
 define("POST_VALIDATION_SEND_POST_TITLE", 3);
 
 define("MOAREFI_ROBOT_BOT_ID", 4);
-define("MOAREFI_ROBOT_BOT_DESCRIPTION", 5);
+define("MOAREFI_ROBOT_BOT_TITLE", 5);
 define("MOAREFI_ROBOT_BOT_IMAGE", 6);
 define("MOAREFI_ROBOT_CAPTION", 7);
 define("MOAREFI_ROBOT_SCHEDULE_POST", 8);
@@ -45,7 +45,7 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 			$class = 'post_validation_command';
 			break;
 		case MOAREFI_ROBOT_BOT_ID:
-		case MOAREFI_ROBOT_BOT_DESCRIPTION:
+		case MOAREFI_ROBOT_BOT_TITLE:
 		case MOAREFI_ROBOT_BOT_IMAGE:
 		case MOAREFI_ROBOT_CAPTION:
 		case MOAREFI_ROBOT_SCHEDULE_POST:
