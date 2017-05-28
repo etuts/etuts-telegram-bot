@@ -50,6 +50,7 @@ function emoji($text){
 		'not_checked' => '◻️',
 		'alert' => '⚠️',
 		'robot' => '🤖',
+		'bullhorn' => '📣',
 	];
 	return $emoji[$text];
 }

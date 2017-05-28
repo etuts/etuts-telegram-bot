@@ -33,7 +33,7 @@ send_last_post_to_users($title , $excerpt , $category , $image_link , $post_link
 
 
 function make_post_for_channel($title, $content, $category, $image_link, $post_link) {
-	$image_link = ($image_link === false) ? '' : "[".'🖼'."](".$image_link.")";
+	$image_link = ($image_link === false) ? '' : "[‍ ](".$image_link.")";
 
 	$post_link = "[برای مشاهده ی مطلب کلیک کنید](".$post_link.")";
 	
