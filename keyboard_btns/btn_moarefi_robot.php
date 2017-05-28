@@ -13,8 +13,8 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 
 			$photo_link = send_post_to_site($title, $description, 1, $photo_link, ['post_format'=>'aside']);
 
-			$final_text = make_post_moarefi_robot_for_channel($title, $photo_link, $description);
-			$db->add_channelpost($final_text);
+			// $final_text = make_post_moarefi_robot_for_channel($title, $photo_link, $description);
+			// $db->add_channelpost($final_text);
 
 			reset_state(THANK_MESSAGE);
 			break;
