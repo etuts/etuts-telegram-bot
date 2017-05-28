@@ -39,7 +39,7 @@ function make_post_for_channel($title, $content, $category, $image_link, $post_l
 	
 	$final_text =   emoji('bullhorn') . ' ' . $title . ' ' . $image_link . "\n" . 
 					'دسته: ' . emoji($category['emoji']) . ' ' . $category['name'] . "\n\n" . 
-					$content . "\n\n" . 
+					emoji('note') . ' ' . $content . "\n\n" . 
 					$post_link . "\n" . 
 					"@etuts";
 	return $final_text;
