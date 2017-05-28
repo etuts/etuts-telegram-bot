@@ -10,97 +10,68 @@ require __DIR__.'/vendor/autoload.php';
 require_once __DIR__.'/config.php';
 use Telegram\Bot\Api;
 require __DIR__.'/database_class.php';
+require __DIR__.'/telegram_helpers.php';
+require __DIR__.'/utilities.php';
 
 
 $db = new Database($db_name, $db_user, $db_pass);
 $telegram = new Api($token);
 
-send_last_post_to_users();
-// display_latest_post(97778738);
-// $rss = get_last_post();
+
+if (empty($_POST) && !isset($_POST['title']) && !isset($_POST['excerpt']) && !isset($_POST['image_link']) && !isset($_POST['category']) && !isset($_POST['post_link']))
+	die('not post request');
 
 
-// post display functions
-function get_last_post(){
-	file_put_contents("feed", fopen("http://etuts.ir/feed", 'r'));
-	$rss = simplexml_load_file('feed');
-	$last_item = $rss->channel->item;
-	return $last_item;
-}
-function make_post_for_channel($title, $description, $image_link = false, $link_to_site = false) {
+$title = $_POST['title'];
+$excerpt = $_POST['excerpt'];
+$image_link = $_POST['image_link'];
+$category = $_POST['category'];
+$post_link = $_POST['post_link'];
+
+
+send_last_post_to_users($title , $excerpt , $category , $image_link , $post_link);
+
+
+function make_post_for_channel($title, $content, $category, $image_link, $post_link) {
 	$image_link = ($image_link === false) ? '' : "[".'🖼'."](".$image_link.")";
 
-	$link_to_site = ($link_to_site === false) ? '' : "[برای مشاهده ی مطلب کلیک کنید](".$link_to_site.")";
+	$post_link = "[برای مشاهده ی مطلب کلیک کنید](".$post_link.")";
 	
-	$final_text =   $title.$image_link."\n".
-					$description."\n".
-					$link_to_site."\n".
+	$final_text =   $title . ' ' . $image_link . "\n" . 
+					'دسته: ' . emoji($category['emoji']) . ' ' . $category['name'] . "\n\n" . 
+					$content . "\n\n" . 
+					$post_link . "\n" . 
 					"@etuts";
 	return $final_text;
 }
-function display_latest_post($chat_id) {
+function display_latest_post($chat_id, $title, $content, $category, $image_link, $post_link) {
 	global $telegram;
-	$post = get_last_post();
-	$description = $post->description;
-	$title = $post->title;
-
-	//Getting image link from description 
-	$text = "";
-	$text .= $description;
-	$pos = strpos($text, "src=\"") + 5;
-	$text = substr($text,$pos);
-	$pos2 = strpos($text, "\"");
-	$image_link = substr($text,0,$pos2);
-
-	$description = strip_tags($description);
-	$description = substr($description, 0,strlen($description)-9);	//Removing garbage characters from description
 	
-	$link_to_site = $post->link;
-
-	$final_text = make_post_for_channel($title, $description, $image_link, $link_to_site);
+	$content = strip_tags($content);
+	
+	$final_text = make_post_for_channel($title, $content, $category, $image_link, $post_link);
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
 		'text' => $final_text,
 		'parse_mode' => "Markdown",
 	]);
 }
-function get_last_id_in_config(){
-	$file = file_get_contents(__DIR__ . "/config.php");
-	$semi_colon_pos = strpos($file,";");
-	$equal_pos = strpos($file,"=");
-	$id = substr($file,$equal_pos+1,$semi_colon_pos - $equal_pos-1);
-	return $id;
-}
-function update_id($new_id){
-	$file = file_get_contents(__DIR__ . "/config.php");
-	$id = get_last_id_in_config();
-	//$new_id = "12345678";
-	$file = str_replace($id,$new_id,$file); 
-	file_put_contents("config.php", $file);
-}
-function get_last_feed_post_id($post){
-	$short_link = $post->guid;
-	$equal_pos = strpos($short_link,"=");
-	$id = substr($short_link,$equal_pos + 1);
-	return $id;
-}
-function send_last_post_to_users(){
-	global $categories_array,$db;
-	$post = get_last_post();
-	$post_id = get_last_feed_post_id($post);
-	$config_id = get_last_id_in_config();
-	if ($post_id == $config_id)
-		return;
-	update_id($post_id);
-	$post_category = $post->category;
-	$category_index = 0;
+function send_last_post_to_users($title, $content, $category, $image_link, $post_link){
+	global $categories_array, $db, $telegram;
+
+	$category_index = -1;
 	for ($i = 0 ; $i < count($categories_array); $i++)
-		if ($categories_array[i]['name'] == $post_category)
+		if ($categories_array[$i]['name'] == $category)
 			$category_index = $i;
+
+	if ($category_index == -1)
+		return false;
+
 	$users_chat_id = $db->get_all_users_chat_id();
 	foreach ($users_chat_id as $user){
 		$user_categories = $db->get_categories_checked_array($user);
 		if ($user_categories[$category_index] == 1)
-			display_latest_post($user);
+			display_latest_post($user, $title, $content, $categories_array[$category_index], $image_link, $post_link);
 	}
+	return true;
 }
