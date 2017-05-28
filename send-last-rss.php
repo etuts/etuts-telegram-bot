@@ -37,7 +37,7 @@ function make_post_for_channel($title, $content, $category, $image_link, $post_l
 
 	$post_link = "[برای مشاهده ی مطلب کلیک کنید](".$post_link.")";
 	
-	$final_text =   $title . ' ' . $image_link . "\n" . 
+	$final_text =   emoji('bullhorn') . ' ' . $title . ' ' . $image_link . "\n" . 
 					'دسته: ' . emoji($category['emoji']) . ' ' . $category['name'] . "\n\n" . 
 					$content . "\n\n" . 
 					$post_link . "\n" . 

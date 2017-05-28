@@ -51,6 +51,7 @@ function emoji($text){
 		'alert' => '⚠️',
 		'robot' => '🤖',
 		'bullhorn' => '📣',
+		'note' => '📋',
 	];
 	return $emoji[$text];
 }
