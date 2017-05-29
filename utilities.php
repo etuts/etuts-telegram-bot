@@ -96,6 +96,7 @@ function send_post_to_site($post_title, $post_content, $author_id, $featured_ima
 	$params = array_merge(array(
 		'post_type' => 'post',
 		'post_format' => 'standard',
+		'status' => 'pedning',
 	), $params);
 
 	$form_params = [
@@ -106,7 +107,7 @@ function send_post_to_site($post_title, $post_content, $author_id, $featured_ima
 		'author' => $author_id,
 		'wp_post_format' => $params['post_format'],
 		'wp_post_featured_image' => $featured_image_link,
-		'status' => 'publish',
+		'status' => $params['status'],
 		'client' => 'tbot',
 	];
 	if (isset($params['category']))
