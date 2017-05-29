@@ -11,7 +11,12 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			$description = $data['description'];
 			$photo_link = get_file_link($image_file_id);
 
-			$photo_link = send_post_to_site($title, $description, 1, $photo_link, ['post_format'=>'aside']);
+			$params = [
+				'post_format'=>'aside',
+				'category' => [784, 615, 620, 623], /* [وب, ابزارها, تلگرام, ربات]*/
+				'bot_id' => $data['bot_id'],
+			];
+			$photo_link = send_post_to_site($title, $description, 1, $photo_link, $params);
 
 			// $final_text = make_post_moarefi_robot_for_channel($title, $photo_link, $description);
 			// $db->add_channelpost($final_text);
@@ -20,12 +25,6 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			break;
 		case MOAREFI_ROBOT_CAPTION:
 			$data = $db->get_data();
-
-			/*$len_text = $data['title'] + strlen($text) + 2 + strlen("@etuts #bot");
-			if ($len_text > 200) {
-				reply('طول کپشن عکس برابر '. $len_text .' کارکتر است که از 200 کارکتر بیشتر است! لطفا یک کپشن دیگر وارد کنید.', true);
-				break;
-			}*/
 
 			$data['description'] = $text;
 			$db->set_data($data);
