@@ -46,6 +46,7 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			break;
 		case MOAREFI_ROBOT_BOT_ID:
 			$data = $db->get_data();
+			$text = str_replace('@' , '' , $text);
 			$data['bot_id'] = $text;
 			$db->set_data($data);
 
