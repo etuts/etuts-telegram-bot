@@ -98,6 +98,26 @@ function send_post_to_site($post_title, $post_content, $author_id, $featured_ima
 		'post_format' => 'standard',
 	), $params);
 
+	$form_params = [
+		'submit' => 'submit',
+		'title' => $post_title,
+		'content' => $post_content,
+		'wp_post_type' => $params['post_type'],
+		'author' => $author_id,
+		'wp_post_format' => $params['post_format'],
+		'wp_post_featured_image' => $featured_image_link,
+		'status' => 'publish',
+		'client' => 'tbot',
+	];
+	if (isset($params['category']))
+		$form_params['category'] = $params['category'];
+	
+	unset($params['category']);
+	unset($params['post_type']);
+	unset($params['post_format']);
+
+	$form_params['other_params'] = $params;
+
 	// Initialize Guzzle client
 	$client = new GuzzleHttp\Client();
 
@@ -106,18 +126,7 @@ function send_post_to_site($post_title, $post_content, $author_id, $featured_ima
 		'POST',
 		$new_post_url,
 		[
-			'form_params' => [
-				'submit' => 'submit',
-				'title' => $post_title,
-				'content' => $post_content,
-				'wp_post_type' => $params['post_type'],
-				'author' => $author_id,
-				'wp_post_format' => $params['post_format'],
-				'wp_post_featured_image' => $featured_image_link,
-				'status' => 'publish',
-				'client' => 'tbot',
-				'category' => [784, 615, 620, 623], // [وب, ابزارها, تلگرام, ربات]
-			]
+			'form_params' => $form_params
 		]
 	);
 	// Parse the response object, e.g. read the headers, body, etc.
