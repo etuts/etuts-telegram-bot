@@ -115,6 +115,8 @@ function send_post_to_site($post_title, $post_content, $author_id, $featured_ima
 				'wp_post_format' => $params['post_format'],
 				'wp_post_featured_image' => $featured_image_link,
 				'status' => 'publish',
+				'client' => 'tbot',
+				'category' => [784, 615, 620, 623], // [وب, ابزارها, تلگرام, ربات]
 			]
 		]
 	);
