@@ -96,7 +96,7 @@ function send_post_to_site($post_title, $post_content, $author_id, $featured_ima
 	$params = array_merge(array(
 		'post_type' => 'post',
 		'post_format' => 'standard',
-		'status' => 'pedning',
+		'status' => 'publish',
 	), $params);
 
 	$form_params = [
