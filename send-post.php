@@ -24,8 +24,7 @@ try {
 	$text .= "\n" . "\n" . "@etuts #bot";
 
 	$telegram->sendMessage([
-		// 'chat_id' => $channel_id,
-		'chat_id' => $admin_id,
+		'chat_id' => $channel_id,
 		'text' => $text,
 		'parse_mode' => 'HTML',
 	]);
