@@ -12,9 +12,12 @@ try {
 	if (empty($_POST) || !isset($_POST['text']) || !isset($_POST['image_link']))
 		die;
 
-	$text = $_POST['text'];
+	$title = $_POST['title'];
+	$content = $_POST['content'];
 	$image_link = $_POST['image_link'];
+	$bot_id = $_POST['bot_id'];
 
+	$text = $title . "\n\n" . $bot_id . "\n\n" . $content;
 	if ($image_link != false) {
 		$text = '[‍ ](' . $image_link . ')' . $text;
 	}
