@@ -19,14 +19,15 @@ try {
 
 	$text = $title . "\n\n" . '@' . $bot_id . "\n\n" . $content;
 	if ($image_link != false) {
-		$text = '[‍ ](' . $image_link . ')' . $text;
+		$text = '<a href="'.$image_link.'">‍ </a>' . $text;
 	}
 	$text .= "\n" . "\n" . "@etuts #bot";
 
 	$telegram->sendMessage([
-		'chat_id' => $channel_id,
+		// 'chat_id' => $channel_id,
+		'chat_id' => $admin_id,
 		'text' => $text,
-		'parse_mode' => 'Markdown',
+		'parse_mode' => 'HTML',
 	]);
 
 } catch (Exception $e) {
