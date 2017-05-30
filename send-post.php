@@ -9,7 +9,7 @@ require __DIR__.'/database_class.php';
 
 try {
 	$telegram = new Api($token);
-	if (empty($_POST) || !isset($_POST['text']) || !isset($_POST['image_link']))
+	if (empty($_POST) || !isset($_POST['title']) || !isset($_POST['content']) || !isset($_POST['bot_id']) || !isset($_POST['image_link']))
 		die;
 
 	$title = $_POST['title'];
