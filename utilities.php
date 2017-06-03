@@ -69,7 +69,7 @@ function create_categories_keyboard_reply_markup($checked){
 }
 
 function create_about_us_keyboard_reply_markup(){
-	global $lots_of_dots;
+	global $lots_of_dots, $vahid, $mamad, $shahr, $url_vahid, $url_mamad, $url_shahr;
 	$btns = [];
 	$btns[] = [create_glassy_link_btn($vahid, $url_vahid)];
 	$btns[] = [create_glassy_link_btn($mamad, $url_mamad)];
@@ -79,6 +79,7 @@ function create_about_us_keyboard_reply_markup(){
 }
 
 function send_post_to_site($post_title, $post_content, $author_id, $featured_image_link, $params) {
+	global $new_post_url;
 	// default values for optional params
 	$params = array_merge(array(
 		'post_type' => 'post',
