@@ -52,6 +52,7 @@ function emoji($text){
 		'robot' => '🤖',
 		'bullhorn' => '📣',
 		'note' => '📋',
+		'id' => '🆔',
 	];
 	return $emoji[$text];
 }
@@ -70,12 +71,6 @@ function create_categories_keyboard_reply_markup($checked){
 function create_about_us_keyboard_reply_markup(){
 	global $lots_of_dots;
 	$btns = [];
-	$vahid = "وحید محمدی";
-	$url_vahid = "http://github.com/gvmohzibat";
-	$mamad = "محمد فغان‌پور گنجی";
-	$url_mamad = "https://github.com/MohGanji";
-	$shahr = "شهریار سلطان‌پور";
-	$url_shahr = "https://github.com/sh-soltanpour";
 	$btns[] = [create_glassy_link_btn($vahid, $url_vahid)];
 	$btns[] = [create_glassy_link_btn($mamad, $url_mamad)];
 	$btns[] = [create_glassy_link_btn($shahr, $url_shahr)];
@@ -84,19 +79,11 @@ function create_about_us_keyboard_reply_markup(){
 }
 
 function send_post_to_site($post_title, $post_content, $author_id, $featured_image_link, $params) {
-	/*	params = [
-	*		post_type
-	*		post_format
-	* 	]
-	*/
-
-	$new_post_url = 'http://etuts.ir/new-post';
-
 	// default values for optional params
 	$params = array_merge(array(
 		'post_type' => 'post',
 		'post_format' => 'standard',
-		'status' => 'publish',
+		'status' => 'pending',
 	), $params);
 
 	$form_params = [
@@ -131,6 +118,6 @@ function send_post_to_site($post_title, $post_content, $author_id, $featured_ima
 		]
 	);
 	// Parse the response object, e.g. read the headers, body, etc.
-	$featured_image_link = $response->getHeaders()['featured_image_link'][0];
-	return $featured_image_link;
+	// $featured_image_link = $response->getHeaders()['featured_image_link'][0];
+	// return $featured_image_link;
 }
