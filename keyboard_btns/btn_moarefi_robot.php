@@ -12,14 +12,12 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			$photo_link = get_file_link($image_file_id);
 
 			$params = [
-				'post_format'=>'aside',
+				'post_format' => 'aside',
 				'category' => [784, 615, 620, 623], /* [وب, ابزارها, تلگرام, ربات]*/
 				'bot_id' => $data['bot_id'],
+				'status' => 'publish',
 			];
-			$photo_link = send_post_to_site($title, $description, 1, $photo_link, $params);
-
-			// $final_text = make_post_moarefi_robot_for_channel($title, $photo_link, $description);
-			// $db->add_channelpost($final_text);
+			send_post_to_site($title, $description, 1, $photo_link, $params);
 
 			reset_state(THANK_MESSAGE);
 			break;
@@ -67,16 +65,4 @@ function btn_moarefi_robot($chat_id, $text, $message_id, $message, $state) {
 			$db->set_state(MOAREFI_ROBOT_BOT_TITLE);
 			break;
 	}
-}
-
-function make_post_moarefi_robot_for_channel($title, $bot_image, $description) {
-	$text = '[‍ ](' . $bot_image . ')' . $title . "\n" .
-			$description . "\n" .
-			"@etuts #bot";
-	
-	$final_text = [
-		'type' => 'text',
-		'text' => $text,
-	];
-	return addslashes(json_encode($final_text));
 }
