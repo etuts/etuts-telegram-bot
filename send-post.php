@@ -24,7 +24,7 @@ try {
 	}
 	$text .= "\n" . "\n" . "@etuts #bot";
 
-
+// log_debug("مطلبی که رفته بود تو کانال دوباره داشت میفرت تو کانال " . $_POST['debug'] . ' ' . $text . ' ' . $channel_id);
 	$telegram->sendMessage([
 		'chat_id' => $channel_id,
 		'text' => $text,
