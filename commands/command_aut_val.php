@@ -7,16 +7,20 @@ class aut_val_command extends base_command {
 	
 	function run($chat_id, $text, $message_id, $message, $state) {
 		global $telegram, $db;
-		
-		$aut_val_text = "سازندگان:\n
-						وحید محمدی، محمد فغان‌پور گنجی، شهریار سلطان‌پور\n
-						ما دانشجوی رشته کامپیوتر دانشگاه تهران هستیم، برای ارتباط با ما می‌تونین از لینک های زیر استفاده کنین.";
-		$aut_val_reply_markup = create_aut_val_keyboard_reply_markup();
-
-		$telegram->sendMessage([
-			'chat_id' => $chat_id,
-			'text' => $aut_val_text,
-			'reply_markup' => $aut_val_reply_markup,
-			]);
+		switch ($state) {
+			case AUTHOR_VALIDATION:
+				reply(THANK_MESSAGE);
+				break;
+			default:
+				$aut_val_text = "این دستور برای تایید شما به عنوان نویسنده ی سایت هست\n
+								لطفا یوزرنیم تون در سایت etuts.ir رو بنویسید.\n
+								بعد منتظر باشید تا مدیر سایت شما رو تایید کنه.";
+				$db->set_state(AUTHOR_VALIDATION);
+				$telegram->sendMessage([
+					'chat_id' => $chat_id,
+					'text' => $aut_val_text,
+				]);
+				break;
+		}
 	}
 }

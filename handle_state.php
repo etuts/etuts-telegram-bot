@@ -18,6 +18,8 @@ define("REQUEST_POST",9);
 
 define("POST_SOURCE",10);
 
+define("AUTHOR_VALIDATION", 11);
+
 
 // get chat state from database
 function get_chat_state($text, $username, $fullname) {
@@ -56,6 +58,9 @@ function handle_state($state, $chat_id, $text, $message_id, $message) {
 			break;
 		case POST_SOURCE:
 			$class = 'post_source_command';
+			break;
+		case AUTHOR_VALIDATION:
+			$class = 'aut_val_command';
 			break;
 		case IDLE:
 		default:
