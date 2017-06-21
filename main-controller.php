@@ -3,8 +3,8 @@
 define("THANK_MESSAGE", 'با موفقیت انجام شد.');
 //--------------------- Enum of permissions ----------------------
 define("USER", 0);
-define("ADMIN", 1);
-define("AUTHOR", 2);
+define("AUTHOR", 1);
+define("ADMIN", 2);
 //--------------------- Enum of site recommended posts states ----
 define("NOT_RESERVED", 0);
 define("RESERVED", 1);
