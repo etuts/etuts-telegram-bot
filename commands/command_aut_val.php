@@ -10,6 +10,7 @@ class aut_val_command extends base_command {
 		switch ($state) {
 			case AUTHOR_VALIDATION:
 				reply(THANK_MESSAGE);
+				send_message_to_admin("یه نفر ادا کرده نویسنده ی سایته:\n". "یوزرنیمش: ".$text);
 				break;
 			default:
 				$aut_val_text = "این دستور برای تایید شما به عنوان نویسنده ی سایت هست\n
