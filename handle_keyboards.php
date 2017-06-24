@@ -11,10 +11,8 @@ $keyboard_buttons = [
 		"schedule_post"=>array("name"=>"ارسال مطلب به کانال", "permission"=>ADMIN),
 		"request_post"=>array("name"=>"درخواست مطلب آموزشی", "permission"=>USER),
 		"categories"=>array("name"=>"دریافت مطالب سایت", "permission"=>USER),
-		// "remove_last_channelpost"=>array("name"=>"حذف آخرین مطلب زمان بندی شده کانال", "permission"=>ADMIN),
 		"post_source"=>array("name"=>"پیشنهاد مطلب به نویسنده ها", "permission"=>ADMIN),
 		"get_site_recommend_post"=>array("name"=>"مطلب برای نوشتن تو سایت", "permission"=>AUTHOR),
-		// "manage_channel_posts"=>array("name"=>"مدیریت مطالب زمانبندی شده کانال", "permission"=>ADMIN),
 		"about_us"=>array("name"=>"درباره ما", "permission"=>USER),
 	],
 

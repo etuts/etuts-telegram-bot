@@ -150,7 +150,7 @@ function get_initial_keyboard() {
 	global $keyboard_buttons, $db, $telegram;
 	$is_admin =  $db->check_user_permission(ADMIN);
 	$is_author = $db->check_user_permission(AUTHOR);
-	$permission = $is_admin ? ADMIN : $is_author ? AUTHOR : USER;
+	$permission = ($is_admin ? ADMIN : ($is_author ? AUTHOR : USER));
 	$buttons = $keyboard_buttons["start"];
 	$commands = array();
 	
