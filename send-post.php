@@ -15,6 +15,7 @@ try {
 	// content of the message
 	$title = $_POST['title'];
 	$content = $_POST['content'];
+	$content = strip_tags($content);
 	$image_link = $_POST['image_link'];
 	$bot_id = $_POST['bot_id'];
 
