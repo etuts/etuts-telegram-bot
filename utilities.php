@@ -53,6 +53,8 @@ function emoji($text){
 		'bullhorn' => '📣',
 		'note' => '📋',
 		'id' => '🆔',
+		'clock' => '🕒',
+		'blue_diamond' => '💠',
 	];
 	return $emoji[$text];
 }

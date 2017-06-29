@@ -51,6 +51,10 @@ class Database {
 		$cats = addslashes($cats);
 		return mysqli_query($this->db, "UPDATE `chats` SET cats = '$cats' WHERE chat_id = '$this->chat_id' ");
 	}
+	function get_chat_id_by_username($username) {
+		$result = mysqli_query($this->db, "SELECT `chat_id` FROM `chats` WHERE etuts_user = '$username' ");
+		return (int)$result->fetch_assoc()['chat_id'];
+	}
 	function get_state($chat_id = false) {
 		if ($chat_id === false)
 			$chat_id = $this->get_chat_id();
