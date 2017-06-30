@@ -20,6 +20,8 @@ try {
 	empty($_POST))
 		die;
 
+	$set_status_url = 'http://etuts.ir/wp-content/plugins/etuts-specific-plugin/scripts/set-comment-status.php?comment_id='.$comment_id . '&';
+
 
 	// content of the message
 	$author_username = $_POST['author_username'];
@@ -36,6 +38,12 @@ try {
 			emoji('clock') . ' در تاریخ: ' . $comment_date . "\n" .
 			emoji('blue_diamond') . ' متن کامنت:‌ ' . $comment_content;
 
+// glassy buttons
+	$approve_btn = create_glassy_link_btn(emoji('checked') . ' پذیرفتن', $set_status_url . "comment_status=approve");
+	$spam_btn = create_glassy_link_btn(emoji('forbidden') . ' اسپم', $set_status_url . "comment_status=spam");
+	$trash_btn = create_glassy_link_btn(emoji('trash') . ' حذف', $set_status_url . "comment_status=trash");
+	$keyboard = create_glassy_keyboard([[$approve_btn, $spam_btn, $trash_btn]]);
+
 	$chat_id = $db->get_chat_id_by_username($author_username);
 	
 	$telegram->sendMessage([
@@ -43,6 +51,7 @@ try {
 		'text' => $text,
 		'parse_mode' => 'HTML',
 		'disable_web_page_preview' => true,
+		'reply_markup' => $keyboard,
 	]);
 
 } catch (Exception $e) {

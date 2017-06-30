@@ -57,6 +57,8 @@ function emoji($text){
 		'blue_diamond' => '💠',
 		'post_letter_box' => '📮',
 		'user' => '👤',
+		'forbidden' => '🚫',
+		'trash' => '🗑',
 	];
 	return $emoji[$text];
 }
