@@ -32,8 +32,9 @@ try {
 
 
 	$text = emoji('post_letter_box') . ' شما یک کامنت جدید در مطلب <a href="'.$post_link.'">'.$post_title.'</a> دارید:' . "\n\n" .
-			emoji('clock') . ' در تاریخ: ' . $comment_date . "\n\n" .
-			emoji('blue_diamond') . ' متن کامنت:‌ ' . $comment_content . "\n\n";
+			emoji('user') . ' نویسنده ی کامنت:‌ ' . $comment_author . "\n" .
+			emoji('clock') . ' در تاریخ: ' . $comment_date . "\n" .
+			emoji('blue_diamond') . ' متن کامنت:‌ ' . $comment_content;
 
 	$chat_id = $db->get_chat_id_by_username($author_username);
 	

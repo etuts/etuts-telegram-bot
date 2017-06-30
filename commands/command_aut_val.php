@@ -15,7 +15,7 @@ class aut_val_command extends base_command {
 			default:
 				$aut_val_text = "این دستور برای تایید شما به عنوان نویسنده ی سایت هست\n
 								لطفا یوزرنیم تون در سایت etuts.ir رو بنویسید.\n
-								بعد منتظر باشید تا مدیر سایت شما رو تایید کنه.";
+								بعد منتظر باشید تا مدیر سایت شما رو تایید کند.";
 				$db->set_state(AUTHOR_VALIDATION);
 				$telegram->sendMessage([
 					'chat_id' => $chat_id,
