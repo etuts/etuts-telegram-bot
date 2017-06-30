@@ -8,9 +8,9 @@ function log_debug($text, $chat_id = 92454) {
 		'text' => $text
 	]);
 
-	$debug_file = fopen("log.txt","a");
-	fwrite($debug_file, $text . PHP_EOL . "-------------------------\r\n");
-	fclose($file);
+	// $debug_file = fopen("log.txt","a");
+	// fwrite($debug_file, $text . PHP_EOL . "-------------------------\r\n");
+	// fclose($file);
 }
 
 // getters

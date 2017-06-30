@@ -55,6 +55,7 @@ function emoji($text){
 		'id' => '🆔',
 		'clock' => '🕒',
 		'blue_diamond' => '💠',
+		'post_letter_box' => '📮',
 	];
 	return $emoji[$text];
 }
