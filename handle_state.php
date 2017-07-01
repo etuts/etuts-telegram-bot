@@ -27,7 +27,7 @@ function get_chat_state($text, $username, $fullname) {
 	$state = IDLE; // no state
 
 	if ($db->user_is_new()) {
-		$db->insert(0, $text, $username, $fullname);
+		log_debug($db->insert($state, $text, $username, $fullname));
 	} else {
 		$state = $db->get_state();
 		$db->set_last_message($text);

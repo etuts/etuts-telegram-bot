@@ -3,6 +3,7 @@
 function callback_aut_val($id, $from, $message, $data) {
 	global $db, $telegram;
 
+
 	$accept = $data['acc'];
 	$chat_id = $data['c'];
 	$username = $data['usr'];
@@ -15,13 +16,14 @@ function callback_aut_val($id, $from, $message, $data) {
 		$db->set_permission(AUTHOR, $chat_id);
 		$author_reply_text = 'درخواست شما برای تایید نویسندگی تایید شد. شما توسط مدیر سایت، به عنوان نویسنده ی سایت در این ربات ثبت شدید.';
 	} else {
+		log_debug("in");
 		$author_reply_text = 'درخواست شما برای تایید نویسندگی رد شد.';
 	}
 	
 	// send message to author
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
-		'text' => $user_reply_text,
+		'text' => $author_reply_text,
 	]);
 
 	// editing inline buttons.
