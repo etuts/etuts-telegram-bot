@@ -26,33 +26,53 @@ class Database {
 		$default_cats = json_encode([0,0,0,0,0,0]);
 		return mysqli_query($this->db, "INSERT INTO `chats` (chat_id, state, last_message, permission, data, username, fullname, cats) VALUES ('$this->chat_id', '$state', '$text', '$permission', '$data', '$username', '$fullname', '$default_cats') ");
 	}
-	function set_permission($permission, $chat_id) {
+	function set_permission($permission, $chat_id = false) {
+		if ($chat_id === false)
+			$chat_id = $this->get_chat_id();
 		return mysqli_query($this->db, "UPDATE `chats` SET permission = '$permission' WHERE chat_id = '$chat_id' ");
 	}
-	function set_state($state) {
-		return mysqli_query($this->db, "UPDATE `chats` SET state = '$state' WHERE chat_id = '$this->chat_id' ");
+	function set_state($state, $chat_id = false) {
+		if ($chat_id === false)
+			$chat_id = $this->get_chat_id();
+		return mysqli_query($this->db, "UPDATE `chats` SET state = '$state' WHERE chat_id = '$chat_id' ");
 	}
-	function set_data($data_string) {
+	function set_data($data_string, $chat_id = false) {
+		if ($chat_id === false)
+			$chat_id = $this->get_chat_id();
 		$data_string = json_encode($data_string);
 		$data_string = addslashes($data_string);
-		return mysqli_query($this->db, "UPDATE `chats` SET data = '$data_string' WHERE chat_id = '$this->chat_id' ");
+		return mysqli_query($this->db, "UPDATE `chats` SET data = '$data_string' WHERE chat_id = '$chat_id' ");
+	
 	}
-	function set_username($username) {
-		return mysqli_query($this->db, "UPDATE `chats` SET username = '$username' WHERE chat_id = '$this->chat_id' ");
+	function set_etuts_user($etuts_user, $chat_id = false) {
+		if ($chat_id === false)
+			$chat_id = $this->get_chat_id();
+		return mysqli_query($this->db, "UPDATE `chats` SET etuts_user = '$etuts_user' WHERE chat_id = '$chat_id' ");
 	}
-	function set_fullname($fullname) {
-		return mysqli_query($this->db, "UPDATE `chats` SET fullname = '$fullname' WHERE chat_id = '$this->chat_id' ");
+	function set_username($username, $chat_id = false) {
+		if ($chat_id === false)
+			$chat_id = $this->get_chat_id();
+		return mysqli_query($this->db, "UPDATE `chats` SET username = '$username' WHERE chat_id = '$chat_id' ");
 	}
-	function set_last_message($text) {
-		return mysqli_query($this->db, "UPDATE `chats` SET last_message = '$text' WHERE chat_id = '$this->chat_id' ");
+	function set_fullname($fullname, $chat_id = false) {
+		if ($chat_id === false)
+			$chat_id = $this->get_chat_id();
+		return mysqli_query($this->db, "UPDATE `chats` SET fullname = '$fullname' WHERE chat_id = '$chat_id' ");
 	}
-	function set_categories_checked_array($cats) {
+	function set_last_message($text, $chat_id = false) {
+		if ($chat_id === false)
+			$chat_id = $this->get_chat_id();
+		return mysqli_query($this->db, "UPDATE `chats` SET last_message = '$text' WHERE chat_id = '$chat_id' ");
+	}
+	function set_categories_checked_array($cats, $chat_id = false) {
+		if ($chat_id === false)
+			$chat_id = $this->get_chat_id();
 		$cats = json_encode($cats);
 		$cats = addslashes($cats);
-		return mysqli_query($this->db, "UPDATE `chats` SET cats = '$cats' WHERE chat_id = '$this->chat_id' ");
+		return mysqli_query($this->db, "UPDATE `chats` SET cats = '$cats' WHERE chat_id = '$chat_id' ");
 	}
-	function get_chat_id_by_username($username) {
-		$result = mysqli_query($this->db, "SELECT `chat_id` FROM `chats` WHERE etuts_user = '$username' ");
+	function get_chat_id_by_etuts_user($etuts_user) {
+		$result = mysqli_query($this->db, "SELECT `chat_id` FROM `chats` WHERE etuts_user = '$etuts_user' ");
 		return (int)$result->fetch_assoc()['chat_id'];
 	}
 	function get_state($chat_id = false) {
