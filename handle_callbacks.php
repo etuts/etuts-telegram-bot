@@ -9,6 +9,7 @@ $callback_query_functions = [
 	"usr_acuir_post",
 	"rmv_chnlpost",
 	"gt_anthr_post",
+	"aut_val",
 
 ];
 
