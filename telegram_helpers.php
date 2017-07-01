@@ -146,6 +146,7 @@ function reset_state($text = false) {
 		]);
 	}
 	$db->reset_state();
+	$db->reset_data();
 }
 function get_initial_keyboard() {
 	global $keyboard_buttons, $db, $telegram;

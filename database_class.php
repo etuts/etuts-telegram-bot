@@ -115,8 +115,11 @@ class Database {
 		$cats = json_decode($cats, true);
 		return $cats;
 	}
-	function reset_state() {
-		return $this->set_state(0);
+	function reset_state($chat_id = false) {
+		return $this->set_state(0, $chat_id);
+	}
+	function reset_data($chat_id = false) {
+		return $this->set_data('', $chat_id);
 	}
 	function check_user_permission($permission) {
 		$result = mysqli_query($this->db, "SELECT * FROM `chats` WHERE (chat_id, permission) = ('$this->chat_id', '$permission') ");
