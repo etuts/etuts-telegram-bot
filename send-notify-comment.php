@@ -45,7 +45,7 @@ try {
 	$trash_btn = create_glassy_link_btn(emoji('trash') . ' حذف', $set_status_url . "comment_status=trash");
 	$keyboard = create_glassy_keyboard([[$approve_btn, $spam_btn, $trash_btn]]);
 
-	$chat_id = $db->get_chat_id_by_username($author_username);
+	$chat_id = $db->get_chat_id_by_etuts_user($author_username);
 	
 	$telegram->sendMessage([
 		'chat_id' => $chat_id,
