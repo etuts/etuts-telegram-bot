@@ -20,8 +20,6 @@ try {
 	empty($_POST))
 		die;
 
-	$set_status_url = 'http://etuts.ir/wp-content/plugins/etuts-specific-plugin/scripts/set-comment-status.php?comment_id='.$comment_id . '&';
-
 
 	// content of the message
 	$author_username = $_POST['author_username'];
@@ -31,6 +29,9 @@ try {
 	$comment_author = $_POST['comment_author'];
 	$comment_date = $_POST['comment_date'];
 	$comment_id = $_POST['comment_id'];
+
+
+	$set_status_url = 'http://etuts.ir/wp-content/plugins/etuts-specific-plugin/scripts/set-comment-status.php?comment_id='.$comment_id . '&';
 
 
 	$text = emoji('post_letter_box') . ' شما یک کامنت جدید در مطلب <a href="'.$post_link.'">'.$post_title.'</a> دارید:' . "\n\n" .
