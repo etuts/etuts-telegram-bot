@@ -10,7 +10,17 @@ class aut_val_command extends base_command {
 		switch ($state) {
 			case AUTHOR_VALIDATION:
 				reply(THANK_MESSAGE);
-				send_message_to_admin("یه نفر ادا کرده نویسنده ی سایته:\n". "یوزرنیمش: ".$text);
+
+				// glassy keyboard
+				$data = [
+					'usr' => $text,
+					'c' => $chat_id,
+				];
+				$accept_btn = create_glassy_btn(emoji('checked').'تایید', 'aut_val', array_merge(['acc'=>1], $data));
+				$decline_btn = create_glassy_btn(emoji('forbidden').'رد', 'aut_val', array_merge(['acc'=>0], $data));
+				$keyboard = create_glassy_keyboard([[$accept_btn, $decline_btn]]);
+
+				send_message_to_admin("یه نفر ادا کرده نویسنده ی سایته:\n". "یوزرنیمش: ".$text, $keyboard);
 				break;
 			default:
 				$aut_val_text = "این دستور برای تایید شما به عنوان نویسنده ی سایت هست\n
