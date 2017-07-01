@@ -115,8 +115,9 @@ function show_keyboard($keyboard_name, $text) { // gets the name of a keyboard f
 	]);
 }
 function create_glassy_btn($text, $callback_function, $params = []) { // returns glassy btn
-	$callback_data = [];
-	$callback_data['f'] = $callback_function;
+	$callback_data = [
+		'f' => $callback_function,
+	];
 	$callback_data = array_merge($callback_data, $params);
 	return [
 		'text' => $text,
