@@ -59,6 +59,7 @@ function emoji($text){
 		'user' => '👤',
 		'forbidden' => '🚫',
 		'trash' => '🗑',
+		'sand_clock' => '⏳',
 	];
 	return $emoji[$text];
 }
