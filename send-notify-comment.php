@@ -9,7 +9,6 @@ require __DIR__.'/main-controller.php';
 try {
 	$db = new Database($db_name, $db_user, $db_pass, $chat_id, $message_id);
 	$telegram = new Api($token);
-
 	if (!isset($_POST['author_username']) ||
 		!isset($_POST['post_title']) ||
 		!isset($_POST['post_link']) ||
@@ -54,6 +53,7 @@ try {
 		'disable_web_page_preview' => true,
 		'reply_markup' => $keyboard,
 	]);
+	log_debug("send-last-rss.php"); //debug
 
 } catch (Exception $e) {
 	log_debug($e->getPrevious());

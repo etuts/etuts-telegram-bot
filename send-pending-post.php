@@ -37,6 +37,7 @@ try {
 		'parse_mode' => 'HTML',
 		'disable_web_page_preview' => true,
 	]);
+	log_debug("send-last-rss.php"); //debug
 
 } catch (Exception $e) {
 	log_debug($e->getPrevious());

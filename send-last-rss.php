@@ -31,7 +31,7 @@ $post_link = $_POST['post_link'];
 
 send_last_post_to_users($title , $excerpt , $category , $image_link , $post_link);
 
-
+log_debug("send-last-rss.php"); //debug
 function make_post_for_channel($title, $content, $category, $image_link, $post_link) {
 	$image_link = ($image_link === false) ? '' : "[‍ ](".$image_link.")";
 
