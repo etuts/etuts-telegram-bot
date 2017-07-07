@@ -30,8 +30,7 @@ try {
 	$comment_id = $_POST['comment_id'];
 
 
-	$set_status_url = 'http://etuts.ir/wp-content/plugins/etuts-specific-plugin/scripts/set-comment-status.php?comment_id='.$comment_id . '&';
-
+	
 
 	$text = emoji('post_letter_box') . ' شما یک کامنت جدید در مطلب <a href="'.$post_link.'">'.$post_title.'</a> دارید:' . "\n\n" .
 			emoji('user') . ' نویسنده ی کامنت:‌ ' . $comment_author . "\n" .
@@ -39,9 +38,9 @@ try {
 			emoji('blue_diamond') . ' متن کامنت:‌ ' . $comment_content;
 
 // glassy buttons
-	$approve_btn = create_glassy_link_btn(emoji('checked') . ' پذیرفتن', $set_status_url . "comment_status=approve");
-	$spam_btn = create_glassy_link_btn(emoji('forbidden') . ' اسپم', $set_status_url . "comment_status=spam");
-	$trash_btn = create_glassy_link_btn(emoji('trash') . ' حذف', $set_status_url . "comment_status=trash");
+	$approve_btn = create_glassy_btn(emoji('checked') . ' پذیرفتن', 'set_cm_status', ['status' => 'approve']);
+	$spam_btn = create_glassy_btn(emoji('forbidden') . ' اسپم', 'set_cm_status', ['status' => 'spam']);
+	$trash_btn = create_glassy_btn(emoji('trash') . ' حذف', 'set_cm_status', ['status' => 'trash']);
 	$keyboard = create_glassy_keyboard([[$approve_btn, $spam_btn, $trash_btn]]);
 
 	$chat_id = $db->get_chat_id_by_etuts_user($author_username);

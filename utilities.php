@@ -60,6 +60,7 @@ function emoji($text){
 		'forbidden' => '🚫',
 		'trash' => '🗑',
 		'sand_clock' => '⏳',
+		'message' => '💬',
 	];
 	return $emoji[$text];
 }
@@ -114,18 +115,20 @@ function send_post_to_site($post_title, $post_content, $author_id, $featured_ima
 
 	$form_params['other_params'] = $params;
 
+	send_http_request($new_post_url, 'POST', $form_params);
+}
+
+function send_http_request($url, $method, $form_params) {
 	// Initialize Guzzle client
 	$client = new GuzzleHttp\Client();
 
 	// Create a POST request
 	$response = $client->request(
-		'POST',
-		$new_post_url,
+		$method,
+		$url,
 		[
 			'form_params' => $form_params
 		]
 	);
-	// Parse the response object, e.g. read the headers, body, etc.
-	// $featured_image_link = $response->getHeaders()['featured_image_link'][0];
-	// return $featured_image_link;
+	return $response;
 }
